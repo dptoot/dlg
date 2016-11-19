@@ -1,6 +1,6 @@
 import * as types from './types';
 import Api from '../api';
-import Storage from '../storage';
+import storage from '../storage';
 
 export function loginUser(user) {
 
@@ -12,7 +12,7 @@ export function loginUser(user) {
 
 	return (dispatch, getState) => {
 
-		return Storage.save({
+		return storage.save({
 		    key: 'loginState',
 		    rawData: userObject,
 		    expires: null,
@@ -30,7 +30,7 @@ export function logoutUser() {
 
 	return (dispatch, getState) => {
 
-		return Storage.remove({
+		return storage.remove({
 		    key: 'loginState',
 		})
 

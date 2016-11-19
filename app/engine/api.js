@@ -43,7 +43,7 @@ class Api {
 
   static xhr(route, params, verb, authenticated) {
     // const host = 'http://api-douglovesgames.rhcloud.com';
-    const host = 'http://localhost:3001';
+    const host = 'http://localhost:3000';
 
     const url = `${host}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );

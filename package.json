@@ -4,10 +4,15 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "web:prod": "webpack --config web/webpack/web.prod.config.js --progress --colors",
+    "web:dev": "webpack-dev-server --content-base web/public/ --config web/webpack/webpack.dev.config.js"
   },
   "dependencies": {
-    "react": "15.3.2",
+    "bootstrap": "^3.3.7",
+    "react": "^15.3.2",
+    "react-bootstrap": "^0.30.6",
+    "react-dom": "^15.3.2",
     "react-native": "0.37.0",
     "react-native-drawer": "^2.3.0",
     "react-native-router-flux": "^3.37.0",
@@ -26,10 +31,21 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
+    "babel-core": "^6.18.2",
     "babel-jest": "17.0.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
     "babel-preset-react-native": "1.9.0",
+    "css-loader": "^0.26.0",
+    "file-loader": "^0.9.0",
     "jest": "17.0.3",
     "jest-react-native": "17.0.3",
-    "react-test-renderer": "15.3.2"
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "15.3.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
