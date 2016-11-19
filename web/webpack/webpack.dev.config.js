@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+console.log(__dirname)
 
 module.exports = {
     watch: true,
@@ -13,7 +14,12 @@ module.exports = {
       loaders: [
         {
           test: /\.js$/,
-          exclude: /(node_modules|bower_components)/,
+          include: [
+            path.resolve(__dirname, "../../web"),
+            path.resolve(__dirname, "../../app/web"),
+            path.resolve(__dirname, "../../app/engine"),
+            path.resolve(__dirname, '../../node_modules/react-native-storage'),
+          ],
           loader: 'babel',
         },
         { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
