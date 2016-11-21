@@ -1,0 +1,14 @@
+.button {
+	cursor: pointer;
+	display: flex;
+	padding: $padding-sm $padding-lg;
+	background: $primary;
+
+	&:hover {
+		opacity: .9;
+	}
+
+	&:active {
+		box-shadow: inset 0px 0px $margin-sm rgba(0,0,0,.75);
+	}
+}

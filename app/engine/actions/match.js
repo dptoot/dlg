@@ -151,7 +151,7 @@ export function fetchMatch(matchId) {
 export function submitCorrectAnswer(answer) {
 	return (dispatch, getState) => {
 		const state = getState();
-		console.log('FOO', answer)
+		
 		Api.authenticatedPost(`/api/matches/${state.match.id}/answer`, {
 			remote_id: answer.id,
 			title: answer.name,

@@ -5,7 +5,7 @@ $light: #fff;
 
 $gray-darker: lighten($gray-base, 7%);
 $gray-dark: lighten($gray-base, 14%);
-$gray: lighten($gray-base, 35%);
+$gray: lighten($gray-base, 21%);
 $gray-light: lighten($gray-base, 42%);
 $gray-lighter: lighten($gray-base, 56%);
 $gray-lightest: lighten($gray-base, 70%);
@@ -14,10 +14,10 @@ $primary: #EF1748;
 $underlay: rgba(239, 23, 72, .5);
 $link: #0879A2;
 
-$text-sm: 1rem;
+$text-sm: .75rem;
 $text-md: 1rem;
-$text-lg: 1.5rem;
-$text-xlg: 2rem;
+$text-lg: 1.25rem;
+$text-xlg: 1.5rem;
 
 // padding
 $padding-sm: 5px;
@@ -44,7 +44,13 @@ $shadow-1x: 0 5px 15px rgba(0,0,0,.5);
 
 
 @import './scss/reset';
+@import './scss/flex';
+
 @import './scss/answer';
+@import './scss/avatar';
+@import './scss/button';
+@import './scss/create-match-input';
+@import './scss/create-match-selection';
 @import './scss/layout';
 @import './scss/list-header';
 @import './scss/match';

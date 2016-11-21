@@ -26,7 +26,7 @@ class Match extends Component {
 
 	handleSearchSelection(answer) {
 		this.handleToggleSearch();
-		console.log(answer);
+		this.props.verifyAnswer(answer.id);
 	}
 
 	renderSearch() {

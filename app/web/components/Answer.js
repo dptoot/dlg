@@ -3,8 +3,6 @@
 import React, { Component } from 'react'
 import { RemoteImage } from '../components';
 
-
-
 class Answer extends Component {
 
     render() {

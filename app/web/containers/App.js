@@ -5,6 +5,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import AppWrapper from './AppWrapper';
 import Login from './Login';
 import LastManStanton from './LastManStanton';
+import CreateMatch from './CreateMatch';
 import Search from './Search';
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.user.isAuthenticated) {
-			browserHistory.push('/lastManStanton')
+			browserHistory.push('/createMatch')
 		}
 	}
 
@@ -62,6 +63,7 @@ class App extends Component {
 				<Route path="/" component={AppWrapper} onEnter={this.autoLogin}>
 					<Route path="login" component={Login} />
 					<Route path="lastManStanton" component={LastManStanton} onEnter={this.requireAuth} />
+					<Route path="createMatch" component={CreateMatch} onEnter={this.requireAuth} />
 				</Route>
 			</Router>
 		);

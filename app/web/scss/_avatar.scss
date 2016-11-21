@@ -1,0 +1,12 @@
+.avatar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: $primary;
+	height: 64px;
+	width: 64px;
+	border-radius: 32px;
+	font-size: $text-lg;
+	font-weight: bold;
+	border: 2px solid $light;
+}

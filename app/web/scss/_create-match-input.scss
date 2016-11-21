@@ -1,0 +1,9 @@
+.create-match-input {
+	display: flex;
+	flex-direction: column;
+	padding: $padding-lg;
+	margin: $margin-lg;
+	background: $gray;
+	width: 50%;
+	box-shadow: $shadow-1x;
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
-import { MatchListItem } from '../components';
+import { MatchListItem, ListHeader } from '../components';
 
 class Matches extends Component {
 
@@ -9,10 +10,15 @@ class Matches extends Component {
 		super();
 
 		this.handleMatchClick = this.handleMatchClick.bind(this);
+		this.handleCreateMatchClick = this.handleCreateMatchClick.bind(this);
 	}
 
 	handleMatchClick(matchId) {
 		this.props.fetchMatch(matchId)
+	}
+
+	handleCreateMatchClick() {
+		browserHistory.push('/createMatch');
 	}
 
 	renderMatches(list) {
@@ -24,15 +30,23 @@ class Matches extends Component {
 		return(
 			<div className>
 				<div>
-					<div className="list-header">Your Turn</div>
+					<ListHeader
+						title="Your Turn" 
+						icon="plus"
+						onIconClick={this.handleCreateMatchClick}
+						/>
 					{this.renderMatches('current')}	
 				</div>
 				<div>
-					<div className="list-header">Waiting on Opponent</div>
+					<ListHeader
+						title="Waiting on Opponent" 
+						/>
 					{this.renderMatches('waiting')}	
 				</div>
 				<div>
-					<div className="list-header">Completed Matches</div>
+					<ListHeader
+						title="Completed Matches" 
+						/>
 					{this.renderMatches('inactive')}	
 				</div>
 

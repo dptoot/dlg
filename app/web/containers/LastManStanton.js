@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
-
 import Match from './Match';
 import Matches from './Matches';
+import {Header} from '../components';
 
 class LastManStanton extends Component {
 
 	constructor() {
 		super();
+
 	}
 
 	componentDidMount() {
@@ -23,14 +24,13 @@ class LastManStanton extends Component {
 		}
 	}
 
+
 	render() {
 		
 		return(
 			<div>
 
-				<header>
-
-				</header>
+				<Header />
 
 				<div className="wrapper">
 					

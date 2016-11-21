@@ -4,6 +4,7 @@ import { mapDispatchToProps } from '../../engine';
 import {
 	ListView,
     RemoteSearchItem,
+    UserSearchItem,
 } from '../components';
 
 class Search extends Component {
@@ -76,8 +77,8 @@ class Search extends Component {
   				break;
   			case 'users':
   				return (
-		  			<UserListItem 
-		  				user={data} 
+		  			<UserSearchItem 
+		  				item={data} 
 		  				onClick={this.props.onSelection.bind(null, data)}
 		  				/>
 		  		)

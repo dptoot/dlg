@@ -1,6 +1,14 @@
 export { default as Answer } from './Answer';
+export { default as Avatar } from './Avatar';
+export { default as Button } from './Button';
+export { default as CreateMatchSelection } from './CreateMatchSelection';
+export { default as CreateMatchInput } from './CreateMatchInput';
+export { default as Header } from './Header';
+export { default as ListHeader } from './ListHeader';
 export { default as ListView } from './ListView';
 export { default as RemoteImage } from './RemoteImage';
 export { default as RemoteSearchItem } from './RemoteSearchItem';
+export { default as SearchModal } from './SearchModal';
+export { default as UserSearchItem } from './UserSearchItem';
 export { default as MatchHeader } from './MatchHeader';
 export { default as MatchListItem } from './MatchListItem';
