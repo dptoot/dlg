@@ -1,0 +1,12 @@
+.remote-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.placeholder {
+		color: $light;
+		font-size: 300%;
+		background: $gray-darker;
+	}
+
+}

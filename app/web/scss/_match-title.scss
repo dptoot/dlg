@@ -1,0 +1,17 @@
+.match-title {
+	background: $gray-darker;
+	display: flex;
+}
+
+.match-title-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: $padding-lg;
+	
+	input {
+		display: flex;
+		font-size: $text-lg;
+		width: 100%;
+	}
+}

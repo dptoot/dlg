@@ -1,0 +1,94 @@
+.search-modal {
+	position: fixed;
+	z-index: 1040;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.search-backdrop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: auto;
+	background-color: $gray-base;
+	opacity: .85;
+}
+
+.search-dialog {
+	display: flex;
+
+	position: absolute;
+    width: 85%;
+    height: 85%;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid $gray-light;
+    background-color: $gray-dark;
+    box-shadow: $shadow-1x;
+    padding: 20px;
+    transition: 1s;
+
+    
+}
+
+.search-wrapper {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+
+	.search-header {
+		display: flex;
+		flex-direction: column;
+		
+    	font-size: $text-lg;
+    }
+
+	.search-header input {
+		display: flex;
+		flex: 1;
+		font-size: $text-lg;
+		width: 100%;
+		text-align: center;
+	}
+
+	.no-results-placeholder {
+		display: flex;
+		flex: 1;
+		justify-content: center;
+		align-items: center; 
+	}
+
+	.search-results {
+		display:flex;
+		flex-wrap: wrap; 
+		flex: 1;
+		justify-content: space-around;
+		overflow: auto;
+		padding: $padding-lg 0;
+	}
+}
+
+
+// REMOTE SEARCH
+.remote-search-item {
+	
+	display: flex;
+	flex: 0;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 10px;
+
+	&:hover {
+		background-color: $primary;
+	}
+
+	.name {
+		text-align: center;
+	}
+}

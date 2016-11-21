@@ -1,0 +1,19 @@
+
+
+
+.match-list-item {
+	color: $gray-base;
+	padding: $padding-md;
+	background: $light;
+	display: flex;
+	flex: 0;
+	//border-radius: $border-radius;
+
+	.remote-image {
+		margin-right: $margin-sm;
+	}
+}
+
+.match-list-item + .match-list-item {
+	border-top: 1px solid $gray;
+}

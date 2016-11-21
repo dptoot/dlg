@@ -1,0 +1,54 @@
+
+$gray-base: #221e1f;
+$dark: $gray-base;
+$light: #fff;
+
+$gray-darker: lighten($gray-base, 7%);
+$gray-dark: lighten($gray-base, 14%);
+$gray: lighten($gray-base, 35%);
+$gray-light: lighten($gray-base, 42%);
+$gray-lighter: lighten($gray-base, 56%);
+$gray-lightest: lighten($gray-base, 70%);
+
+$primary: #EF1748;
+$underlay: rgba(239, 23, 72, .5);
+$link: #0879A2;
+
+$text-sm: 1rem;
+$text-md: 1rem;
+$text-lg: 1.5rem;
+$text-xlg: 2rem;
+
+// padding
+$padding-sm: 5px;
+$padding-md: 10px;
+$padding-lg: 20px;
+
+// margin
+$margin-sm: 5px;
+$margin-md: 10px;
+$margin-lg: 20px;
+
+// border
+$border-radius: 2px;
+
+// shadow
+$shadow-1x: 0 5px 15px rgba(0,0,0,.5);
+
+.item-grid {
+	display:flex;
+	flex-wrap: wrap; 
+	justify-content: space-around;
+}
+
+
+
+@import './scss/reset';
+@import './scss/answer';
+@import './scss/layout';
+@import './scss/list-header';
+@import './scss/match';
+@import './scss/match-list-item';
+@import './scss/match-title';
+@import './scss/remote-image';
+@import './scss/search';

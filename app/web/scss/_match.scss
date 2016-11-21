@@ -1,0 +1,8 @@
+.match-board {
+	display: flex;
+    justify-content: center;
+    align-items: flex-start;
+	flex: 1;
+	padding: $padding-lg;
+	box-shadow: inset 0px 0px $margin-lg rgba(0,0,0,.75);
+}
