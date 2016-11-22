@@ -21,7 +21,7 @@ class Match extends Component {
 
 	componentDidMount() {
 		socket.on('matchupdate', message => {
-			
+			// Update match if the message includes the user id and the match is loaded
 			if(message.players.includes(this.props.user.id) && message.id === this.props.match.id) {
 				this.props.fetchMatch(this.props.match.id);
 			}
@@ -36,7 +36,7 @@ class Match extends Component {
 
 	handleSearchSelection(answer) {
 		this.handleToggleSearch();
-		this.props.verifyAnswer(answer.id);
+		this.props.verifyAnswer(answer);
 	}
 
 	renderSearch() {
@@ -60,8 +60,7 @@ class Match extends Component {
 	
 	renderMatch() {
 		return (
-			<div>
-
+			<div className="match-board">
 				<MatchHeader 
 					match={this.props.match} 
 					onSearchClick={this.handleToggleSearch} 
@@ -70,22 +69,22 @@ class Match extends Component {
 				<div className="item-grid">
 					{this.props.match.answers.map(answer => <Answer key={answer.id} answer={answer} />)}
 				</div>
-				
+
 			</div>
 		)
 	}
 
 	renderPlaceholder() {
 		return (
-			<div className="centered">
-				<div>No match</div>
+			<div className="match-board-placeholder">
+				<div>Select a match from the sidebar or start a new match by pressing the + icon.</div>
 			</div>
 		);
 	}
 
 	render() {
 		return (
-			<div className="match-board">
+			<div className="match-board-container">
 				{this.renderSearch()}
 				{this.props.match.id ? this.renderMatch() : this.renderPlaceholder()}
 			</div>

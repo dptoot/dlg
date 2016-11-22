@@ -41,20 +41,15 @@ class MatchesList extends Component {
 	}
 
 	componentDidMount() {
+
 		this.props.fetchMatchesList(this.props.user.id);
 
-		socket.on(this.props.user.id, (data)  => {
-			console.log(`web socket update for ${this.props.user.id} detected in matches screen: ` , data)
-
-			switch(data.event) {
-				// case 'matches updated':
-				// 	this.props.fetchMatchesList(this.props.user.id);
-				// 	break;
-
-				default: 
-					
+		socket.on('matchupdate', message => {
+			
+			if(message.players.includes(this.props.user.id)) {
+				this.props.fetchMatchesList(this.props.user.id);
 			}
-		});	
+		})
 	
 	}
 

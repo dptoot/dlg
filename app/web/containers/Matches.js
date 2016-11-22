@@ -60,6 +60,7 @@ class Matches extends Component {
 				}
 			}
 		];
+		
 		return (
 			<Alert 
 				show={true}

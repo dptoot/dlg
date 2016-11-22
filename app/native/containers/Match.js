@@ -41,25 +41,22 @@ class Match extends Component {
 			this.props.fetchMatch(this.props.matchId);
 		}
 
-		socket.on(this.props.user.id, (data)  => {
-			switch(data.event) {
-				case 'match updated':
-					
-					// Fetch the updated match if the update in question is the current user match
-					if (this.props.match.id === data.matchId) {
-						console.log('matchupdate detected')
-						this.props.fetchMatch(data.matchId);
-					}
-					break;
+		socket.on('matchupdate', message => {
+			
+			// Only listen to the users events
+			if(message.players.includes(this.props.user.id)) {
+			
+				// update matches lists for the user
+				this.props.fetchMatchesList(this.props.user.id);
 
-				case 'matches updated':
-					this.props.fetchMatchesList(this.props.user.id);
-					break;
-
-				default: 
-					console.log('web socket update detected in match screen: ', data)
+				// update current match if it is affected
+				if (message.id === this.props.match.id) {
+					this.props.fetchMatch(this.props.match.id);
+				}
+				
 			}
-		});	
+
+		})
 	}
 
 	componentDidUpdate (prevProps) {

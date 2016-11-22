@@ -7,6 +7,15 @@ import { RemoteImage } from '../components';
 
 class MatchHeader extends Component {
 
+    renderSearchInput() {
+        return (
+            <input 
+                onClick={this.props.onSearchClick}  
+                placeholder={`Guess a ${this.props.match.actor.name} movie`} 
+                />
+        );
+    }
+
     render() {
         return (
             <div className="match-title">
@@ -17,10 +26,7 @@ class MatchHeader extends Component {
 
                 <div className="match-title-content">
                     <div className="text-xlg">{this.props.match.actor.name}</div>
-                    <input 
-                        onClick={this.props.onSearchClick}  
-                        placeholder={`Guess a ${this.props.match.actor.name} movie`} 
-                        />
+                    {this.props.match.userPlayer.status === 'current' && this.renderSearchInput()}
                 </div>    
             </div>
         );
