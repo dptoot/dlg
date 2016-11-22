@@ -150,13 +150,7 @@ const scenes = Actions.create(
                 title="Match"
                 hideTabBar
             />
-            <Scene
-                sceneStyle={styles.sceneWithNavBar}
-                key="matchScene"
-                component={Match}
-                title="Match"
-                hideTabBar
-            />
+        
             <Scene
                 sceneStyle={styles.sceneWithNavBar}
                 key="answersScene"

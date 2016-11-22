@@ -42,12 +42,23 @@ class Match extends Component {
 		}
 
 		socket.on(this.props.user.id, (data)  => {
-			if (data.event === 'match update' && this.props.match.id === data.matchId) {
-				console.log('matchupdate detected')
+			switch(data.event) {
+				case 'match updated':
+					
+					// Fetch the updated match if the update in question is the current user match
+					if (this.props.match.id === data.matchId) {
+						console.log('matchupdate detected')
+						this.props.fetchMatch(data.matchId);
+					}
+					break;
 
-				this.props.fetchMatch(data.matchId);
+				case 'matches updated':
+					this.props.fetchMatchesList(this.props.user.id);
+					break;
+
+				default: 
+					console.log('web socket update detected in match screen: ', data)
 			}
-		    
 		});	
 	}
 

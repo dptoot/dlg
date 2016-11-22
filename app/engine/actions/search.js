@@ -18,6 +18,12 @@ export function clearMovieSearchValue() {
 	}
 }
 
+export function clearMovieSearchResult() {
+	return {
+		type: types.CLEAR_MOVIE_SEARCH_RESULT,
+	}
+}
+
 export function updateMovieSearchResults(results) {
 	return {
 		type: types.UPDATE_MOVIE_SEARCH_RESULTS,
@@ -59,6 +65,12 @@ export function clearUserSearchValue() {
 	}
 }
 
+export function clearUserSearchResult() {
+	return {
+		type: types.CLEAR_USER_SEARCH_RESULT,
+	}
+}
+
 export function updateUserSearchResults(results) {
 	return {
 		type: types.UPDATE_USER_SEARCH_RESULTS,
@@ -97,6 +109,12 @@ export function updateActorSearchValue(value) {
 export function clearActorSearchValue() {
 	return {
 		type: types.CLEAR_ACTOR_SEARCH_VALUE,
+	}
+}
+
+export function clearActorSearchResult() {
+	return {
+		type: types.CLEAR_ACTOR_SEARCH_RESULT,
 	}
 }
 

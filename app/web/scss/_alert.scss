@@ -1,0 +1,59 @@
+.alert-modal {
+	position: fixed;
+	z-index: 1040;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.alert-backdrop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: auto;
+	background-color: $gray-base;
+	opacity: .85;
+}
+
+.alert-dialog {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+    width: 400px;
+    //height: 85%;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $light;
+    box-shadow: $shadow-1x;
+    transition: 1s;
+  	color: $gray-base;
+
+  	.alert-title, 
+  	.alert-message {
+  		text-align: center;
+  		padding-top: $padding-md;
+  	}
+  	.alert-title {
+  		font-weight: bold;
+  	}
+  	
+  	.alert-message {
+  		padding-bottom: $padding-md;
+  	}
+
+  	.alert-buttons {
+  		display: flex;
+  	}
+
+  	.alert-button {
+  		display: flex;
+  		flex: 1;
+  		justify-content: center;
+  		padding: $padding-md; 
+  		border: 1px solid $gray-lightest;
+  	}
+}

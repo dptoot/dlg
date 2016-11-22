@@ -12,58 +12,71 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
-		this.autoLogin = this.autoLogin.bind(this);
+		
 		this.requireAuth = this.requireAuth.bind(this);
+		this.handleAutoLogin = this.handleAutoLogin.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.user.isAuthenticated) {
-			browserHistory.push('/createMatch')
-		}
-	}
+	
+	handleAutoLogin(nextState, replace, callback) {
 
-	autoLogin(nextState, replace) {
-		if(!this.props.user.isAuthenticated) {
+		// Ignore all this if we are already on a white list page
+		if (['/login', '/create'].includes(nextState.location.pathname)) {
+			callback();
+		} 
+
+		if (!this.props.user.isAuthenticated) {
 			storage.load({
 			    key: 'loginState',
 			    autoSync: false,
 			}).then(user => {
 			    this.props.loginUser(user);
+			    callback();
 			}).catch(err => {
 			    switch (err.name) {
 			        case 'NotFoundError':
-						if (!this.props.user.isAuthenticated) {
-							replace({
-							  pathname: '/login',
-							  state: { nextPathname: nextState.location.pathname }
-							})
-						}
-			            break;
+						replace({
+						  pathname: '/login',
+						  state: { nextPathname: nextState.location.pathname }
+						});
+						callback();
+						break;
 			        case 'ExpiredError':
-			            // TODO
+			            replace({
+						  pathname: '/login',
+						  state: { nextPathname: nextState.location.pathname }
+						})
+						callback();
 			            break;
 			    }
 			})
+		} else {
+			callback();
 		}
+
 	}
 
 	requireAuth(nextState, replace) {
-		// if (!this.props.user.isAuthenticated) {
-		// 	replace({
-		// 	  pathname: '/login',
-		// 	  state: { nextPathname: nextState.location.pathname }
-		// 	})
-		// }
+		if (!this.props.user.isAuthenticated) {
+			replace({
+			  pathname: '/login',
+			  state: { nextPathname: nextState.location.pathname }
+			})
+		}
 	}
 
 	
 	render() {
 		return(
 			<Router history={browserHistory} >
-				<Route path="/" component={AppWrapper} onEnter={this.autoLogin}>
+				<Route path='/' component={AppWrapper} onEnter={this.handleAutoLogin}>
+					
 					<Route path="login" component={Login} />
-					<Route path="lastManStanton" component={LastManStanton} onEnter={this.requireAuth} />
-					<Route path="createMatch" component={CreateMatch} onEnter={this.requireAuth} />
+
+					<Route path="lastmanstanton" component={LastManStanton} onEnter={this.requireAuth} />
+					
+					<Route path="create" component={CreateMatch} onEnter={this.requireAuth}/>
+
 				</Route>
 			</Router>
 		);

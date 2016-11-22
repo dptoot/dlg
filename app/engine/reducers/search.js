@@ -51,6 +51,13 @@ export const search = createReducer(initialState, {
 			isFetching: false,
 		};
 	}, 
+	[types.CLEAR_MOVIE_SEARCH_RESULT](state, action) {
+		return {
+			...state, 
+			movies: initialState.movies,
+			isFetching: false,
+		};
+	},
 	[types.UPDATE_MOVIE_SEARCH_RESULTS](state, action) {
 		return {
 			...state, 
@@ -100,6 +107,13 @@ export const search = createReducer(initialState, {
 				...state.users,
 				value: null,
 			},
+			isFetching: false,
+		};
+	},
+	[types.CLEAR_USER_SEARCH_RESULT](state, action) {
+		return {
+			...state, 
+			users: initialState.users,
 			isFetching: false,
 		};
 	}, 
@@ -153,6 +167,13 @@ export const search = createReducer(initialState, {
 				...state.actors,
 				value: null,
 			},
+			isFetching: false,
+		};
+	}, 
+	[types.CLEAR_ACTOR_SEARCH_RESULT](state, action) {
+		return {
+			...state, 
+			actors: initialState.actors,
 			isFetching: false,
 		};
 	}, 

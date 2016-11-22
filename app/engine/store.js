@@ -5,6 +5,7 @@ import createLogger from 'redux-logger';
 import reducer from './reducers';
 
 const loggerMiddleware = createLogger({ 
+    collapsed: true,
     predicate: (getState, action) => process.env !== 'production', 
 });
 

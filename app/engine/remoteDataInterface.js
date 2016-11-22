@@ -32,7 +32,7 @@ class RemoteDataInterface {
 			actor: match.actor,
 			status: match.status,
 			started: moment(match.createdAt).fromNow(),
-			lastPlayed: moment(match.updateAt).fromNow(),
+			lastPlayed: moment(match.updatedAt).fromNow(),
 			showSearch: false,
 			...RemoteDataInterface.sortPlayers([match.player_1, match.player_2], state.user),
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
@@ -69,7 +69,7 @@ class RemoteDataInterface {
 		return sortedPlayers;
 	}
 
-	static getAnswerData(answers, matchStatus) {
+	static getAnswerData(answers = [], matchStatus) {
 			const formattedAnswers = [];
 			let lastAnswer = false;
 			let selectedAnswerCount = 0;

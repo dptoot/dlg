@@ -67,8 +67,6 @@ export function quitMatch() {
 				},
             ]
 		}));
-
-		//dispatch(fetchMatch(match));
 	}
 }
 
@@ -106,7 +104,6 @@ export function verifyAnswer(answer) {
 export function createMatch() {
 	return (dispatch, getState) => {
 		const state = getState();
-		console.log('creating')
 		
 		Api.authenticatedPost(`/api/matches/`, {
 			opponent_id: state.search.users.selected.id,
@@ -136,7 +133,7 @@ export function fetchMatch(matchId) {
 			}
 		})
 		.then(match => {
-			console.log('match', match)
+			console.log('match', match);
 			return RemoteDataInterface.getMatch(match, state);
 		})
 		.then(match => {
@@ -170,6 +167,38 @@ export function submitCorrectAnswer(answer) {
 		.then(match => {
 			dispatch(updateMatch(match));
 		})
+	}
+}
+
+export function acceptMatch(matchId) {
+	return (dispatch, getState) => {
+		const state = getState();
+		
+		Api.authenticatedGet(`/api/matches/${matchId}/accept`)
+		.then(response => {
+			if (response.success) {
+				return response.match
+			} else {
+				// handle bad login
+			}
+		})
+
+	}
+}
+
+export function declineMatch(matchId) {
+	return (dispatch, getState) => {
+		const state = getState();
+		
+		Api.authenticatedDelete(`/api/matches/${matchId}`)
+		.then(response => {
+			if (response.success) {
+				return response.match
+			} else {
+				// handle bad login
+			}
+		})
+
 	}
 }
 

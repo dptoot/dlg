@@ -1,6 +1,7 @@
 import * as types from './types';
 import Api from '../api';
-import moment from 'moment';
+import RemoteDataInterface from '../remoteDataInterface';
+
 
 export function showRefreshingMatches() {
 	return {
@@ -12,6 +13,21 @@ export function showRefreshingMatches() {
 export function hideRefreshingMatches() {
 	return {
 		type: types.HIDE_REFRESHING_MATCHES, 
+		payload: {},
+	}
+}
+
+
+export function showPendingMatchAlert() {
+	return {
+		type: types.SHOW_PENDING_MATCH_ALERT, 
+		payload: {},
+	}
+}
+
+export function hidePendingMatchAlert() {
+	return {
+		type: types.HIDE_PENDING_MATCH_ALERT, 
 		payload: {},
 	}
 }
@@ -34,13 +50,10 @@ export function refreshMatches(userId) {
 }
 
 
+
 export function fetchMatchesList(userId) {
 	return (dispatch, getState) => {
 		const state = getState();
-
-		const getOpponent = (players) => {
-			return players.filter(player => player.user._id !== state.user.id)[0];
-		}
 		
 		Api.authenticatedGet(`/api/users/${userId}/matches`)
 		.then(response => {
@@ -54,19 +67,11 @@ export function fetchMatchesList(userId) {
 			
 			const matchLists = {};
 
+			// Iterate over each of the match types and normalize the data
 			Object.keys(matches).forEach((matchType, index) => {
-
 				matchLists[matchType] = matches[matchType].map(match => {
-					const {_id, updatedAt, player_1, player_2, ...rest} = match;
-
-					return {
-						id: _id,
-						opponent: getOpponent([player_1, player_2]),
-						lastPlayed: moment(updatedAt).fromNow(),
-						...rest
-					}
+					return RemoteDataInterface.getMatch(match, state);
 				})
-				
 			})
 
 			return matchLists;
@@ -75,8 +80,6 @@ export function fetchMatchesList(userId) {
 			dispatch(updateMatchesList(matchLists))
 			dispatch(hideRefreshingMatches());
 		})
-
-
 	}
 }
 

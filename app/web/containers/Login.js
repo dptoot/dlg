@@ -38,7 +38,7 @@ class Login extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.user.isAuthenticated) {
-			browserHistory.push('/lastManStanton')
+			browserHistory.push('/lastmanstanton');
 		}
 	}
 

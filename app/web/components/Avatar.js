@@ -7,9 +7,13 @@ import Icon from 'react-fontawesome';
 
 class Avatar extends Component {
 
+
     render() {
+
+		const {text, ...rest} = this.props;
+
         return (
-            <div className="avatar">
+            <div className="avatar" {...rest}>
                 <div>
                     {this.props.text}
                 </div>

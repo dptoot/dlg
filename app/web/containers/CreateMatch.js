@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import { mapDispatchToProps } from '../../engine';
+import Header from './Header';
 
 import {
-	Header, 
 	SearchModal,
 	RemoteImage,
 	Avatar,
@@ -33,6 +33,8 @@ class CreateMatch extends Component {
 	
 	handleSubmit() {
   		this.props.createMatch();
+  		this.props.clearUserSearchResult();
+  		this.props.clearActorSearchResult();
   		browserHistory.push('/lastManStanton');
   	}
 

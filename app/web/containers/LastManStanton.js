@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
 import Match from './Match';
 import Matches from './Matches';
-import {Header} from '../components';
+import Header from './Header';
 
 class LastManStanton extends Component {
 
@@ -13,9 +14,12 @@ class LastManStanton extends Component {
 	}
 
 	componentDidMount() {
+
+		// Get Initial dataset
 		if (this.props.user.isAuthenticated) {
 			this.props.fetchMatchesList(this.props.user.id);
 		}
+
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -23,7 +27,6 @@ class LastManStanton extends Component {
 			this.props.fetchMatchesList(nextProps.user.id);
 		}
 	}
-
 
 	render() {
 		

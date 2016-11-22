@@ -4,6 +4,7 @@ import {mapDispatchToProps} from '../../engine';
 import { MatchHeader, Answer } from '../components';
 import Search from '../containers/Search';
 import {Modal} from 'react-overlays';
+import socket from '../webSocket';
 
 class Match extends Component {
 
@@ -16,6 +17,15 @@ class Match extends Component {
 
 		this.handleToggleSearch = this.handleToggleSearch.bind(this);
 		this.handleSearchSelection = this.handleSearchSelection.bind(this);
+	}
+
+	componentDidMount() {
+		socket.on('matchupdate', message => {
+			
+			if(message.players.includes(this.props.user.id) && message.id === this.props.match.id) {
+				this.props.fetchMatch(this.props.match.id);
+			}
+		})
 	}
 	
 	handleToggleSearch() {
@@ -86,6 +96,7 @@ class Match extends Component {
 
 function mapStateToProps(state) {
 	return {
+		user: state.user,
 		match: state.match,
 	}
 }

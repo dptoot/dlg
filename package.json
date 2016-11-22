@@ -9,6 +9,7 @@
     "web:dev": "webpack-dev-server --content-base web/public/ --config web/webpack/webpack.dev.config.js"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-fontawesome": "^1.4.0",
