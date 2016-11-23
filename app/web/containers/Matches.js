@@ -38,7 +38,7 @@ class Matches extends Component {
 	}
 
 	handleCreateMatchClick() {
-		browserHistory.push('/createMatch');
+		browserHistory.push('/create-match');
 	}
 	
 	renderPendingMatchAlert() {

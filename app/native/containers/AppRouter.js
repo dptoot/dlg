@@ -9,6 +9,7 @@ import theme from '../styles/theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
+    AppWrapper,
     Login,
     SignUp,
     MatchList, 
@@ -171,6 +172,11 @@ const scenes = Actions.create(
 
 export default class AppRouter extends React.Component {
     render() {
-        return <Router scenes={scenes} {...routerAttributes} />
+        return (
+            <View style={{flex: 1}}>
+                <Router scenes={scenes} {...routerAttributes} />
+                <AppWrapper />
+            </View>
+        )
     }
 }

@@ -1,4 +1,5 @@
 export {default as Root} from './Root';
+export {default as AppWrapper} from './AppWrapper';
 export {default as AppRouter} from './AppRouter';
 export {default as Drawer} from './Drawer';
 export {default as Login} from './Login';

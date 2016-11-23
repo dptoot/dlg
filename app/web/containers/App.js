@@ -75,7 +75,7 @@ class App extends Component {
 
 					<Route path="lastmanstanton" component={LastManStanton} onEnter={this.requireAuth} />
 					
-					<Route path="create" component={CreateMatch} onEnter={this.requireAuth}/>
+					<Route path="create-match" component={CreateMatch} onEnter={this.requireAuth}/>
 
 				</Route>
 			</Router>

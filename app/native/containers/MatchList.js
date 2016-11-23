@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { mapDispatchToProps } from '../../engine';
-import socket from '../lib/websocketConfig';
 import Swipeout from 'react-native-swipeout';
 
 import {
@@ -41,16 +40,7 @@ class MatchesList extends Component {
 	}
 
 	componentDidMount() {
-
 		this.props.fetchMatchesList(this.props.user.id);
-
-		socket.on('matchupdate', message => {
-			
-			if(message.players.includes(this.props.user.id)) {
-				this.props.fetchMatchesList(this.props.user.id);
-			}
-		})
-	
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -58,11 +48,6 @@ class MatchesList extends Component {
 			this.setState({
 				dataSource: ds.cloneWithRows(this.getMatchesList(nextProps.name, nextProps.matches))
 			})
-		}
-
-		// Notify user if there are pending matches
-		if (nextProps.matches.lists.pending.length > 0) {
-			this.renderPendingMatchAlert(nextProps.matches.lists.pending[0]);
 		}
   	}
 
@@ -98,21 +83,7 @@ class MatchesList extends Component {
 		return matchesList;	
 	}
 
-	renderPendingMatchAlert(match) {
-  		return Alert.alert(
-			`${match.opponent.user.name} wants to challenge you`,
-			`The actor is ${match.actor.name}.  Do you accept?`,
-			[
-				{
-					text: 'Accept', 
-					onPress: this.props.acceptMatch(match.id),
-				}, 
-				{
-					text: 'Decline', 
-				}
-			]
-		)
-  	}
+	
 
 	renderMatchListItem(match) {
 		if (this.props.name === 'inactiveList') {

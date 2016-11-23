@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { mapDispatchToProps } from '../../engine';
-import socket from '../lib/websocketConfig';
 
 import {
 	Alert,
@@ -35,15 +34,12 @@ class Match extends Component {
 		
 		this.handleAnswersPress = this.handleAnswersPress.bind(this);
 		this.handleSearchFocus = this.handleSearchFocus.bind(this);
-		this.handleMatchUpdateFromSocket = this.handleMatchUpdateFromSocket.bind(this);
 	}
 
 	componentDidMount() {
 		if(this.props.match.id !== this.props.matchId) {
 			this.props.fetchMatch(this.props.matchId);
 		}
-
-		socket.on('matchupdate', this.handleMatchUpdateFromSocket)
 	}
 
 	componentDidUpdate (prevProps) {
@@ -79,20 +75,6 @@ class Match extends Component {
 
   	handleRefresh() {
 		this.props.refreshMatch(this.props.matchId);
-  	}
-
-  	handleMatchUpdateFromSocket(message) {
-		// Only listen to the users events
-		if(message.players.includes(this.props.user.id)) {
-		
-			// update matches lists for the user
-			this.props.fetchMatchesList(this.props.user.id);
-
-			// update current match if it is affected
-			if (message.id === this.props.match.id) {
-				this.props.fetchMatch(this.props.match.id);
-			}
-		}
   	}
 
   	isMatchLoaded() {
