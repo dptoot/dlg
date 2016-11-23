@@ -5,6 +5,7 @@ const initialState = {
 	isRefreshing: false,
 	isFetching: true,
 	showMatchAlert: false,
+	showQuitMatchAlert: false,
 	matchAlert: null,
 };
 
@@ -17,7 +18,7 @@ export const match = createReducer(initialState, {
 	[types.UPDATE_MATCH](state, action) {
 		return {
 			...state, 
-			
+	
 			...action.payload.match,
 		};
 	},
@@ -49,6 +50,20 @@ export const match = createReducer(initialState, {
 			...state, 
 			showMatchAlert: false,
 			matchAlert: null,
+		};
+	},
+
+	[types.SHOW_QUIT_MATCH_ALERT](state, action) {
+		return {
+			...state, 
+			showQuitMatchAlert: true,
+		};
+	},
+
+	[types.HIDE_QUIT_MATCH_ALERT](state, action) {
+		return {
+			...state, 
+			showQuitMatchAlert: false,
 		};
 	},
 

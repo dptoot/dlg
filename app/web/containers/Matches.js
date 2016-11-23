@@ -73,7 +73,19 @@ class Matches extends Component {
 	}
 
 	renderMatches(list) {
-		return this.props.matches.lists[list].map(match => <MatchListItem key={match.id} match={match} onClick={this.handleMatchClick} />);
+		const matches = this.props.matches.lists[list];
+		let element;
+		if (matches.length > 0) {
+			element = this.props.matches.lists[list].map(match => <MatchListItem key={match.id} match={match} onClick={this.handleMatchClick} />);
+		} else {
+			element = (
+				<div className="match-list-item-placeholder">
+					<div>There are no matches here</div>
+				</div>
+			)
+		}
+
+		return element;
 	}
 
 	render() {

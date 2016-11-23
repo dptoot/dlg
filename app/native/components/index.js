@@ -1,4 +1,6 @@
 export {default as Avatar} from './Avatar';
+export {default as AlertBox} from './AlertBox';
+export {default as AlertButton} from './AlertButton';
 export {default as Button} from './Button';
 export {default as Container} from './Container';
 export {default as ListItem} from './ListItem';

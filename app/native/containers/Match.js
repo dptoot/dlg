@@ -18,6 +18,8 @@ import {
 import theme from '../styles/theme';
 
 import {
+	AlertBox,
+	AlertButton,
 	Container, 
 	ListItem, 
 	RemoteImage,
@@ -33,7 +35,7 @@ class Match extends Component {
 		
 		this.handleAnswersPress = this.handleAnswersPress.bind(this);
 		this.handleSearchFocus = this.handleSearchFocus.bind(this);
-		this.handleQuitMatch = this.handleQuitMatch.bind(this);
+		this.handleMatchUpdateFromSocket = this.handleMatchUpdateFromSocket.bind(this);
 	}
 
 	componentDidMount() {
@@ -41,28 +43,17 @@ class Match extends Component {
 			this.props.fetchMatch(this.props.matchId);
 		}
 
-		socket.on('matchupdate', message => {
-			
-			// Only listen to the users events
-			if(message.players.includes(this.props.user.id)) {
-			
-				// update matches lists for the user
-				this.props.fetchMatchesList(this.props.user.id);
-
-				// update current match if it is affected
-				if (message.id === this.props.match.id) {
-					this.props.fetchMatch(this.props.match.id);
-				}
-				
-			}
-
-		})
+		socket.on('matchupdate', this.handleMatchUpdateFromSocket)
 	}
 
 	componentDidUpdate (prevProps) {
 		if (!prevProps.match.showMatchAlert && this.props.match.showMatchAlert) {
 			this.renderMatchAlert();
 		}
+	}
+
+	isMatchActive() {
+		return this.props.match.status === 'active';
 	}
 
 	handleAnswersPress() {
@@ -86,12 +77,22 @@ class Match extends Component {
   		});
   	}
 
-  	handleQuitMatch() {
-  		this.props.quitMatch();
-  	}
-
   	handleRefresh() {
 		this.props.refreshMatch(this.props.matchId);
+  	}
+
+  	handleMatchUpdateFromSocket(message) {
+		// Only listen to the users events
+		if(message.players.includes(this.props.user.id)) {
+		
+			// update matches lists for the user
+			this.props.fetchMatchesList(this.props.user.id);
+
+			// update current match if it is affected
+			if (message.id === this.props.match.id) {
+				this.props.fetchMatch(this.props.match.id);
+			}
+		}
   	}
 
   	isMatchLoaded() {
@@ -99,27 +100,20 @@ class Match extends Component {
   	}
 
   	renderMatchAlert() {
-
-  		const {title, message, buttons} = this.props.match.matchAlert;
-  		const defaultButtons = [
-			{
-				text: 'OK', 
-				onPress: () => {
-					this.props.hideMatchAlert();
-          		},
-			}
-        ]
   		return Alert.alert(
-			title,
-			message,
-			buttons || defaultButtons
+			this.props.match.matchAlert.title,
+			this.props.match.matchAlert.message,
+			[{
+				text: 'OK', 
+				onPress: () => this.props.hideMatchAlert(),
+			}]
 		)
   	}
 
   	renderSearch() {
-
   		return (
   			<Container 
+  				rendered={this.props.match.showSearch}
   				expand={false} 
   				padding="sm" 
 				style={{backgroundColor: theme.colors.grayDark}}
@@ -169,8 +163,9 @@ class Match extends Component {
 								>
 								<Text>Your stats against {this.props.match.opponent.user.name}</Text>
 							</ListItem>
-							<ListItem 
-			        			onPress={this.handleQuitMatch.bind(this)}
+							<ListItem
+								rendered={this.isMatchActive()} 
+			        			onPress={() => this.props.showQuitMatchAlert()}
 								icon="remove"
 								>
 								<Text>Quit this match</Text>
@@ -180,7 +175,19 @@ class Match extends Component {
 					</Container>
 				
 				</ScrollView>
-				{this.props.match.showSearch && this.renderSearch()}
+
+				{this.renderSearch()}
+				
+				<AlertBox
+					show={this.props.match.showQuitMatchAlert}
+					onHide={this.props.hideQuitMatchAlert}
+	  				title="Quit Match"
+	  				message="Are you sure you want to give up?"
+	  				>
+  					<AlertButton text="Yes" onPress={() => this.props.deactivateMatch('resign')} />
+  					<AlertButton text="No" />
+	  			</AlertBox>
+				
 			</Container>
 		)
 	}

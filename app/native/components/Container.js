@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text, StyleSheet} from 'react-native';
+import renderable from '../hoc/renderable';
 import theme from '../styles/theme';
 
 class Container extends Component {
@@ -54,6 +55,6 @@ const styles = StyleSheet.create({
 
 })
 
-export default Container;
+export default renderable(Container);
 
 

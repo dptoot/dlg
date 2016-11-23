@@ -2,7 +2,11 @@
 
 import React, { Component } from 'react'
 import { TextInput, View, TouchableHighlight, Text, StyleSheet} from 'react-native';
-import {Container} from '../components';
+import {
+    Container
+} from '../components';
+
+import renderable from '../hoc/renderable';
 import theme from '../styles/theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -79,6 +83,6 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ListItem;
+export default renderable(ListItem);
 
 

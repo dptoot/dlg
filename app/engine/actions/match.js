@@ -42,6 +42,20 @@ export function hideMatchAlert() {
 	}
 }
 
+export function showQuitMatchAlert() {
+	return {
+		type: types.SHOW_QUIT_MATCH_ALERT, 
+		payload: {},
+	}
+}
+
+export function hideQuitMatchAlert() {
+	return {
+		type: types.HIDE_QUIT_MATCH_ALERT, 
+		payload: {},
+	}
+}
+
 
 // thunks
 export function refreshMatch(match) {
@@ -51,24 +65,7 @@ export function refreshMatch(match) {
 	}
 }
 
-export function quitMatch() {
-	return (dispatch, getState) => {
-		dispatch(showMatchAlert({
-			title: 'Quit Match', 
-			message: 'Are you sure you want to give up?', 
-			buttons: [
-				{
-					text: 'Yes', 
-					onPress: () => dispatch(deactivateMatch('resign')),
-				},
-				{
-					text: 'No', 
-					onPress: () => dispatch(hideMatchAlert()),
-				},
-            ]
-		}));
-	}
-}
+
 
 export function verifyAnswer(answer) {
 	return (dispatch, getState) => {
