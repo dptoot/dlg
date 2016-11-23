@@ -1,0 +1,20 @@
+.card {
+
+	display:flex;
+	flex-direction: column;
+	box-shadow: $shadow-1x;
+
+
+	.card-title {
+		background: $gray-darker;
+		padding: $padding-md $padding-lg; 
+		font-size: $text-lg;
+	}
+
+	.card-content {
+		background: $gray-dark;
+		padding: $padding-lg $padding-lg; 
+	}
+
+
+}

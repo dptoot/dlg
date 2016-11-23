@@ -48,18 +48,12 @@ header {
 
 	.centered-main {
 		display: flex;
+		flex-direction: column;
 		flex: 1;
 		justify-content: center;
 		align-items: center;
 	}
 }
-
-// INPUTS 
-input {
-	font-size: $text-lg;
-}
-
-
 
 // utilities
 .text-sm {

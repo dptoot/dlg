@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router'
 import { mapDispatchToProps } from '../../engine';
+// import { Card } from '../components';
+import { 
+	Card,
+	CenteredWrapper,
+	Button,
+} from '../elements';
 import tcomb from 'tcomb-form';
 
 
@@ -52,19 +58,31 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div>
-				<Form 
-                    type={UserLogin} 
-                    value={this.props.user}
-                    options={options}
-                    onChange={this.handleInputChange}
-                />
+			<CenteredWrapper>
+				<Card 
+					className="login-card"
+					title="Login"
+					>
 
-                <button 
-                	onClick={this.handleLogin}>
-                	Login
-                </button>
-			</div>	
+					<Form 
+	                    type={UserLogin} 
+	                    value={this.props.user}
+	                    options={options}
+	                    onChange={this.handleInputChange}
+	                />
+
+	                <Button 
+	                	text="Submit"
+	                	onClick={this.handleLogin} 
+	                	/>
+				</Card>	
+
+				<Button 
+                    onClick={() => browserHistory.push('/register')}
+                    text="Don't have an account yet?  Register an account real quick."
+                    type="link"
+                    />
+			</CenteredWrapper>
 		)
 	}
 }

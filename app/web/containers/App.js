@@ -4,6 +4,7 @@ import {mapDispatchToProps, storage} from '../../engine';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import AppWrapper from './AppWrapper';
 import Login from './Login';
+import Register from './Register';
 import LastManStanton from './LastManStanton';
 import CreateMatch from './CreateMatch';
 import Search from './Search';
@@ -21,7 +22,7 @@ class App extends Component {
 	handleAutoLogin(nextState, replace, callback) {
 
 		// Ignore all this if we are already on a white list page
-		if (['/login', '/create'].includes(nextState.location.pathname)) {
+		if (['/login', '/register', '/create'].includes(nextState.location.pathname)) {
 			callback();
 		} 
 
@@ -72,6 +73,7 @@ class App extends Component {
 				<Route path='/' component={AppWrapper} onEnter={this.handleAutoLogin}>
 					
 					<Route path="login" component={Login} />
+					<Route path="register" component={Register} />
 
 					<Route path="lastmanstanton" component={LastManStanton} onEnter={this.requireAuth} />
 					

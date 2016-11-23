@@ -1,7 +1,6 @@
 export { default as Answer } from './Answer';
 export { default as Alert } from './Alert';
 export { default as Avatar } from './Avatar';
-export { default as Button } from './Button';
 export { default as CreateMatchSelection } from './CreateMatchSelection';
 export { default as CreateMatchInput } from './CreateMatchInput';
 export { default as ListHeader } from './ListHeader';

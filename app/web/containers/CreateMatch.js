@@ -9,11 +9,12 @@ import {
 	RemoteImage,
 	Avatar,
 	CreateMatchSelection,
-	Button,
 	CreateMatchInput,
 } from '../components';
 
-
+import {
+	Button,
+} from '../elements';
 
 class CreateMatch extends Component {
 
