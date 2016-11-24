@@ -9,16 +9,22 @@ class Card extends Component {
 
     render() {
 
-		const {children, title, className,...rest} = this.props;
+		const {children, title, className, containerClassName, shadow = '1x', vertical = false, ...rest} = this.props;
 
         const classes = classnames({
             card: true,
-        }, className)
+            [`shadow-${shadow}`]: true,
+        }, containerClassName)
+
+        const contentClasses = classnames({
+            'card-content': true,
+            'flex-column': vertical,
+        }, className);
 
         return (
             <div className={classes} {...rest}>
             	<div className="card-title">{title}</div>
-            	<div className="card-content">
+            	<div className={contentClasses}>
                 	{children}
                 </div>
             </div>

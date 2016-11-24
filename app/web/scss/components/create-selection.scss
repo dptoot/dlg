@@ -1,0 +1,26 @@
+.create-selection {
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	.fa-remove {
+		position: absolute;
+		top: $margin-sm;
+		right: $margin-md;
+		font-size: $text-lg;
+		cursor: pointer;
+	}
+
+	.create-selection-image {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: $padding-lg;
+	}
+
+	.create-selection-label {
+		margin-left: $margin-lg;
+	}
+
+}

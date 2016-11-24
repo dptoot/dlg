@@ -3,6 +3,7 @@ export {default as AlertBox} from './AlertBox';
 export {default as AlertButton} from './AlertButton';
 export {default as Button} from './Button';
 export {default as Container} from './Container';
+export {default as CreateSelection} from './CreateSelection';
 export {default as ListItem} from './ListItem';
 export {default as RemoteListItem} from './RemoteListItem';
 export {default as UserListItem} from './UserListItem';

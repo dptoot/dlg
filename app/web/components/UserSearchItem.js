@@ -2,9 +2,6 @@
 
 import React, { Component } from 'react'
 
-import {
-    RemoteImage,
-} from '../components';
 
 class UserSearchItem extends Component {
 

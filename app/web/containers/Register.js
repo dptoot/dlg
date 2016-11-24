@@ -62,7 +62,8 @@ class Register extends Component {
 			<CenteredWrapper>
 
 				<Card 
-					className="register-card"
+					vertical
+					containerClassName="width-50"
 					title="Register"
 					>
 					<Form 

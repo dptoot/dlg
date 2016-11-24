@@ -49,6 +49,7 @@ class AppWrapper extends Component {
                 }, 
                 {
                     text: 'Decline', 
+                    onPress: () => this.props.deleteMatch(match.id),
                 }
             ]
         )

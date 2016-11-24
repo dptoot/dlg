@@ -90,7 +90,7 @@ class MatchesList extends Component {
 			const swipeoutBtns = [
 				{
 					text: 'Delete', 
-					onPress: this.props.deleteMatch.bind(null, match.id),
+					onPress: this.props.archiveMatch.bind(null, match.id),
 					backgroundColor: theme.colors.primary,
 					underlayColor: theme.colors.underlay,
 				}

@@ -158,12 +158,6 @@ export function submitCorrectAnswer(answer) {
 				// handle bad login
 			}
 		})
-		.then(match => {
-			return RemoteDataInterface.getMatch(match, state);
-		})
-		.then(match => {
-			dispatch(updateMatch(match));
-		})
 	}
 }
 
@@ -215,12 +209,22 @@ export function deactivateMatch(reason) {
 				// handle bad login
 			}
 		})
-		.then(match => {
-			return RemoteDataInterface.getMatch(match, state);
+	}
+}
+
+export function archiveMatch(matchId) {
+	return (dispatch, getState) => {
+		const state = getState();
+		
+		Api.authenticatedPost(`/api/matches/${matchId}/archive`, {
+			user_id: state.user.id,
 		})
-		.then(match => {
-			dispatch(updateMatch(match));
-			
+		.then(response => {
+			if (response.success) {
+				return response.match
+			} else {
+				// handle bad login
+			}
 		})
 	}
 }

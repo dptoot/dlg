@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router'
 import { mapDispatchToProps } from '../../engine';
-// import { Card } from '../components';
+
 import { 
 	Card,
 	CenteredWrapper,
@@ -26,8 +26,7 @@ const options = {
       		autoCorrect: false
     	},
         password: {
-            password: true,
-            secureTextEntry: true,
+            type: 'password',
         }
     }
 }
@@ -42,12 +41,6 @@ class Login extends Component {
 		
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.user.isAuthenticated) {
-			browserHistory.push('/lastmanstanton');
-		}
-	}
-
 	handleInputChange(model) {
 		this.props.updateUserLogin(model);
 	}
@@ -60,7 +53,8 @@ class Login extends Component {
 		return (
 			<CenteredWrapper>
 				<Card 
-					className="login-card"
+					vertical
+					containerClassName="width-50"
 					title="Login"
 					>
 
@@ -79,7 +73,7 @@ class Login extends Component {
 
 				<Button 
                     onClick={() => browserHistory.push('/register')}
-                    text="Don't have an account yet?  Register an account real quick."
+                    text="Don't have an account yet?  Register an account."
                     type="link"
                     />
 			</CenteredWrapper>

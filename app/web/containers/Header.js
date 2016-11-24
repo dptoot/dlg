@@ -3,7 +3,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps, storage} from '../../engine';
-import { Avatar } from '../components';
+
+import { 
+    Avatar,
+} from '../elements';
+
 import Icon from 'react-fontawesome';
 
 

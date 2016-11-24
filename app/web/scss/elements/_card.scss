@@ -2,16 +2,23 @@
 
 	display:flex;
 	flex-direction: column;
-	box-shadow: $shadow-1x;
+	margin-bottom: $margin-lg;
+	border: 1px solid $gray;
 
 
 	.card-title {
 		background: $gray-darker;
 		padding: $padding-md $padding-lg; 
 		font-size: $text-lg;
+		border-bottom: 1px solid $gray;
+
+		&:empty {
+			display: none;
+		}
 	}
 
 	.card-content {
+		display: flex;
 		background: $gray-dark;
 		padding: $padding-lg $padding-lg; 
 	}

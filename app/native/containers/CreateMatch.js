@@ -13,6 +13,8 @@ import {
 import theme from '../styles/theme';
 
 import {
+	Avatar,
+	CreateSelection, 
 	Container, 
 	ListItem, 
 	RemoteImage,
@@ -72,47 +74,29 @@ class CreateMatch extends Component {
 
   	renderSelectedUser() {
   		return (
-  			<Container
-				style={styles.formRow} 
-				expand={false}
-				>
-				<Text style={styles.label}>Selected Actor</Text>
-	  			<Container
-                    expand={false}
-                    vertical={false}
-                    alignItems="center"
-                    >
-                    <View style={styles.selectedUserAvatarContainer}>
-                        <Text style={styles.selectedUserAvatar}>
-                            {this.props.search.users.selected.name.slice(0,1).toUpperCase()}
-                        </Text>
-                    </View>
-                    <Text style={styles.selectedNameText}>{this.props.search.users.selected.name}</Text>
-                </Container>
-			</Container>
+  			<CreateSelection 
+  				onRemovePress={this.props.clearActorSearchResult}
+  				label={this.props.search.users.selected.name}
+  				>
+                <Avatar 
+                	size={92}
+                	text={this.props.search.users.selected.name.slice(0,1).toUpperCase()} />
+             </CreateSelection>
 		); 
   	}
 
   	renderSelectedActor() {
   		return (
-  			<Container
-				style={styles.formRow} 
-				expand={false}
-				>
-				<Text style={styles.label}>Selected Actor</Text>
-	  			<Container
-                    expand={false}
-                    vertical={false}
-                    alignItems="center"
-                    >
-                    <RemoteImage 
-                        style={styles.thumb}
-                        path={this.props.search.actors.selected.imagePath} 
-                        width={92}
-                        />
-                    <Text style={styles.selectedNameText}>{this.props.search.actors.selected.name}</Text>
-                </Container>
-			</Container>
+  			<CreateSelection 
+  				onRemovePress={this.props.clearActorSearchResult}
+  				label={this.props.search.actors.selected.name}
+  				>
+                <RemoteImage 
+                    style={styles.thumb}
+                    path={this.props.search.actors.selected.imagePath} 
+                    width={92}
+                    />
+            </CreateSelection>
 		); 
   	}
 
@@ -192,21 +176,7 @@ var styles = StyleSheet.create({
     	fontSize: theme.text.lg,
     	marginLeft: theme.margin.md,
     },
-    selectedUserAvatarContainer: {
-        flex:0,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 92,
-        width: 92,
-        borderRadius: 46,
-        backgroundColor: theme.colors.primary,
-        ...theme.shadow, 
-    }, 
-    selectedUserAvatar: {
-        color: theme.colors.light,
-        fontSize: theme.text.xlg,
-        fontWeight: "bold",
-    },
+   
 });
 
 

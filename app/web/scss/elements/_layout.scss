@@ -56,6 +56,15 @@ header {
 }
 
 // utilities
+
+.width-50 {
+	min-width: 50%;
+}
+
+.shadow-1x {
+	box-shadow: $shadow-1x;
+}
+ 
 .text-sm {
 	font-size: $text-sm;
 }

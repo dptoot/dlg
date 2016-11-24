@@ -98,8 +98,5 @@ export function deleteMatch(matchId) {
 				// handle bad login
 			}
 		})
-		.then(response => {
-			dispatch(fetchMatchesList(state.user.id))
-		})
 	}
 }

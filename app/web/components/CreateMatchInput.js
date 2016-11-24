@@ -1,22 +1,24 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { RemoteImage } from '../components';
-import Icon from 'react-fontawesome';
 
+import {
+    Card,
+} from '../elements';
 
 class CreateMatchInput extends Component {
 
     render() {
 
-        const {label, onClick, placeholder} = this.props;
+        const {title, onInputClick, placeholder} = this.props;
 
         return (
-            <div className="create-match-input">
-                <div>{label}</div>
+            <div className="create-match-input"
+                title={title}
+                >
                 <input 
                     placeholder={placeholder}
-                    onClick={onClick}
+                    onClick={onInputClick}
                     />
             </div>
         );

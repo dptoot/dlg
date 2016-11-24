@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
 import {
-	ListView,
     RemoteSearchItem,
     UserSearchItem,
 } from '../components';
+
+import {
+    ListView,
+} from '../elements';
 
 class Search extends Component {
 

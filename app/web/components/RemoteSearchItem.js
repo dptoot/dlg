@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 import {
     RemoteImage,
-} from '../components';
+} from '../elements';
 
 class RemoteSearchItem extends Component {
 

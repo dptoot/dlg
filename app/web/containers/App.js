@@ -20,9 +20,9 @@ class App extends Component {
 
 	
 	handleAutoLogin(nextState, replace, callback) {
-
+		const publicPaths = ['/login', '/register'];
 		// Ignore all this if we are already on a white list page
-		if (['/login', '/register', '/create'].includes(nextState.location.pathname)) {
+		if (publicPaths.includes(nextState.location.pathname)) {
 			callback();
 		} 
 
@@ -58,12 +58,12 @@ class App extends Component {
 	}
 
 	requireAuth(nextState, replace) {
-		if (!this.props.user.isAuthenticated) {
-			replace({
-			  pathname: '/login',
-			  state: { nextPathname: nextState.location.pathname }
-			})
-		}
+		// if (!this.props.user.isAuthenticated) {
+		// 	replace({
+		// 	  pathname: '/login',
+		// 	  state: { nextPathname: nextState.location.pathname }
+		// 	})
+		// }
 	}
 
 	

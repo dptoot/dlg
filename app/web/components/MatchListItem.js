@@ -1,12 +1,14 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { RemoteImage } from '../components';
+import { RemoteImage } from '../elements';
+import classnames from 'classnames';
+import Icon from 'react-fontawesome';
 
 class MatchListItem extends Component {
 
     render() {
-        const {match} = this.props;
+        const {match, onDelete, ...rest} = this.props;
 
         return (
             <div 
@@ -14,6 +16,7 @@ class MatchListItem extends Component {
                 onClick={this.props.onClick.bind(null, this.props.match.id)}
                 >
                 
+                {onDelete && <Icon name="remove" onClick={onDelete}/>}
 
                 <RemoteImage 
                     path={match.actor.profile_path}

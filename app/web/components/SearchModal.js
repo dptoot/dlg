@@ -1,8 +1,6 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { RemoteImage } from '../components';
-import Icon from 'react-fontawesome';
 import Search from '../containers/Search';
 import {Modal} from 'react-overlays';
 

@@ -6,13 +6,15 @@ import Header from './Header';
 
 import {
 	SearchModal,
-	RemoteImage,
-	Avatar,
-	CreateMatchSelection,
+	CreateSelection,
 	CreateMatchInput,
 } from '../components';
 
 import {
+	Card,
+	CenteredWrapper,
+	RemoteImage,
+	Avatar,
 	Button,
 } from '../elements';
 
@@ -60,26 +62,28 @@ class CreateMatch extends Component {
 
   	renderSelectedUser() {
   		return (
-  			<CreateMatchSelection 
+  			<CreateSelection 
   				title="Selected User"
   				name={this.props.search.users.selected.name}
+  				onRemove={this.props.clearUserSearchResult}
   				>
   				<Avatar text={this.props.search.users.selected.name.slice(0,1).toUpperCase()} />
-			</CreateMatchSelection>
+			</CreateSelection>
 		); 
   	}
 
   	renderSelectedActor() {
   		return (
-			<CreateMatchSelection 
+			<CreateSelection 
   				title="Selected Actor"
   				name={this.props.search.actors.selected.name}
+  				onRemove={this.props.clearActorSearchResult}
   				>
   				<RemoteImage 
                     path={this.props.search.actors.selected.imagePath} 
                     width={92}
                     />
-			</CreateMatchSelection>
+			</CreateSelection>
   			
 		); 
   	}
@@ -134,18 +138,22 @@ class CreateMatch extends Component {
 
   	render() {
 		return (
-			<div className="flex flex-column flex-grow flex-centered">
-				
+			<CenteredWrapper>
+				<Card 
+					containerClassName="width-50"
+					title="Create Match"
+					vertical
+					>
 				{this.props.search.users.selected ? this.renderSelectedUser() : this.renderTextInput({
-					label: 'Select an Opponent',
+					title: 'Select an Opponent',
 					placeholder: 'Enter any user name',
-					onClick: this.handleUserSearchInputClick,
+					onInputClick: this.handleUserSearchInputClick,
 				})}
 
 				{this.props.search.actors.selected ? this.renderSelectedActor() : this.renderTextInput({
-					label: 'Select an Actor',
+					title: 'Select an Actor',
 					placeholder: 'Enter any Actor\'s or Actress\' name',
-					onClick: (this.handleActorSearchInputClick),
+					onInputClick: (this.handleActorSearchInputClick),
 				})}
 				
 				
@@ -153,12 +161,13 @@ class CreateMatch extends Component {
 					onClick={this.handleSubmit}
 					text="Request Match"
 					/>
-				
+
+				</Card>
 				
 				{/*	Search Modals */}
 				{this.renderActorSearch()}
 				{this.renderUserSearch()}
-			</div>
+			</CenteredWrapper>
 		)
 	}
 }

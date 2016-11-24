@@ -3,11 +3,15 @@ import {connect} from 'react-redux';
 import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
 import socket from '../webSocket';
+
 import { 
 	MatchListItem,
-	ListHeader,
-	Alert,
 } from '../components';
+
+import { 
+	Alert,
+	ListHeader,
+} from '../elements';
 
 class Matches extends Component {
 
@@ -75,8 +79,25 @@ class Matches extends Component {
 	renderMatches(list) {
 		const matches = this.props.matches.lists[list];
 		let element;
+
 		if (matches.length > 0) {
-			element = this.props.matches.lists[list].map(match => <MatchListItem key={match.id} match={match} onClick={this.handleMatchClick} />);
+			element = this.props.matches.lists[list].map(match => {
+				const dynamicProps = {}
+				if (list === 'inactive') {
+					Object.assign(dynamicProps, {
+						onDelete: this.props.deleteMatch.bind(null, match.id)
+					})
+				}
+
+				return (
+					<MatchListItem 
+						key={match.id} 
+						match={match} 
+						onClick={this.handleMatchClick}
+						{...dynamicProps}
+						/>
+				);
+			});
 		} else {
 			element = (
 				<div className="match-list-item-placeholder">

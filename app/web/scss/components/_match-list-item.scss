@@ -1,13 +1,21 @@
 .match-list-item {
+	position: relative;
 	color: $gray-base;
 	padding: $padding-md;
 	background: $light;
 	display: flex;
 	flex: 0;
-	//border-radius: $border-radius;
 
 	.remote-image {
 		margin-right: $margin-sm;
+	}
+
+	.fa-remove {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: $padding-sm;
+		cursor: pointer;
 	}
 }
 
