@@ -53,14 +53,12 @@ class Matches extends Component {
 				text: 'Accept', 
 				onClick: () => {
 					this.props.acceptMatch(match.id);
-					this.props.hidePendingMatchAlert();
 				}
 			}, 
 			{
 				text: 'Decline',
 				onClick: () => {
 					this.props.deleteMatch(match.id);
-					this.props.hidePendingMatchAlert();
 				}
 			}
 		];
@@ -68,6 +66,7 @@ class Matches extends Component {
 		return (
 			<Alert 
 				show={true}
+				onHide={this.props.hidePendingMatchAlert}
 				title={`${match.opponent.user.name} wants to challenge you`}
 				message={`The actor is ${match.actor.name}.  Do you accept?`}
 				buttons={buttons}
@@ -99,9 +98,16 @@ class Matches extends Component {
 				);
 			});
 		} else {
+
+			const messages = {
+				inactive: 'You have no recently completed matches',
+				waiting: 'You are not waiting on anyone to play',
+				current: 'It is not your turn in any matches',
+			}
+
 			element = (
 				<div className="match-list-item-placeholder">
-					<div>There are no matches here</div>
+					<div>{messages[list]}</div>
 				</div>
 			)
 		}
@@ -112,7 +118,7 @@ class Matches extends Component {
 	render() {
 		
 		return(
-			<div className>
+			<div className="flex flex-column flex-grow">
 				<div>
 					<ListHeader
 						title="Your Turn" 

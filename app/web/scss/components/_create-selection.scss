@@ -5,11 +5,13 @@
 	align-items: center;
 
 	.fa-remove {
+
+		@extend .linkable;
+
 		position: absolute;
 		top: $margin-sm;
 		right: $margin-md;
 		font-size: $text-lg;
-		cursor: pointer;
 	}
 
 	.create-selection-image {

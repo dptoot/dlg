@@ -6,13 +6,16 @@ import {Modal} from 'react-overlays';
 class Alert extends Component {
 
 	renderButtons() {
-		return this.props.buttons.map(button => {
+		return this.props.buttons.map(({onClick = ()=>{}, text}) => {
 			return (
 				<div 
 					className="alert-button"
-					onClick={button.onClick}
+					onClick={() => {
+						onClick();
+						this.props.onHide();
+					}}
 					>
-					{button.text}
+					{text}
 				</div>
 			)
 		})

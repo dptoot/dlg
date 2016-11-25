@@ -3,14 +3,16 @@ $gray-base: #221e1f;
 $dark: $gray-base;
 $light: #fff;
 
-$gray-darker: lighten($gray-base, 7%);
-$gray-dark: lighten($gray-base, 14%);
-$gray: lighten($gray-base, 21%);
-$gray-light: lighten($gray-base, 42%);
-$gray-lighter: lighten($gray-base, 56%);
-$gray-lightest: lighten($gray-base, 70%);
+$gray-darkest: lighten($gray-base, 5%);
+$gray-darker: lighten($gray-base, 10%);
+$gray-dark: lighten($gray-base, 15%);
+$gray: lighten($gray-base, 30%);
+$gray-light: lighten($gray-base, 40%);
+$gray-lighter: lighten($gray-base, 45%);
+$gray-lightest: lighten($gray-base, 50%);
 
 $primary: #EF1748;
+$secondary: #0879A2;
 $underlay: rgba(239, 23, 72, .5);
 $link: #0879A2;
 
@@ -33,6 +35,11 @@ $margin-lg: 20px;
 $border-radius: 2px;
 
 // shadow
-$shadow-1x: 5px 5px 5px rgba(0,0,0,.15);
-$shadow-2x: 10px 10px 10px rgba(0,0,0,.30);
-$shadow-3x: 15px 15px 15px rgba(0,0,0,.30);
+$shadow-1x: $margin-sm $margin-sm $margin-sm rgba(0,0,0,.15);
+$shadow-2x: $margin-md $margin-md $margin-md rgba(0,0,0,.30);
+$shadow-3x: $margin-lg $margin-lg $margin-lg rgba(0,0,0,.30);
+$shadow-1x-inset: inset 0px 0px $margin-sm rgba(0,0,0,.75);
+$shadow-2x-inset: inset 0px 0px $margin-md rgba(0,0,0,.75);
+$shadow-3x-inset: inset 0px 0px $margin-lg rgba(0,0,0,.75);
+
+

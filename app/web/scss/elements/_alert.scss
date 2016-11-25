@@ -55,5 +55,8 @@
   		justify-content: center;
   		padding: $padding-md; 
   		border: 1px solid $gray-lightest;
+      @extend .linkable;
+
+
   	}
 }

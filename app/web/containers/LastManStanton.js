@@ -39,9 +39,7 @@ class LastManStanton extends Component {
 					
 					
 					<div className="sidebar">
-						<div className="scroll-panel">
-							<Matches />	
-						</div>
+						<Matches />	
 					</div>
 
 					<div className="main">

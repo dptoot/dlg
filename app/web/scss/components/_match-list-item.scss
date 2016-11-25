@@ -5,6 +5,11 @@
 	background: $light;
 	display: flex;
 	flex: 0;
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: $shadow-1x-inset;
+	}
 
 	.remote-image {
 		margin-right: $margin-sm;
@@ -25,12 +30,11 @@
 
 
 .match-list-item-placeholder {
-	color: $gray-lightest;
+	color: $gray-lighter;
 	font-size: $text-sm;
 	display: flex;
 	min-height: 120px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-bottom: 1px solid $gray;
 }

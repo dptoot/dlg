@@ -17,7 +17,10 @@ class Header extends Component {
         return (
             <header>
     	
-        		<Avatar text={this.props.user.name} onClick={this.props.logoutUser}/>
+        		<Avatar 
+                    name={this.props.user.name} 
+                    onClick={this.props.logoutUser}
+                    />
         		
             </header>
         );

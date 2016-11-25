@@ -10,12 +10,12 @@ class Avatar extends Component {
 
     render() {
 
-		const {text, ...rest} = this.props;
+		const {name, text, ...rest} = this.props;
 
         return (
             <div className="avatar" {...rest}>
                 <div>
-                    {this.props.text}
+                    {name && name.slice(0,1).toUpperCase()}
                 </div>
             </div>
         );

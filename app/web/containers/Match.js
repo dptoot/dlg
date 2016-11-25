@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
-import { MatchHeader, Answer } from '../components';
+import { Answer, LastAnswer } from '../components';
 import Search from '../containers/Search';
+import MatchHeader from '../containers/MatchHeader';
 import {Modal} from 'react-overlays';
 import socket from '../webSocket';
 
@@ -65,6 +66,13 @@ class Match extends Component {
 					match={this.props.match} 
 					onSearchClick={this.handleToggleSearch} 
 					/>
+
+				<div className="flex">	
+					<LastAnswer 
+						rendered={this.props.match.lastAnswer}
+						answer={this.props.match.lastAnswer} 
+						/>
+				</div>
 					
 				<div className="item-grid">
 					{this.props.match.answers.map(answer => <Answer key={answer.id} answer={answer} />)}

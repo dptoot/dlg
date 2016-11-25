@@ -9,7 +9,7 @@
 	.card-title {
 		background: $gray-darker;
 		padding: $padding-md $padding-lg; 
-		font-size: $text-lg;
+		font-size: $text-md;
 		border-bottom: 1px solid $gray;
 
 		&:empty {
@@ -19,6 +19,7 @@
 
 	.card-content {
 		display: flex;
+		justify-content: center;
 		background: $gray-dark;
 		padding: $padding-lg $padding-lg; 
 	}

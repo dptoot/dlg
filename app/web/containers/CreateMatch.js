@@ -67,7 +67,7 @@ class CreateMatch extends Component {
   				name={this.props.search.users.selected.name}
   				onRemove={this.props.clearUserSearchResult}
   				>
-  				<Avatar text={this.props.search.users.selected.name.slice(0,1).toUpperCase()} />
+  				<Avatar name={this.props.search.users.selected.name} />
 			</CreateSelection>
 		); 
   	}

@@ -7,10 +7,12 @@
 
 @import './scss/variables';
 @import './scss/reset';
+@import './scss/utils';
 
 @import './scss/elements/alert';
 @import './scss/elements/avatar';
 @import './scss/elements/button';
+@import './scss/elements/button-toolbar';
 @import './scss/elements/card';
 @import './scss/elements/flex';
 @import './scss/elements/forms';
@@ -21,9 +23,10 @@
 @import './scss/components/answer';
 @import './scss/components/create-match-input';
 @import './scss/components/create-selection';
+@import './scss/components/last-answer';
 @import './scss/components/match';
+@import './scss/components/match-header';
 @import './scss/components/match-list-item';
-@import './scss/components/match-title';
 
 @import './scss/components/search';
 

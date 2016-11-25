@@ -1,0 +1,14 @@
+.button-toolbar {
+
+	display: flex;
+	justify-content: space-between;
+
+	.button {
+		width: auto;
+	}
+
+	&.button-toolbar-reversed {
+		flex-direction: row-reverse;
+	}
+
+}

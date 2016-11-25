@@ -10,8 +10,9 @@ class UserSearchItem extends Component {
         return (
             <a 
                 onClick={this.props.onClick}
-                className="remote-search-item"
+                className="search-item"
                 >
+                    <Avatar name={this.props.item.name} />
                     <div className="name">
                         {this.props.item.name}
                     </div>

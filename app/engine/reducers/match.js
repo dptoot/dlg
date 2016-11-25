@@ -7,6 +7,7 @@ const initialState = {
 	showMatchAlert: false,
 	showQuitMatchAlert: false,
 	matchAlert: null,
+	lastAnswer: null,
 };
 
 export const match = createReducer(initialState, {

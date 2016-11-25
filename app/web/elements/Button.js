@@ -1,24 +1,25 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { RemoteImage } from '../components';
 import Icon from 'react-fontawesome';
 import classnames from 'classnames';
+import renderable from '../hoc/renderable';
 
 
 class Button extends Component {
 
     render() {
 
-		const {text, type,...rest} = this.props;
+		const {text, type, icon, ...rest} = this.props;
 
 		const classes = classnames({
 			button: true,
-			'button-link': type === 'link',
+			[`button-${type}`]: true,
 		})
 
         return (
             <div className={classes} {...rest}>
+                {icon && <Icon name={icon} />}
                 {text}
             </div>
         );
@@ -27,9 +28,9 @@ class Button extends Component {
 }
 
 Button.defaultProps = {
-
+    type: 'primary',
 }
 
-export default Button;
+export default renderable(Button);
 
 

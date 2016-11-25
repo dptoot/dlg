@@ -3,5 +3,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: $padding-sm $padding-md;
-	border-bottom: 1px solid $gray;
+	background: $gray-darkest;
+
+	.fa {
+		@extend .linkable;
+	}
 }

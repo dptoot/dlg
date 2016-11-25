@@ -4,13 +4,22 @@
 	padding: $padding-md $padding-lg;
 	background: $primary;
 	justify-content: center;
+	align-items: center;
+
+	.fa {
+		margin-right: $margin-sm;
+	}
 
 	&:hover {
 		opacity: .9;
 	}
 
 	&:active {
-		box-shadow: inset 0px 0px $margin-sm rgba(0,0,0,.75);
+		box-shadow: $shadow-1x-inset;
+	}
+
+	&.button-secondary {
+		background: $secondary;
 	}
 
 	&.button-link {
