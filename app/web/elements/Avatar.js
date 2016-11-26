@@ -12,10 +12,16 @@ class Avatar extends Component {
 
 		const {name, text, ...rest} = this.props;
 
+        let content = text;
+        
+        if (name) {
+            content = name.slice(0,1).toUpperCase();
+        } 
+
         return (
             <div className="avatar" {...rest}>
                 <div>
-                    {name && name.slice(0,1).toUpperCase()}
+                    {content}
                 </div>
             </div>
         );

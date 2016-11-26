@@ -9,7 +9,16 @@ class Card extends Component {
 
     render() {
 
-		const {children, title, className, containerClassName, shadow = '1x', vertical = false, ...rest} = this.props;
+		const {
+            children, 
+            title, 
+            className, 
+            containerClassName, 
+            shadow = '1x', 
+            vertical = false,
+            justify = 'center', 
+            ...rest
+        } = this.props;
 
         const classes = classnames({
             card: true,
@@ -19,6 +28,7 @@ class Card extends Component {
         const contentClasses = classnames({
             'card-content': true,
             'flex-column': vertical,
+            [`flex-${justify}`]: true,
         }, className);
 
         return (

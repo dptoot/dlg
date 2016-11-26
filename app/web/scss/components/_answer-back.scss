@@ -1,0 +1,15 @@
+.answer-back {
+	height: 100%;
+	background: $gray-darker;
+
+	.answer-title {
+		background: $gray-darkest;
+		padding: $padding-sm;
+	}
+
+	.answer-year {
+		text-align: right;
+		color: $gray;
+		padding: $padding-sm $padding-md;
+	}
+}

@@ -1,12 +1,19 @@
 'use strict';
 
 import React, { Component } from 'react'
+import classnames from 'classnames';
 
 class RemoteImage extends Component {
 
     render() {
+
+        const {className, path, height, width, style, originalWidth, maintainAspectRatio, circular, shadow, ...rest} = this.props;
+
+
+        const classes = classnames({
+            'remote-image': true,
+        }, className)
         
-        const {path, height, width, style, originalWidth, maintainAspectRatio, circular, shadow, ...rest} = this.props;
 
         const uri = `https://image.tmdb.org/t/p/w${width}${path}`
 
@@ -20,7 +27,7 @@ class RemoteImage extends Component {
         const renderImage = () => {
             return (
                 <img
-                    className="remote-image"
+                    className={classes}
                     style={imageStyle}
                     src={`https://image.tmdb.org/t/p/w${remoteImageWidth}${path}`}
                 />

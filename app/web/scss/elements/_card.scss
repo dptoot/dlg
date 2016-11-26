@@ -3,14 +3,14 @@
 	display:flex;
 	flex-direction: column;
 	margin-bottom: $margin-lg;
-	border: 1px solid $gray;
+	border: 1px solid $gray-darker;
 
 
 	.card-title {
 		background: $gray-darker;
 		padding: $padding-md $padding-lg; 
 		font-size: $text-md;
-		border-bottom: 1px solid $gray;
+		border-bottom: 1px solid $gray-darker;
 
 		&:empty {
 			display: none;
@@ -19,7 +19,6 @@
 
 	.card-content {
 		display: flex;
-		justify-content: center;
 		background: $gray-dark;
 		padding: $padding-lg $padding-lg; 
 	}

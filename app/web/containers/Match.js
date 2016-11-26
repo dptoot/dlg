@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
-import { Answer, LastAnswer } from '../components';
+import { Answer, LastAnswer, MatchStatus } from '../components';
 import Search from '../containers/Search';
 import MatchHeader from '../containers/MatchHeader';
 import {Modal} from 'react-overlays';
@@ -70,7 +70,13 @@ class Match extends Component {
 				<div className="flex">	
 					<LastAnswer 
 						rendered={this.props.match.lastAnswer}
+						className="flex-grow margin-horizontal-md margin-collapse-left"
 						answer={this.props.match.lastAnswer} 
+						/>
+
+					<MatchStatus 
+						className="flex-grow margin-horizontal-md margin-collapse-right"
+						match={this.props.match}
 						/>
 				</div>
 					
