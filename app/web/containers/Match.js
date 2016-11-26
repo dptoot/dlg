@@ -70,12 +70,12 @@ class Match extends Component {
 				<div className="flex">	
 					<LastAnswer 
 						rendered={this.props.match.lastAnswer}
-						className="flex-grow margin-horizontal-md margin-collapse-left"
+						className="flex-grow margin-horizontal-lg margin-collapse-left"
 						answer={this.props.match.lastAnswer} 
 						/>
 
 					<MatchStatus 
-						className="flex-grow margin-horizontal-md margin-collapse-right"
+						className="flex-grow"
 						match={this.props.match}
 						/>
 				</div>

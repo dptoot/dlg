@@ -25,6 +25,7 @@ class LastAnswer extends Component {
                 justify="left"
                 containerClassName={classes}
                 title="Last Answer"
+                shadow={false}
                 >
                 <RemoteImage 
                     path={this.props.answer.imagePath} 

@@ -27,6 +27,7 @@ class MatchStatus extends Component {
                 containerClassName={classes}
                 title="Match Stats"
                 vertical
+                shadow={false}
                 >
                 <section className="flex flex-middle flex-center">
                     <Avatar text={`${match.answerCompletionPercentage}%`} />

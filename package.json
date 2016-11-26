@@ -5,8 +5,9 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "web:prod": "webpack --config web/webpack/web.prod.config.js --progress --colors",
-    "web:dev": "webpack-dev-server --content-base web/public/ --config web/webpack/webpack.dev.config.js"
+    "web:build": "webpack -p --config web/webpack/webpack.prod.config.js --progress --colors",
+    "web:dev": "webpack-dev-server --content-base web/public/ --config web/webpack/webpack.dev.config.js",
+    "web:deploy": "node ./web/scripts/deploy-webapp.js"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -50,6 +51,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "15.3.2",
     "sass-loader": "^4.0.2",
+    "shelljs": "^0.7.5",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",

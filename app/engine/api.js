@@ -55,6 +55,7 @@ class Api {
     if (authenticated) {
         Object.assign(options.headers, {
             'Authorization': store.getState().user.token,
+            'credentials': 'include',
         });
     }
 
