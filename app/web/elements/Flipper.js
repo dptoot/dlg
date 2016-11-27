@@ -29,7 +29,7 @@ class Flipper extends Component {
             <div 
                 style={dimensionsStyle}
                 className={containerClasses} 
-                onTouchStart="this.classList.toggle('hover');">
+                onTouchStart={() => this.classList.toggle('hover')}>
                 <div className={classes}>
                     <div className="flipper-front" style={dimensionsStyle}>
                         {this.props.front}

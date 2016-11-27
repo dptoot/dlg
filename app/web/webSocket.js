@@ -2,7 +2,7 @@
 // This must be below your `window.navigator` hack above
 import io from 'socket.io-client/socket.io';
 
-const socket = io('http://localhost:3000', {
+const socket = io(process.env.WEBSOCKET_HOST, {
   transports: ['websocket'] // you need to explicitly tell it to use websockets
 });
 

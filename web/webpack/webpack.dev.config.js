@@ -1,6 +1,9 @@
 const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-console.log(__dirname)
+
+// Set dev flag to mimic react-native for react-native-storage
+global.__DEV__ = true;
 
 module.exports = {
     watch: true,
@@ -8,7 +11,7 @@ module.exports = {
     devServer: {
       historyApiFallback: true,
       devtool: 'eval',
-      hot: true,        //Live-reload
+      hot: true,     
       inline: true,
     },
     entry: [
@@ -42,9 +45,16 @@ module.exports = {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        template: 'web/webpack/index-template.ejs',
+      }),
       new webpack.DefinePlugin({
+        '__DEV__': true, // emulate react-native for react-native-storage
         'process.env': {
-          'web': true,
+          NODE_ENV: JSON.stringify('development'),
+          PLATFORM: JSON.stringify('web'),
+          API_HOST: JSON.stringify('http://localhost:3000'),
+          WEBSOCKET_HOST: JSON.stringify('http://localhost:3000'),
         }
       })
     ]

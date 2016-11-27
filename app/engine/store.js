@@ -6,7 +6,7 @@ import reducer from './reducers';
 
 const loggerMiddleware = createLogger({ 
     collapsed: true,
-    predicate: (getState, action) => process.env !== 'production', 
+    predicate: (getState, action) => __DEV__, 
 });
 
 const enhancer = compose(

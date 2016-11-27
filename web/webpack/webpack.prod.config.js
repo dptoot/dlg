@@ -1,5 +1,8 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 var path = require('path');
+var projectRoot = path.resolve(__dirname, '../../');
 var buildPath = path.resolve(__dirname, '../', 'public');
 var nodeModulesPath = path.resolve(__dirname, '../../', 'node_modules');
 
@@ -11,7 +14,7 @@ var config = {
   entry: './app/web/index.js',
   output: {
     path: buildPath,
-    filename: 'bundle.js'
+    filename: 'bundle-[hash].js'
   },
   module: {
       loaders: [
@@ -33,11 +36,22 @@ var config = {
       ]
     },
     plugins: [
+      new CleanWebpackPlugin(buildPath, {
+        root: process.cwd(),
+      }),
+      new HtmlWebpackPlugin({
+        template: 'web/webpack/index-template.ejs',
+      }),
       new webpack.DefinePlugin({
+        '__DEV__': false, // emulate react-native for react-native-storage
         'process.env': {
-          'web': true,
+          NODE_ENV: JSON.stringify('production'),
+          PLATFORM: JSON.stringify('web'),
+          API_HOST: JSON.stringify('http://api-douglovesgames.rhcloud.com'),
+          WEBSOCKET_HOST: JSON.stringify('http://api-douglovesgames.rhcloud.com:8000'),
         }
-      })
+      }),
+      new webpack.optimize.UglifyJsPlugin()
     ]
 }
 

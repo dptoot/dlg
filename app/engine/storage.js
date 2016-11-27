@@ -3,7 +3,7 @@ import Storage from 'react-native-storage';
 let storageContainer;
 
 
-if (process.env.web) {
+if (process.env.PLATFORM === 'web') {
 	// use localStorage for web client
 	storageContainer = window.localStorage;
 } else {
