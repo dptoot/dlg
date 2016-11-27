@@ -1,13 +1,14 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var path = require('path');
-var projectRoot = path.resolve(__dirname, '../../');
-var buildPath = path.resolve(__dirname, '../', 'public');
-var nodeModulesPath = path.resolve(__dirname, '../../', 'node_modules');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
+const projectRoot = path.resolve(__dirname, '../../');
+const buildPath = path.resolve(__dirname, '../', 'public');
+const nodeModulesPath = path.resolve(__dirname, '../../', 'node_modules');
+const autoprefixer = require('autoprefixer'); 
 
 
-var config = {
+const config = {
 
   // We change to normal source mapping
   devtool: 'source-map',
@@ -30,7 +31,15 @@ var config = {
         },
         { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
         { test: /\.css$/, loader: "style-loader!css-loader" },
-        { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader" },
+        { 
+            test: /\.scss$/, 
+            loaders: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ]
+        },
         { test: /\.png$/, loader: "url-loader?limit=100000" },
         { test: /\.jpg$/, loader: "file-loader" }
       ]

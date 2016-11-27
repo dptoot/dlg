@@ -1,6 +1,7 @@
 const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer'); 
 
 // Set dev flag to mimic react-native for react-native-storage
 global.__DEV__ = true;
@@ -19,11 +20,6 @@ module.exports = {
         'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
         './app/web/index.js',
     ],
-    // output: {
-    //     path: '/',
-    //     publicPath: 'public',
-    //     filename: 'bundle.js'
-    // },
     module: {
       loaders: [
         {
@@ -37,12 +33,21 @@ module.exports = {
           loader: 'babel',
         },
         { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
-        { test: /\.css$/, loader: "style-loader!css-loader" },
-        { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader" },
+        //{ test: /\.css$/, loader: "style-loader!css-loader" },
+        { 
+            test: /\.scss$/, 
+            loaders: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader',
+                'sass-loader',
+            ]
+        },
         { test: /\.png$/, loader: "url-loader?limit=100000" },
         { test: /\.jpg$/, loader: "file-loader" }
       ]
     },
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
