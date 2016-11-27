@@ -44,6 +44,7 @@ const config = {
         { test: /\.jpg$/, loader: "file-loader" }
       ]
     },
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     plugins: [
       new CleanWebpackPlugin(buildPath, {
         root: process.cwd(),
