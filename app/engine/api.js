@@ -1,4 +1,5 @@
 import store from './store';
+import 'isomorphic-fetch';
 
 class Api {
   static headers() {
