@@ -6,7 +6,8 @@ import {Modal} from 'react-overlays';
 class Alert extends Component {
 
 	renderButtons() {
-		return this.props.buttons.map(({onClick = ()=>{}, text}) => {
+		let buttons = this.props.buttons || [{text: 'OK'}];
+		return buttons.map(({onClick = ()=>{}, text}) => {
 			return (
 				<div 
 					className="alert-button"
@@ -34,7 +35,6 @@ class Alert extends Component {
 	        		<div className="alert-title">{this.props.title}</div>
 	        		<div className="alert-message">{this.props.message}</div>
 	        		<div className="alert-buttons">{this.renderButtons()}</div>
-
 				</div>
 	        </Modal>
         );

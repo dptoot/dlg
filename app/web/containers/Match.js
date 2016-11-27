@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
+import { Alert } from '../elements';
 import { Answer, LastAnswer, MatchStatus } from '../components';
 import Search from '../containers/Search';
 import MatchHeader from '../containers/MatchHeader';
@@ -38,6 +39,18 @@ class Match extends Component {
 	handleSearchSelection(answer) {
 		this.handleToggleSearch();
 		this.props.verifyAnswer(answer);
+	}
+
+	renderMatchAlert() {
+		
+		return (
+			<Alert
+				show={this.props.match.showMatchAlert}
+				onHide={this.props.hideMatchAlert}
+				title={this.props.match.matchAlert.title}
+				message={this.props.match.matchAlert.message}
+				/>
+		)
 	}
 
 	renderSearch() {
@@ -100,6 +113,7 @@ class Match extends Component {
 		return (
 			<div className="match-board-container">
 				{this.renderSearch()}
+				{this.renderMatchAlert()}
 				{this.props.match.id ? this.renderMatch() : this.renderPlaceholder()}
 			</div>
 		);

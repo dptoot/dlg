@@ -6,7 +6,10 @@ const initialState = {
 	isFetching: true,
 	showMatchAlert: false,
 	showQuitMatchAlert: false,
-	matchAlert: null,
+	matchAlert: {
+		title: '',
+		message:'',
+	},
 	lastAnswer: null,
 };
 
@@ -50,7 +53,7 @@ export const match = createReducer(initialState, {
 		return {
 			...state, 
 			showMatchAlert: false,
-			matchAlert: null,
+			matchAlert: initialState.matchAlert,
 		};
 	},
 
