@@ -2,6 +2,7 @@ import * as types from './types';
 import Api from '../api';
 import RemoteDataInterface from '../remoteDataInterface';
 
+const matchApi = '/api/match';
 
 export function updateMatch(match) {
 	return {
@@ -102,7 +103,7 @@ export function createMatch() {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedPost(`/api/matches/`, {
+		Api.authenticatedPost(`${matchApi}`, {
 			opponent_id: state.search.users.selected.id,
 			remote_id: state.search.actors.selected.id,
 			user_id: state.user.id,
@@ -121,7 +122,7 @@ export function fetchMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedGet(`/api/matches/${matchId}`)
+		Api.authenticatedGet(`${matchApi}/${matchId}`)
 		.then(response => {
 			if (response.success) {
 				return response.match
@@ -146,7 +147,7 @@ export function submitCorrectAnswer(answer) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedPost(`/api/matches/${state.match.id}/answer`, {
+		Api.authenticatedPost(`${matchApi}/${state.match.id}/answer`, {
 			remote_id: answer.id,
 			title: answer.name,
 			user_id: state.user.id
@@ -165,7 +166,7 @@ export function acceptMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedGet(`/api/matches/${matchId}/accept`)
+		Api.authenticatedGet(`${matchApi}/${matchId}/accept`)
 		.then(response => {
 			if (response.success) {
 				return response.match
@@ -177,11 +178,11 @@ export function acceptMatch(matchId) {
 	}
 }
 
-export function declineMatch(matchId) {
+export function deleteMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedDelete(`/api/matches/${matchId}`)
+		Api.authenticatedDelete(`${matchApi}/${matchId}`)
 		.then(response => {
 			if (response.success) {
 				return response.match
@@ -197,7 +198,7 @@ export function deactivateMatch(reason) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedPost(`/api/matches/${state.match.id}/deactivate`, {
+		Api.authenticatedPost(`${matchApi}/${state.match.id}/deactivate`, {
 			reason: reason,
 			winner_id: state.match.opponent.user.id,
 			loser_id: state.user.id,
@@ -216,7 +217,7 @@ export function archiveMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedPost(`/api/matches/${matchId}/archive`, {
+		Api.authenticatedPost(`${matchApi}/${matchId}/archive`, {
 			user_id: state.user.id,
 		})
 		.then(response => {

@@ -84,7 +84,7 @@ class Matches extends Component {
 				const dynamicProps = {}
 				if (list === 'inactive') {
 					Object.assign(dynamicProps, {
-						onDelete: this.props.deleteMatch.bind(null, match.id)
+						onDelete: this.props.archiveMatch.bind(null, match.id)
 					})
 				}
 

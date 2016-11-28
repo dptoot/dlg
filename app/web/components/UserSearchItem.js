@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react'
-
+import { Avatar } from '../elements';
 
 class UserSearchItem extends Component {
 

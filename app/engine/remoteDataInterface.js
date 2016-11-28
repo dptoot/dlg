@@ -82,12 +82,14 @@ class RemoteDataInterface {
 				}	
 
 				if (answer.selected) {
+					console.log(answer);
 					Object.assign(formattedAnswer, {
 						selected: answer.selected,
 						title: answer.title,
 						imagePath: answer.poster_path,
 						selectedBy: null,
 						selectionIndex: answer.selectionIndex,
+						overview: answer.overview,
 					})
 
 					if(!lastAnswer || answer.selectionIndex >= lastAnswer.selectionIndex) {

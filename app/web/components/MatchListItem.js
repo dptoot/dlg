@@ -16,7 +16,11 @@ class MatchListItem extends Component {
                 onClick={this.props.onClick.bind(null, this.props.match.id)}
                 >
                 
-                {onDelete && <Icon name="remove" onClick={onDelete}/>}
+                {onDelete && <Icon name="remove" onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    onDelete();
+                }}/>}
 
                 <RemoteImage 
                     path={match.actor.profile_path}

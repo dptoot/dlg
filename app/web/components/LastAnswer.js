@@ -34,6 +34,7 @@ class LastAnswer extends Component {
                 <div className="margin-horizontal-lg margin-collapse-right">
                     <div className="text-lg">{this.props.answer.title}</div>
                     <div className="text-gray">{this.props.answer.year}</div>
+                    <div className="text-gray text-sm">{this.props.answer.overview}</div>
                 </div>
             </Card>
         );

@@ -42,7 +42,7 @@ class Api {
     return this.xhr(route, params, 'DELETE', true);
   }
 
-  static xhr(route, params, verb, authenticated) {
+  static xhr(route, params, verb, authenticated = false) {
 
     const url = `${process.env.API_HOST}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );

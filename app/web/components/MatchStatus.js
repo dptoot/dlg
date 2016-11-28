@@ -13,6 +13,24 @@ import renderable from '../hoc/renderable';
 
 class MatchStatus extends Component {
 
+    renderActorMatchHistory() {
+        let actorMatchHistory;
+        if (!!this.props.match.actor.played) {
+            actorMatchHistory = (
+                <div className="text-center">
+                    <div className="text-gray">{`The most movies guessed correctly in a match is ${this.props.match.actor.most_answers} by ${this.props.match.actor.most_answers_by.name}.`}</div>
+                    <div className="text-gray">{`The highest percentage completed in a single match of ${this.props.match.actor.name} is ${Math.ceil(this.props.match.actor.highest_percentage_completed*100)}%.`}</div>
+                </div>
+            );
+        } else {
+            actorMatchHistory = (
+                <div className="text-gray">Bold move!  You and {this.props.match.opponent.user.name} are the first people to play {this.props.match.actor.name}</div>
+            );
+        }
+
+        return actorMatchHistory;
+    }
+
     render() {
 
         const {match, className, ...rest} = this.props;
@@ -33,10 +51,9 @@ class MatchStatus extends Component {
                     <Avatar text={`${match.answerCompletionPercentage}%`} />
                     <div className="margin-horizontal-md margin-collapse-right">complete</div>
                 </section>
-                <div className="margin-vertical-lg">
+                <div className="margin-vertical-lg text-center">
                     <div className="text-md">{`${match.selectedAnswerCount} of ${match.totalAnswerCount} ${match.actor.name} movies have been selected.`}</div>
-                    <div className="text-gray">{`The most movies guessed correctly in a match is ${match.actor.most_answers} by ${match.actor.most_answers_by.name}.`}</div>
-                    <div className="text-gray">{`The highest percentage completed in a single match of ${match.actor.name} is ${Math.ceil(match.actor.highest_percentage_completed*100)}%.`}</div>
+                    {this.renderActorMatchHistory()}
                 </div>
             </Card>
         );

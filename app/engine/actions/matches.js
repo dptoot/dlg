@@ -55,7 +55,7 @@ export function fetchMatchesList(userId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedGet(`/api/users/${userId}/matches`)
+		Api.authenticatedGet(`/api/matches/${userId}/`)
 		.then(response => {
 			if (response.success) {
 				return response.matches
@@ -79,24 +79,6 @@ export function fetchMatchesList(userId) {
 		.then(matchLists => {
 			dispatch(updateMatchesList(matchLists))
 			dispatch(hideRefreshingMatches());
-		})
-	}
-}
-
-export function deleteMatch(matchId) {
-	return (dispatch, getState) => {
-
-		const state = getState();
-		
-		Api.authenticatedPost(`/api/matches/${matchId}/archive`, {
-			user_id: state.user.id,
-		})
-		.then(response => {
-			if (response.success) {
-				return response
-			} else {
-				// handle bad login
-			}
 		})
 	}
 }
