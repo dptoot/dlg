@@ -1,0 +1,26 @@
+.user-search-item {
+
+	.item-label {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		flex: 0;
+		padding: $padding-md;
+
+		.name {
+			margin-top: $margin-sm;
+			text-align: center;
+		}
+
+		&:hover {
+			background-color: $secondary;
+			.name {
+				color: $light;
+			}
+			
+		}
+
+	}
+
+	
+}

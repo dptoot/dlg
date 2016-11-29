@@ -10,11 +10,13 @@ class UserSearchItem extends Component {
         return (
             <a 
                 onClick={this.props.onClick}
-                className="search-item"
+                className="user-search-item"
                 >
-                    <Avatar name={this.props.item.name} />
-                    <div className="name">
-                        {this.props.item.name}
+                    <div className="item-label">
+                        <Avatar name={this.props.item.name} />
+                        <div className="name">
+                            {this.props.item.name}
+                        </div>
                     </div>
 
             </a>

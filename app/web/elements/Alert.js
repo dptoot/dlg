@@ -7,9 +7,10 @@ class Alert extends Component {
 
 	renderButtons() {
 		let buttons = this.props.buttons || [{text: 'OK'}];
-		return buttons.map(({onClick = ()=>{}, text}) => {
+		return buttons.map(({onClick = ()=>{}, text}, index) => {
 			return (
-				<div 
+				<div
+					key={index}
 					className="alert-button"
 					onClick={() => {
 						onClick();

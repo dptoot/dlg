@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
-import socket from '../webSocket';
+import socket from '../websocket';
 
 import { 
 	MatchListItem,

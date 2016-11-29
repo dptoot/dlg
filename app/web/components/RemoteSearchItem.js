@@ -20,8 +20,10 @@ class RemoteSearchItem extends Component {
                         path={this.props.item.imagePath} 
                         width={154}
                         />
-                    <div className="name">
-                        {this.props.item.name}
+
+                    <div className="item-label">
+                        <div className="name">{this.props.item.name}</div>
+                        <div className="year">{this.props.item.year}</div>
                     </div>
 
             </a>

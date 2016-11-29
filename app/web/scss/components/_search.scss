@@ -72,22 +72,3 @@
 		padding: $padding-lg 0;
 	}
 }
-
-
-// REMOTE SEARCH
-.remote-search-item {
-	
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	padding: 10px;
-
-	&:hover {
-		background-color: $primary;
-	}
-
-	.name {
-		text-align: center;
-	}
-}

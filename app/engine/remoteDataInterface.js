@@ -4,10 +4,14 @@ import moment from 'moment';
 class RemoteDataInterface {
   
     static movie(movie) {
+
+    	const year = moment(movie.release_date).format("YYYY");
+
         return {
             id: movie.id,
             imagePath: movie.image,
             name: movie.value,
+            year: year === 'Invalid date' ? 'n/a' : year,
         };
     }
 
@@ -82,7 +86,6 @@ class RemoteDataInterface {
 				}	
 
 				if (answer.selected) {
-					console.log(answer);
 					Object.assign(formattedAnswer, {
 						selected: answer.selected,
 						title: answer.title,

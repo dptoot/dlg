@@ -9,7 +9,7 @@ import {
 
 import { connect } from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
-import socket from '../lib/websocketConfig';
+import socket from '../websocket';
 
 import theme from '../styles/theme';
 

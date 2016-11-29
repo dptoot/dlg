@@ -1,3 +1,5 @@
+import config from '../engine/config';
+
 // You need to set `window.navigator` to something in order to use the socket.io
 // client. You have to do it like this in order to use the debugger because the
 // debugger in React Native runs in a webworker and only has a getter method for

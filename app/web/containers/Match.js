@@ -6,7 +6,7 @@ import { Answer, LastAnswer, MatchStatus } from '../components';
 import Search from '../containers/Search';
 import MatchHeader from '../containers/MatchHeader';
 import {Modal} from 'react-overlays';
-import socket from '../webSocket';
+import socket from '../websocket';
 
 class Match extends Component {
 

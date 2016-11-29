@@ -1,5 +1,6 @@
 import store from './store';
 import 'isomorphic-fetch';
+import config from './config';
 
 class Api {
   static headers() {
@@ -44,7 +45,7 @@ class Api {
 
   static xhr(route, params, verb, authenticated = false) {
 
-    const url = `${process.env.API_HOST}${route}`
+    const url = `${config('API_HOST')}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     
     // Add headers

@@ -1,0 +1,37 @@
+.remote-search-item {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 10px;
+
+	&:hover {
+		background-color: $secondary;
+
+		.year {
+			color: $light;
+		}
+	}
+
+
+	.item-label {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: $padding-sm 0;
+
+	}
+
+	.name {
+		
+
+	}
+
+	.year {
+		color: $gray-light;
+		text-align: center;
+
+
+	}
+}

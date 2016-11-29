@@ -12,6 +12,12 @@ import theme from '../styles/theme';
 
 class RemoteListItem extends Component {
 
+    renderYear() {
+        return this.props.item.year && (
+            <Text style={styles.itemYear}>{this.props.item.year}</Text>
+        );
+    }
+
     render() {
         
         return (
@@ -26,7 +32,12 @@ class RemoteListItem extends Component {
                         path={this.props.item.imagePath} 
                         width={45}
                         />
-                    <Text style={styles.itemText}>{this.props.item.name}</Text>
+                    <Container expand={false}
+                        style={styles.itemLabel}
+                        >
+                        <Text style={styles.itemName}>{this.props.item.name}</Text>
+                        {this.renderYear()}
+                    </Container>
                 </Container>
             </ListItem>
         )
@@ -39,8 +50,11 @@ RemoteListItem.defaultProps = {
 
 
 const styles = StyleSheet.create({
-    itemText: {
+    itemLabel: {
         marginLeft: theme.margin.sm,
+    },
+    itemYear: {
+        color: theme.colors.gray,
     }
 
 })

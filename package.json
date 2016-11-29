@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "native:dev": "react-native run-ios",
     "web:build": "webpack --config web/webpack/webpack.prod.config.js --progress --colors",
     "web:dev": "webpack-dev-server --content-base web/public/ --config web/webpack/webpack.dev.config.js",
     "web:deploy": "node ./web/scripts/deploy-webapp.js"

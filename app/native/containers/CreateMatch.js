@@ -75,7 +75,7 @@ class CreateMatch extends Component {
   	renderSelectedUser() {
   		return (
   			<CreateSelection 
-  				onRemovePress={this.props.clearActorSearchResult}
+  				onRemovePress={this.props.clearUserSearchResult}
   				label={this.props.search.users.selected.name}
   				>
                 <Avatar 
