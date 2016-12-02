@@ -19,7 +19,7 @@ class Header extends Component {
     	
         		<Avatar 
                     name={this.props.user.name} 
-                    onClick={this.props.logoutUser}
+                    onClick={this.props.openDrawer}
                     />
         		
             </header>

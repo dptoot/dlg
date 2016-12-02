@@ -118,7 +118,7 @@ class Matches extends Component {
 	render() {
 		
 		return(
-			<div className="flex flex-column flex-grow">
+			<div className="matches">
 				<div>
 					<ListHeader
 						title="Your Turn" 

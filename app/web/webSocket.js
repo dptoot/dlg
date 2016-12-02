@@ -9,5 +9,5 @@ const socket = io(config('WEBSOCKET_HOST'), {
 
 socket.on('connect', () => console.log('connection established to dlg websocket server'));
 socket.on('disconnect', () => console.log('connection lost to the dlg websocket server'));
-
+socket.on('error', () => console.log('there was an error connecting dlg websocket server'));
 export default socket;

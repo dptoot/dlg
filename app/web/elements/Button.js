@@ -10,12 +10,12 @@ class Button extends Component {
 
     render() {
 
-		const {text, type, icon, ...rest} = this.props;
+		const {className, text, type, icon, ...rest} = this.props;
 
 		const classes = classnames({
 			button: true,
 			[`button-${type}`]: true,
-		})
+		}, className)
 
         return (
             <div className={classes} {...rest}>

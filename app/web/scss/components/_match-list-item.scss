@@ -1,7 +1,7 @@
 .match-list-item {
 	position: relative;
-	color: $gray-base;
-	padding: $padding-md;
+	color: $dark;
+	padding: $paddingMedium;
 	background: $light;
 	display: flex;
 	flex: 0;
@@ -12,14 +12,14 @@
 	}
 
 	.remote-image {
-		margin-right: $margin-sm;
+		margin-right: $marginSmall;
 	}
 
 	.fa-remove {
 		position: absolute;
 		top: 0;
 		right: 0;
-		padding: $padding-sm;
+		padding: $paddingSmall;
 		cursor: pointer;
 	}
 }
@@ -30,7 +30,7 @@
 
 
 .match-list-item-placeholder {
-	color: $gray-lighter;
+	color: $grayLighter;
 	font-size: $text-sm;
 	display: flex;
 	min-height: 120px;

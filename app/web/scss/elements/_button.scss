@@ -1,13 +1,13 @@
 .button {
 	cursor: pointer;
 	display: flex;
-	padding: $padding-md $padding-lg;
+	padding: $paddingMedium $paddingLarge;
 	background: $primary;
 	justify-content: center;
 	align-items: center;
 
 	.fa {
-		margin-right: $margin-sm;
+		margin-right: $marginSmall;
 	}
 
 	&:hover {

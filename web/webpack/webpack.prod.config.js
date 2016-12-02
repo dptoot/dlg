@@ -6,7 +6,7 @@ const projectRoot = path.resolve(__dirname, '../../');
 const buildPath = path.resolve(__dirname, '../', 'public');
 const nodeModulesPath = path.resolve(__dirname, '../../', 'node_modules');
 const autoprefixer = require('autoprefixer'); 
-
+const jsonImporter = require('node-sass-json-importer');
 
 const config = {
 
@@ -29,6 +29,15 @@ const config = {
           ],
           loader: 'babel',
         },
+        {
+          test: /\.json$/,
+          include: [
+            path.resolve(__dirname, "../../web"),
+            path.resolve(__dirname, "../../app/web"),
+            path.resolve(__dirname, "../../app/engine"),
+          ],
+          loader: 'json',
+        },
         { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
         { test: /\.css$/, loader: "style-loader!css-loader" },
         { 
@@ -43,6 +52,10 @@ const config = {
         { test: /\.png$/, loader: "url-loader?limit=100000" },
         { test: /\.jpg$/, loader: "file-loader" }
       ]
+    },
+    sassLoader: {
+       // Apply the JSON importer via sass-loader's options.
+        importer: jsonImporter,
     },
     postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ],
     plugins: [

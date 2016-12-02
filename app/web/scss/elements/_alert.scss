@@ -14,7 +14,7 @@
 	left: 0;
 	right: 0;
 	z-index: auto;
-	background-color: $gray-base;
+	background-color: $dark;
 	opacity: .85;
 }
 
@@ -30,19 +30,19 @@
     background-color: $light;
     box-shadow: $shadow-1x;
     transition: 1s;
-  	color: $gray-base;
+  	color: $dark;
 
   	.alert-title, 
   	.alert-message {
   		text-align: center;
-  		padding-top: $padding-md;
+  		padding-top: $paddingMedium;
   	}
   	.alert-title {
   		font-weight: bold;
   	}
   	
   	.alert-message {
-  		padding-bottom: $padding-md;
+  		padding-bottom: $paddingMedium;
   	}
 
   	.alert-buttons {
@@ -53,8 +53,8 @@
   		display: flex;
   		flex: 1;
   		justify-content: center;
-  		padding: $padding-md; 
-  		border: 1px solid $gray-lightest;
+  		padding: $paddingMedium; 
+  		border: 1px solid $grayLightest;
       @extend .linkable;
 
 

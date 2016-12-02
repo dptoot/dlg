@@ -1,15 +1,8 @@
+@import '../../engine/theme.json';
 
-$gray-base: #221e1f;
-$dark: $gray-base;
+
+$dark: $grayBase;
 $light: #fff;
-
-$gray-darkest: lighten($gray-base, 5%);
-$gray-darker: lighten($gray-base, 10%);
-$gray-dark: lighten($gray-base, 15%);
-$gray: lighten($gray-base, 30%);
-$gray-light: lighten($gray-base, 40%);
-$gray-lighter: lighten($gray-base, 45%);
-$gray-lightest: lighten($gray-base, 50%);
 
 $primary: #EF1748;
 $secondary: #0879A2;
@@ -22,24 +15,24 @@ $text-lg: 1.25rem;
 $text-xlg: 1.5rem;
 
 // padding
-$padding-sm: 5px;
-$padding-md: 10px;
-$padding-lg: 20px;
+$paddingSmall: 5px;
+$paddingMedium: 10px;
+$paddingLarge: 20px;
 
 // margin
-$margin-sm: 5px;
-$margin-md: 10px;
-$margin-lg: 20px;
+$marginSmall: 5px;
+$marginMedium: 10px;
+$marginLarge: 20px;
 
 // border
 $border-radius: 2px;
 
 // shadow
-$shadow-1x: $margin-sm $margin-sm $margin-sm rgba(0,0,0,.15);
-$shadow-2x: $margin-md $margin-md $margin-md rgba(0,0,0,.30);
-$shadow-3x: $margin-lg $margin-lg $margin-lg rgba(0,0,0,.30);
-$shadow-1x-inset: inset 0px 0px $margin-sm rgba(0,0,0,.75);
-$shadow-2x-inset: inset 0px 0px $margin-md rgba(0,0,0,.75);
-$shadow-3x-inset: inset 0px 0px $margin-lg rgba(0,0,0,.75);
+$shadow-1x: $marginSmall $marginSmall $marginSmall rgba(0,0,0,.15);
+$shadow-2x: $marginMedium $marginMedium $marginMedium rgba(0,0,0,.30);
+$shadow-3x: $marginLarge $marginLarge $marginLarge rgba(0,0,0,.30);
+$shadow-1x-inset: inset 0px 0px $marginSmall rgba(0,0,0,.75);
+$shadow-2x-inset: inset 0px 0px $marginMedium rgba(0,0,0,.75);
+$shadow-3x-inset: inset 0px 0px $marginLarge rgba(0,0,0,.75);
 
 

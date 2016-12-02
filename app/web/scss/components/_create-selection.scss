@@ -9,8 +9,8 @@
 		@extend .linkable;
 
 		position: absolute;
-		top: $margin-sm;
-		right: $margin-md;
+		top: $marginSmall;
+		right: $marginMedium;
 		font-size: $text-lg;
 	}
 
@@ -18,11 +18,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: $padding-lg;
+		padding: $paddingLarge;
 	}
 
 	.create-selection-label {
-		margin-left: $margin-lg;
+		margin-left: $marginLarge;
 	}
 
 }

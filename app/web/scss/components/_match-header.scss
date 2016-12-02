@@ -1,14 +1,14 @@
 .match-header {
-	background: $gray-darker;
+	background: $grayDarker;
 	display: flex;
-	margin-bottom: $margin-lg;
+	margin-bottom: $marginLarge;
 }
 
 .match-header-content {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	padding: $padding-lg;
+	padding: $paddingLarge;
 	
 	.match-header-action {
 		display: flex;

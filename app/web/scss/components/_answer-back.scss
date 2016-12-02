@@ -1,19 +1,19 @@
 .answer-back {
 	height: 100%;
-	background: $gray-darker;
+	background: $grayDarker;
 	display:flex;
 	flex-direction: column;
 	overflow: hidden;
 
 	.answer-title {
-		background: $gray-darkest;
-		padding: $padding-sm;
+		background: $grayDarkest;
+		padding: $paddingSmall;
 	}
 
 	.answer-year {
 		text-align: right;
 		color: $gray;
-		padding: $padding-sm $padding-md;
+		padding: $paddingSmall $paddingMedium;
 	}
 
 	.answer-overview {
@@ -21,7 +21,7 @@
 		flex: 1;
 
 		color: gray;
-		padding: $padding-sm $padding-md; 
+		padding: $paddingSmall $paddingMedium; 
 		font-size: $text-sm;
 
 		-webkit-line-clamp: 5;

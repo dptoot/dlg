@@ -8,7 +8,7 @@ body,
 }  
 
 body {
-	background: $gray-dark;
+	background: $grayDark;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	color: $light;
@@ -18,30 +18,17 @@ header {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	background: $gray-darker;
+	background: $grayDarker;
 	border-bottom: 1px solid $gray;
-	padding: $padding-lg;
+	padding: $paddingLarge;
+	height: 100px;
+
+	position: fixed;
+	width: 100%;
+	z-index: 100;
 
 	.avatar {
 		cursor: pointer;
-	}
-}
-
-// PAGE WRAPPER
-.wrapper {
-
-	display: flex;
-	position: relative;
-	flex: 1;
-
-	.sidebar {
-		display: flex;
-		flex: 0 25%;
-	}
-
-	.main {
-		display: flex;
-		flex: 1 75%;
 	}
 }
 

@@ -1,0 +1,14 @@
+{
+	"dark": "#221e1f",
+	"light": "#fff",
+	"grayBase": "#221e1f",
+	"grayDarkest": "#302a2b", 
+	"grayDarker": "#3d3638", 
+	"grayDark": "#4b4244", 
+	"gray": "#736669", 
+	"grayLight": "#8e7e82", 
+	"grayLighter": "#998c8f", 
+	"grayLightest": "#a59a9c", 
+	"primary":  "#ef1748",
+	"secondary":  "#0879A2"
+}

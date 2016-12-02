@@ -27,19 +27,19 @@
 
 // TEXT COLOR
 .text-gray {
-	color: $gray-light;
+	color: $grayLight;
 }
 
 .text-gray-light {
-	color: $gray-light;
+	color: $grayLight;
 }
 
 .text-gray-lighter {
-	color: $gray-lighter;
+	color: $grayLighter;
 }
 
 .text-gray-lightest {
-	color: $gray-lightest;
+	color: $grayLightest;
 }
 
 .text-center {
@@ -48,40 +48,40 @@
 
 
 // MARGIN
-.margin-sm {
-	margin: $margin-sm;
+.marginSmall {
+	margin: $marginSmall;
 }
-.margin-md {
-	margin: $margin-md;
+.marginMedium {
+	margin: $marginMedium;
 }
-.margin-lg {
-	margin: $margin-lg;
+.marginLarge {
+	margin: $marginLarge;
 }
 
 .margin-vertical-sm {
-	margin-top: $margin-sm;
-	margin-bottom: $margin-sm;
+	margin-top: $marginSmall;
+	margin-bottom: $marginSmall;
 }
 .margin-vertical-md {
-	margin-top: $margin-md;
-	margin-bottom: $margin-md;
+	margin-top: $marginMedium;
+	margin-bottom: $marginMedium;
 }
 .margin-vertical-lg {
-	margin-top: $margin-lg;
-	margin-bottom: $margin-lg;
+	margin-top: $marginLarge;
+	margin-bottom: $marginLarge;
 }
 
 .margin-horizontal-sm {
-	margin-left: $margin-sm;
-	margin-right: $margin-sm;
+	margin-left: $marginSmall;
+	margin-right: $marginSmall;
 }
 .margin-horizontal-md {
-	margin-left: $margin-md;
-	margin-right: $margin-md;
+	margin-left: $marginMedium;
+	margin-right: $marginMedium;
 }
 .margin-horizontal-lg {
-	margin-left: $margin-lg;
-	margin-right: $margin-lg;
+	margin-left: $marginLarge;
+	margin-right: $marginLarge;
 }
 
 .margin-collapse-top {
@@ -101,40 +101,40 @@
 }
 
 // PADDING
-.padding-sm {
-	padding: $padding-sm;
+.paddingSmall {
+	padding: $paddingSmall;
 }
-.padding-md {
-	padding: $padding-md;
+.paddingMedium {
+	padding: $paddingMedium;
 }
-.padding-lg {
-	padding: $padding-lg;
+.paddingLarge {
+	padding: $paddingLarge;
 }
 
 .padding-vertical-sm {
-	padding-top: $padding-sm;
-	padding-bottom: $padding-sm;
+	padding-top: $paddingSmall;
+	padding-bottom: $paddingSmall;
 }
 .padding-vertical-md {
-	padding-top: $padding-md;
-	padding-bottom: $padding-md;
+	padding-top: $paddingMedium;
+	padding-bottom: $paddingMedium;
 }
 .padding-vertical-lg {
-	padding-top: $padding-lg;
-	padding-bottom: $padding-lg;
+	padding-top: $paddingLarge;
+	padding-bottom: $paddingLarge;
 }
 
 .padding-horizontal-sm {
-	padding-left: $padding-sm;
-	padding-right: $padding-sm;
+	padding-left: $paddingSmall;
+	padding-right: $paddingSmall;
 }
 .padding-horizontal-md {
-	padding-left: $padding-md;
-	padding-right: $padding-md;
+	padding-left: $paddingMedium;
+	padding-right: $paddingMedium;
 }
 .padding-horizontal-lg {
-	padding-left: $padding-lg;
-	padding-right: $padding-lg;
+	padding-left: $paddingLarge;
+	padding-right: $paddingLarge;
 }
 
 .padding-collapse-top {

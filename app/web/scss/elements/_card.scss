@@ -2,15 +2,15 @@
 
 	display:flex;
 	flex-direction: column;
-	margin-bottom: $margin-lg;
-	border: 1px solid $gray-darker;
+	margin-bottom: $marginLarge;
+	border: 1px solid $grayDarker;
 
 
 	.card-title {
-		background: $gray-darker;
-		padding: $padding-md $padding-lg; 
+		background: $grayDarker;
+		padding: $paddingMedium $paddingLarge; 
 		font-size: $text-md;
-		border-bottom: 1px solid $gray-darker;
+		border-bottom: 1px solid $grayDarker;
 
 		&:empty {
 			display: none;
@@ -19,8 +19,8 @@
 
 	.card-content {
 		display: flex;
-		background: $gray-dark;
-		padding: $padding-lg $padding-lg; 
+		background: $grayDark;
+		padding: $paddingLarge $paddingLarge; 
 	}
 
 
