@@ -42,11 +42,16 @@ class UserSidebar extends Component {
                    pullRight
                    styles={{
                         sidebar: {
+                            zIndex: 102,
                             width: '20%',
                             background: theme.light,
                         },
                         overlay: {
+                            zIndex: 101,
                             backgroundColor: 'rgba(0,0,0,.6)',
+                        },
+                        dragHandle: {
+                            zIndex: 101,
                         }
                    }}
                    >

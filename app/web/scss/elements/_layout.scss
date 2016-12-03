@@ -23,6 +23,8 @@ header {
 	padding: $paddingLarge;
 	height: 100px;
 
+	box-shadow: $shadow-1x;
+
 	position: fixed;
 	width: 100%;
 	z-index: 100;
