@@ -38,6 +38,7 @@ class Match extends Component {
 
 	handleSearchSelection(answer) {
 		this.handleToggleSearch();
+		this.props.clearMovieSearchValue();
 		this.props.verifyAnswer(answer);
 	}
 
