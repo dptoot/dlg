@@ -22,6 +22,14 @@
 		padding: $paddingSmall;
 		cursor: pointer;
 	}
+
+	.match-status, 
+	.match-opponent {
+		color: $gray;
+		font-size: $text-sm;
+	}
+
+	
 }
 
 .match-list-item + .match-list-item {

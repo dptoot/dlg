@@ -32,9 +32,9 @@ class MatchListItem extends Component {
                 
                 <div>
 
-                    <div >{match.actor.name}</div>
-                    <div >Playing against {match.opponent.user.name}</div>
-                    <div >Last Played: {match.lastPlayed}</div>
+                    <div className="match-title">{match.actor.name}</div>
+                    <div className="match-opponent">Playing against {match.opponent.user.name}</div>
+                    <div className="match-status">Last Played: {match.lastPlayed}</div>
 
                 </div>
                 
