@@ -5,7 +5,7 @@ const configuration = {
 	},
 	production: {
 		API_HOST: 'http://api-douglovesgames.rhcloud.com',
-		WEBSOCKET_HOST: 'http://api-douglovesgames.rhcloud.com:8000' 
+		WEBSOCKET_HOST: 'https://api-douglovesgames.rhcloud.com:8443' 
 	}
 }
 
