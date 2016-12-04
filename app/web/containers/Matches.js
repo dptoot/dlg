@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
 import socket from '../websocket';
+import { showNotification } from '../notifications';
 
 import { 
 	MatchListItem,
@@ -23,8 +24,7 @@ class Matches extends Component {
 	}
 
 	componentDidMount() {
-		socket.on('matchupdate', message => {
-			console.log('matchupdate', message);
+		socket.on('matchupdate', message => {	
 			if(message.players.includes(this.props.user.id)) {
 				this.props.fetchMatchesList(this.props.user.id);
 			}
@@ -32,9 +32,22 @@ class Matches extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		// Show pending match alert if there is a pending match present
 		if (nextProps.matches.lists.pending.length !== this.props.matches.lists.pending.length) {
 			this.props.showPendingMatchAlert()
 		}
+
+		// Show a window notification if there has been a change in current matches
+		// and it is not the initial data load
+		const isInitialDataLoad = this.props.matches.isInitialState && !nextProps.matches.isInitialState;
+		
+		if ( !isInitialDataLoad && (nextProps.matches.lists.current.length > this.props.matches.lists.current.length)) {
+			this.showMatchUpdateNotification()
+		}
+	}
+
+	showMatchUpdateNotification() {
+		showNotification('There has been an match update', 'Looks like it\'s your turn again.');	
 	}
 
 	handleMatchClick(matchId) {

@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
+import { requestNotificationPermission } from '../notifications';
 
 class AppWrapper extends Component {
+
+	componentDidMount() {
+		requestNotificationPermission();
+	}
 
 	componentWillReceiveProps(nextProps) {
 		

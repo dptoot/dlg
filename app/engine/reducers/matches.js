@@ -2,6 +2,7 @@ import { createReducer } from 'redux-create-reducer';
 import * as types from '../actions/types';
 
 const initialState = {
+	isInitialState: true,
 	isRefreshing: false,
 	showPendingMatchAlert: false,
 	lists: {
@@ -49,7 +50,8 @@ export const matches = createReducer(initialState, {
 	
 	[types.UPDATE_MATCHES_LIST](state, action) {
 		return {
-			...state, 
+			...state,
+			isInitialState: false, 
 			lists: {
 				...action.payload.matches
 			}
