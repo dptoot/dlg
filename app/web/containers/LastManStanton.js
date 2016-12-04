@@ -25,12 +25,6 @@ class LastManStanton extends Component {
 
 	}
 
-	
-	componentWillMount() {
-		
-	}
-	
-
 	componentDidMount() {
 
 		// Get Initial dataset
@@ -39,7 +33,6 @@ class LastManStanton extends Component {
 		}
 
 		var mediaQuery = window.matchMedia(`(min-width: 800px)`);
-			console.log(mediaQuery)
 		    mediaQuery.addListener(this.handleMediaQueryChanged);
 		    this.setState({
 		    	mediaQuery: mediaQuery, 

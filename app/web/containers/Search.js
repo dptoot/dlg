@@ -7,6 +7,8 @@ import {
 } from '../components';
 
 import {
+	Button, 
+	ButtonToolbar, 
     ListView,
 } from '../elements';
 
@@ -108,6 +110,18 @@ class Search extends Component {
   		);
   	}
 
+  	renderRandomSearch() {
+  		return this.props.searchCollection === 'actors' && (
+  			<ButtonToolbar className="flex flex-centered margin-vertical-lg margin-collapse-bottom">
+	  			<Button 
+					type="secondary" 
+					text="Find Random Actors" 
+					onClick={this.props.fetchRandomActorSearch} 
+					/>
+			</ButtonToolbar>
+  		);
+  	}
+
   	renderNoResults() {
   		
   		return (
@@ -128,6 +142,8 @@ class Search extends Component {
 						placeholder={this.getPlaceholder()}
 						/>
 				</div>
+
+				{this.renderRandomSearch()}
 				
 				{this.state.dataSource.length > 0 ? this.renderResultsList() : this.renderNoResults()}
 			</div>

@@ -174,8 +174,6 @@ export function fetchSearch(collection, value) {
 		.then(response => {
 			let results;
 
-			console.log(response)
-			
 			switch(collection) {
 				case 'movies': 
 					results = response.results.map(RemoteDataInterface.movie);
@@ -191,6 +189,26 @@ export function fetchSearch(collection, value) {
 					break;
 			}
 
+		})
+	}
+}
+
+export function fetchRandomActorSearch() {
+	return (dispatch, getState) => {
+
+		return Api.authenticatedGet(`/api/search/actors/random`)
+
+		.then(response => {
+			if (response.success) {
+				return response;
+			} else {
+				// handle bad login
+			}
+		})
+
+		.then(response => {
+			const results = response.results.map(RemoteDataInterface.actor);
+			dispatch(updateActorSearchResults(results));
 		})
 	}
 }
