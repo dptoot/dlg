@@ -24,15 +24,47 @@ class MatchHeader extends Component {
         );
     }
 
-    renderSearchPlaceholder() {
+    renderSearchPlaceholder({message, icon}) {
         return (
             <div className="flex text-gray">
-                <Icon name="clock-o" className="text-xlg" />
+                <Icon name={icon} className="text-xlg text-primary" />
                 <div className="margin-horizontal-md margin-collapse-right">
-                    Just waiting on {this.props.match.opponent.user.name} to come up with that next answer.
+                    {message}
                 </div>
             </div>
         );
+    }
+
+    renderHeaderAction() {
+        let action;
+
+        switch(this.props.match.userPlayer.status) {
+            case 'current':
+                action = this.renderSearchInput();
+                break;
+
+            case 'waiting': 
+                action = this.renderSearchPlaceholder({
+                    message: `Just waiting on ${this.props.match.opponent.user.name} to come up with that next answer.`,
+                    icon: 'clock-o',
+                });
+                break;
+            case 'loser': 
+                action = this.renderSearchPlaceholder({
+                    message: `You lost to ${this.props.match.opponent.user.name}!  Better luck next time.`,
+                    icon: 'frown-o',
+                });
+                break;
+            case 'winner': 
+                action = this.renderSearchPlaceholder({
+                    message: `You beat ${this.props.match.opponent.user.name}!  No one knows more ${this.props.match.actor.name} movies than you do.`,
+                    icon: 'trophy',
+                });
+                break;
+            default:
+        }
+
+        return action;
     }
 
     renderQuitMatchAlert() {
@@ -69,8 +101,7 @@ class MatchHeader extends Component {
                     <div className="text-xlg">{this.props.match.actor.name}</div>
 
                     <div className="match-header-action">
-                        {this.props.match.userPlayer.status === 'current' && this.renderSearchInput()}
-                        {this.props.match.userPlayer.status === 'waiting' && this.renderSearchPlaceholder()}
+                        {this.renderHeaderAction()}
                     </div>
 
                     <ButtonToolbar reversed>

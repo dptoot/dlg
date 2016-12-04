@@ -13,15 +13,8 @@ class LastManStanton extends Component {
 	constructor() {
 		super();
 
-		this.state = {
-			mediaQuery: null,
-			matchesSidebarOpen: false,
-			matchesSidebarDocked: true,
-		}
-
 		this.handleCloseMatchesSidebar = this.handleCloseMatchesSidebar.bind(this);
 		this.handleOpenMatchesSidebar = this.handleOpenMatchesSidebar.bind(this);
-		this.handleMediaQueryChanged = this.handleMediaQueryChanged.bind(this);
 
 	}
 
@@ -32,13 +25,6 @@ class LastManStanton extends Component {
 			this.props.fetchMatchesList(this.props.user.id);
 		}
 
-		var mediaQuery = window.matchMedia(`(min-width: 800px)`);
-		    mediaQuery.addListener(this.handleMediaQueryChanged);
-		    this.setState({
-		    	mediaQuery: mediaQuery, 
-		    	matchesSidebarDocked: mediaQuery.matches
-		    });
-
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -46,10 +32,7 @@ class LastManStanton extends Component {
 			this.props.fetchMatchesList(nextProps.user.id);
 		}
 	}
-
-	componentWillUnmount() {
-		this.state.mediaQuery.removeListener(this.handleMediaQueryChanged);
-	}
+	
 
 	getMatchesSidebarStyles() {
 		return {
@@ -57,8 +40,7 @@ class LastManStanton extends Component {
 			    boxShadow: 'none',
 			},
 			sidebar: {
-				// background: 'transparent',
-				width: '20%',
+				width: this.props.browser.greaterThan.small ? '20%' : '50%',
 				marginTop: '100px',
 			},
 			content: {
@@ -76,10 +58,6 @@ class LastManStanton extends Component {
 		}
 	}
 
-	handleMediaQueryChanged() {
-		this.setState({matchesSidebarDocked: this.state.mediaQuery.matches});
-	}
-
 	handleOpenMatchesSidebar() {
 		this.setState({
 			matchesSidebarOpen: true,
@@ -87,36 +65,36 @@ class LastManStanton extends Component {
 	}
 
 	handleCloseMatchesSidebar() {
-		if (!this.state.matchesSidebarDocked) {
+		// if (!this.state.matchesSidebarDocked) {
 			this.setState({
 				matchesSidebarOpen: false,
 			})
-		}
+		// }
 	}
 
 	render() {
-		
+
 		return(
 				
 				<div>
 					<Header />
 
 					<div className="wrapper">
-					<UserSidebar>
-						
-						<Sidebar
-							sidebar={<Matches />}
-							docked={this.state.matchesSidebarDocked}
-							open={this.state.matchesSidebarOpen}
-							onSetOpen={this.handleCloseMatchesSidebar}		
-							styles={this.getMatchesSidebarStyles()}
-							>
+						<UserSidebar>
 							
-							<Match />
+							<Sidebar
+								sidebar={<Matches />}
+								docked={this.props.browser.greaterThan.small}
+								open={this.props.matches.showMatchesSidebar}
+								onSetOpen={this.props.toggleMatchesSidebar}		
+								styles={this.getMatchesSidebarStyles()}
+								>
+								
+								<Match />
 
-						</Sidebar>
+							</Sidebar>
 
-					</UserSidebar>
+						</UserSidebar>
 					</div>
 				</div>
 			
@@ -127,7 +105,9 @@ class LastManStanton extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user
+		user: state.user,
+		browser: state.browser,
+		matches: state.matches,
 	}
 }
 

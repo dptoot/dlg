@@ -32,6 +32,13 @@ export function hidePendingMatchAlert() {
 	}
 }
 
+export function toggleMatchesSidebar() {
+	return {
+		type: types.TOGGLE_MATCHES_SIDEBAR, 
+		payload: {},
+	}
+}
+
 export function updateMatchesList(matches) {
 	return {
 		isRefreshing: false,
@@ -41,6 +48,8 @@ export function updateMatchesList(matches) {
 		},
 	}
 }
+
+
 
 export function refreshMatches(userId) {
 	return (dispatch, getState) => {

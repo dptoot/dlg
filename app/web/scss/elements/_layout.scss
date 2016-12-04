@@ -16,7 +16,7 @@ body {
 
 header {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
 	background: $grayDarker;
 	border-bottom: 1px solid $gray;

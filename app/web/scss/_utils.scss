@@ -26,6 +26,14 @@
 }
 
 // TEXT COLOR
+.text-primary {
+	color: $primary;
+}
+
+.text-secondary {
+	color: $secondary;
+}
+
 .text-gray {
 	color: $grayLight;
 }
