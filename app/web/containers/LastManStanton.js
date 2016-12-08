@@ -10,14 +10,6 @@ import Sidebar from 'react-sidebar';
 
 class LastManStanton extends Component {
 
-	constructor() {
-		super();
-
-		this.handleCloseMatchesSidebar = this.handleCloseMatchesSidebar.bind(this);
-		this.handleOpenMatchesSidebar = this.handleOpenMatchesSidebar.bind(this);
-
-	}
-
 	componentDidMount() {
 
 		// Get Initial dataset
@@ -40,7 +32,7 @@ class LastManStanton extends Component {
 			    boxShadow: 'none',
 			},
 			sidebar: {
-				width: this.props.browser.greaterThan.small ? '20%' : '50%',
+				width: this.props.browser.greaterThan.small ? '20%' : '90%',
 				marginTop: '100px',
 			},
 			content: {
@@ -56,20 +48,6 @@ class LastManStanton extends Component {
 				boxShadow: 'none',
 			},
 		}
-	}
-
-	handleOpenMatchesSidebar() {
-		this.setState({
-			matchesSidebarOpen: true,
-		})
-	}
-
-	handleCloseMatchesSidebar() {
-		// if (!this.state.matchesSidebarDocked) {
-			this.setState({
-				matchesSidebarOpen: false,
-			})
-		// }
 	}
 
 	render() {
