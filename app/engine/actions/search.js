@@ -1,5 +1,6 @@
 import * as types from './types';
 import Api from '../api';
+import debounce from 'lodash.debounce';
 import RemoteDataInterface from '../remoteDataInterface';
 
 // MOVIE
@@ -142,6 +143,43 @@ export function selectActorSearchResult(result) {
 	}
 }
 
+const debounceRemoteSearch = debounce((dispatch, collection, value) => remoteSearch(dispatch, collection, value), 500);
+
+export function remoteSearch(dispatch, collection, value) {
+		
+	return Api.authenticatedPost(`/api/search/${collection}`, {
+		query: value,
+	})
+
+	.then(response => {
+		if (response.success) {
+			return response;
+		} else {
+			// handle bad login
+		}
+	})
+
+	.then(response => {
+		let results;
+
+		switch(collection) {
+			case 'movies': 
+				results = response.results.map(RemoteDataInterface.movie);
+				dispatch(updateMovieSearchResults(results));
+				break;
+			case 'users': 
+				results = response.results.map(RemoteDataInterface.user);
+				dispatch(updateUserSearchResults(results));
+				break;
+			case 'actors': 
+				results = response.results.map(RemoteDataInterface.actor);
+				dispatch(updateActorSearchResults(results));
+				break;
+		}
+
+	})
+}
+
 export function fetchSearch(collection, value) {
 	return (dispatch, getState) => {
 
@@ -156,40 +194,11 @@ export function fetchSearch(collection, value) {
 				dispatch(updateActorSearchValue(value));
 				break;
 		}
-		
+
 		const state = getState();
+
+		debounceRemoteSearch(dispatch, collection, state.search[collection].value)
 		
-		return Api.authenticatedPost(`/api/search/${collection}`, {
-			query: state.search[collection].value,
-		})
-
-		.then(response => {
-			if (response.success) {
-				return response;
-			} else {
-				// handle bad login
-			}
-		})
-
-		.then(response => {
-			let results;
-
-			switch(collection) {
-				case 'movies': 
-					results = response.results.map(RemoteDataInterface.movie);
-					dispatch(updateMovieSearchResults(results));
-					break;
-				case 'users': 
-					results = response.results.map(RemoteDataInterface.user);
-					dispatch(updateUserSearchResults(results));
-					break;
-				case 'actors': 
-					results = response.results.map(RemoteDataInterface.actor);
-					dispatch(updateActorSearchResults(results));
-					break;
-			}
-
-		})
 	}
 }
 
