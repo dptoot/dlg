@@ -5,6 +5,8 @@ import { Alert } from '../elements';
 import { Answer, LastAnswer, MatchStatus } from '../components';
 import Search from '../containers/Search';
 import MatchHeader from '../containers/MatchHeader';
+import MatchChat from '../containers/MatchChat';
+import Sidebar from 'react-sidebar';
 import {Modal} from 'react-overlays';
 import socket from '../websocket';
 
@@ -28,6 +30,28 @@ class Match extends Component {
 				this.props.fetchMatch(this.props.match.id);
 			}
 		})
+	}
+
+	getMatchChatStyles() {
+		return {
+			root: {
+			    boxShadow: 'none',
+			},
+			sidebar: {
+				width: this.props.browser.greaterThan.small ? '20%' : '90%',
+				marginTop: '100px',
+			},
+			content: {
+				marginTop: '100px',
+				boxShadow: 'none',
+			},
+			overlay: {
+				boxShadow: 'none',
+			},
+			dragHandle: {
+				boxShadow: 'none',
+			},
+		}
 	}
 	
 	handleToggleSearch() {
@@ -75,30 +99,38 @@ class Match extends Component {
 	
 	renderMatch() {
 		return (
-			<div className="match-board">
-				<MatchHeader 
-					match={this.props.match} 
-					onSearchClick={this.handleToggleSearch} 
-					/>
-
-				<div className="flex">	
-					<LastAnswer 
-						rendered={this.props.match.lastAnswer}
-						className="flex-grow margin-horizontal-lg margin-collapse-left"
-						answer={this.props.match.lastAnswer} 
+			<Sidebar
+				pullRight
+				sidebar={<MatchChat />}
+				docked={this.props.match.chat.showMatchChat}
+				open={false}
+				onSetOpen={this.props.toggleMatchChatSidebar}	
+				styles={this.getMatchChatStyles()}	
+				>
+				<div className="match-board">
+					<MatchHeader 
+						match={this.props.match} 
+						onSearchClick={this.handleToggleSearch} 
 						/>
 
-					<MatchStatus 
-						className="flex-grow"
-						match={this.props.match}
-						/>
-				</div>
-					
-				<div className="item-grid">
-					{this.props.match.answers.map(answer => <Answer key={answer.id} answer={answer} />)}
-				</div>
+					<div className="flex">	
+						<LastAnswer 
+							rendered={this.props.match.lastAnswer}
+							className="flex-grow margin-horizontal-lg margin-collapse-left"
+							answer={this.props.match.lastAnswer} 
+							/>
 
-			</div>
+						<MatchStatus 
+							className="flex-grow"
+							match={this.props.match}
+							/>
+					</div>
+						
+					<div className="item-grid">
+						{this.props.match.answers.map(answer => <Answer key={answer.id} answer={answer} />)}
+					</div>
+				</div>
+			</Sidebar>
 		)
 	}
 
@@ -126,6 +158,7 @@ function mapStateToProps(state) {
 	return {
 		user: state.user,
 		match: state.match,
+		browser: state.browser,
 	}
 }
 

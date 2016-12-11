@@ -1,0 +1,12 @@
+.match-chat {
+	background: $grayDark;
+	padding: $paddingMedium;
+
+	input {
+		position: fixed;
+		bottom: $marginMedium;
+		left: $marginMedium;
+		right: 0;
+		width: 90%;
+	}
+}

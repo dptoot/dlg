@@ -10,11 +10,12 @@ class ButtonToolbar extends Component {
 
     render() {
 
-        const {reversed, className, ...rest} = this.props;
+        const {reversed, align, className, ...rest} = this.props;
 
 		const classes = classnames({
             'button-toolbar': true,
 			'button-toolbar-reversed': reversed,
+            [`button-toolbar-align-${align}`]: align,
 		}, className)
 
         return (
@@ -28,6 +29,7 @@ class ButtonToolbar extends Component {
 
 ButtonToolbar.defaultProps = {
     reversed: false,
+    align: false,
 }
 
 export default ButtonToolbar;

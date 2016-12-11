@@ -57,6 +57,38 @@ export function hideQuitMatchAlert() {
 	}
 }
 
+export function updateMatchChatInputValue(value) {
+	return {
+		type: types.UPDATE_MATCH_CHAT_INPUT_VALUE, 
+		payload: {
+			value: value,
+		},
+	}
+}
+
+export function updateMatchChatHistory(history) {
+	return {
+		type: types.UPDATE_MATCH_CHAT_HISTORY, 
+		payload: {
+			history: history,
+		},
+	}
+}
+
+export function clearMatchChatInputValue() {
+	return {
+		type: types.CLEAR_MATCH_CHAT_INPUT_VALUE, 
+		payload: {},
+	}
+}
+
+export function toggleMatchChat() {
+	return {
+		type: types.TOGGLE_MATCH_CHAT, 
+		payload: {},
+	}
+}
+
 
 // thunks
 export function refreshMatch(match) {
@@ -65,8 +97,6 @@ export function refreshMatch(match) {
 		dispatch(fetchMatch(match));
 	}
 }
-
-
 
 export function verifyAnswer(answer) {
 	return (dispatch, getState) => {

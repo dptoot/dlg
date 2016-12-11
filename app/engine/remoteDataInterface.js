@@ -38,6 +38,9 @@ class RemoteDataInterface {
 			started: moment(match.createdAt).fromNow(),
 			lastPlayed: moment(match.updatedAt).fromNow(),
 			showSearch: false,
+			chat: {
+				history: match.chat,
+			},
 			...RemoteDataInterface.sortPlayers([match.player_1, match.player_2], state.user),
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
 		}

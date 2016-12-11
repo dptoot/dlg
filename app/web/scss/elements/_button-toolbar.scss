@@ -11,4 +11,12 @@
 		flex-direction: row-reverse;
 	}
 
+	&.button-toolbar-align-left {
+		justify-content: flex-start;
+	}
+
+	&.button-toolbar-align-right {
+		justify-content: flex-end;
+	}
+
 }

@@ -15,6 +15,7 @@
     "lodash.debounce": "^4.0.8",
     "notifyjs": "^2.0.3",
     "react": "^15.3.2",
+    "react-burger-menu": "^1.10.9",
     "react-dom": "^15.3.2",
     "react-fontawesome": "^1.4.0",
     "react-native": "0.37.0",

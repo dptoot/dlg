@@ -36,15 +36,12 @@ class LastManStanton extends Component {
 				marginTop: '100px',
 			},
 			content: {
-				// top: '88px',
 				boxShadow: 'none',
 			},
 			overlay: {
-				// top: '88px',
 				boxShadow: 'none',
 			},
 			dragHandle: {
-				// top: '88px',
 				boxShadow: 'none',
 			},
 		}
@@ -54,7 +51,7 @@ class LastManStanton extends Component {
 
 		return(
 				
-				<div>
+				<div id="outer-container">
 					<Header />
 
 					<div className="wrapper">

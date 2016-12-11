@@ -5,7 +5,7 @@ const initialState = {
 	isInitialState: true,
 	isRefreshing: false,
 	showPendingMatchAlert: false,
-	showMatchesSidebar: false,
+	showMatchesSidebar: true,
 	lists: {
 		current: [],
 		inactive: [],

@@ -70,11 +70,11 @@ class MatchHeader extends Component {
     renderQuitMatchAlert() {
         const buttons = [
             {
-                text: 'Accept', 
+                text: 'Yes', 
                 onClick: this.props.deactivateMatch.bind(null,'resign'),
             }, 
             {
-                text: 'Decline',
+                text: 'No',
             }
         ];
         
@@ -104,14 +104,22 @@ class MatchHeader extends Component {
                         {this.renderHeaderAction()}
                     </div>
 
-                    <ButtonToolbar reversed>
+                    <ButtonToolbar align="right">
                         <Button 
                             type="secondary"
+                            icon="comments"
+                            text={this.props.match.chat.showMatchChat ? 'Close Chat' : 'Open Chat'}
+                            onClick={this.props.toggleMatchChat}
+                            />
+                        <Button 
                             rendered={this.props.match.status === 'active'}
+                            type="secondary"
                             icon="remove"
                             text="Quit Match"
                             onClick={this.props.showQuitMatchAlert}
                             />
+
+                        
                     </ButtonToolbar>   
 
                 </div>
