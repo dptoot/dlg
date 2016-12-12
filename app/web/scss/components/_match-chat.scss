@@ -23,7 +23,6 @@
 		position: fixed;
 		margin-top: 0;
 		margin-left: 0;
-		padding-right: $paddingMedium;
 	}
 
 	
@@ -41,16 +40,19 @@
 		display: flex;
 		flex-direction: column;
 		overflow-y: auto;
+		padding: $paddingMedium;
 	}
 
 	.match-chat-input-container {
 		flex: 0;
+		background: $grayDarkest;
 		margin-top: $marginSmall;
-		padding: $paddingSmall;
+		padding: $paddingMedium;
 	}
 
 	.chat-bubble {
 		display: flex;
+		flex: 0 0 auto;
 		flex-direction: column;
 		width: 75%;
 		position:relative;
