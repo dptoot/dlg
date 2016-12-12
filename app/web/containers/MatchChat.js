@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
 import socket from '../websocket';
 import classnames from 'classnames';
-import {
-
-} from '../components';
+import Scroll from 'react-scroll';
+var scroll = Scroll.animateScroll;
 
 import {
 	Button, 
@@ -22,6 +21,12 @@ class MatchChat extends Component {
 		this.handleChatInputValueChange = this.handleChatInputValueChange.bind(this);
 		this.handleChatInputKeyDown = this.handleChatInputKeyDown.bind(this);
 		// this.handleChatInputFocus = this.handleChatInputFocus.bind(this);
+	}
+
+	componentDidUpdate() {
+		scroll.scrollToBottom({
+			containerId: 'chatHistory'
+		});
 	}
 
 	// handleChatInputFocus(event) {
@@ -90,6 +95,7 @@ class MatchChat extends Component {
 						/>
 					
 					<ListView
+						id="chatHistory"
 		  				className="chat-history"
 						dataSource={this.props.match.chat.history}
 						renderRow={this.renderChatItem.bind(this)}
