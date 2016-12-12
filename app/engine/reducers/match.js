@@ -16,6 +16,8 @@ const initialState = {
 		showMatchChat: false,
 		value: '',
 		history: [],
+		lastActivity: null,
+		newMessageCount: 0,
 	},
 };
 
@@ -79,17 +81,6 @@ export const match = createReducer(initialState, {
 		};
 	},
 
-	[types.UPDATE_MATCH_CHAT_HISTORY](state, action) {
-
-		return {
-			...state, 
-			chat: {
-				...state.chat,
-				history: action.payload.history,
-			},
-		};
-	},
-
 	[types.UPDATE_MATCH_CHAT_INPUT_VALUE](state, action) {
 
 		return {
@@ -111,12 +102,37 @@ export const match = createReducer(initialState, {
 		};
 	},
 
-	[types.TOGGLE_MATCH_CHAT](state, action) {
+	[types.SHOW_MATCH_CHAT](state, action) {
 		return {
 			...state, 
 			chat: {
 				...state.chat,
-				showMatchChat: !state.chat.showMatchChat,
+				showMatchChat: true,
+				lastActivity: Date.now(),
+				newMessageCount: initialState.chat.newMessageCount,
+			},
+		};
+	},
+
+	[types.HIDE_MATCH_CHAT](state, action) {
+		return {
+			...state, 
+			chat: {
+				...state.chat,
+				showMatchChat: false,
+				lastActivity: Date.now(),
+				newMessageCount: initialState.chat.newMessageCount,
+			},
+		};
+	},
+
+	[types.UPDATE_MATCH_CHAT_LAST_ACTIVITY](state, action) {
+		return {
+			...state, 
+			chat: {
+				...state.chat,
+				lastActivity: Date.now(),
+				newMessageCount: initialState.chat.newMessageCount,
 			},
 		};
 	},

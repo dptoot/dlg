@@ -75,6 +75,13 @@ export function updateMatchChatHistory(history) {
 	}
 }
 
+export function updateMatchChatLastActivity() {
+	return {
+		type: types.UPDATE_MATCH_CHAT_LAST_ACTIVITY, 
+		payload: {},
+	}
+}
+
 export function clearMatchChatInputValue() {
 	return {
 		type: types.CLEAR_MATCH_CHAT_INPUT_VALUE, 
@@ -82,9 +89,16 @@ export function clearMatchChatInputValue() {
 	}
 }
 
-export function toggleMatchChat() {
+export function showMatchChat() {
 	return {
-		type: types.TOGGLE_MATCH_CHAT, 
+		type: types.SHOW_MATCH_CHAT, 
+		payload: {},
+	}
+}
+
+export function hideMatchChat() {
+	return {
+		type: types.HIDE_MATCH_CHAT, 
 		payload: {},
 	}
 }

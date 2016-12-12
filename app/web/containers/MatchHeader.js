@@ -109,7 +109,7 @@ class MatchHeader extends Component {
                             type="secondary"
                             icon="comments"
                             text={this.props.match.chat.showMatchChat ? 'Close Chat' : 'Open Chat'}
-                            onClick={this.props.toggleMatchChat}
+                            onClick={this.props.showMatchChat}
                             />
                         <Button 
                             rendered={this.props.match.status === 'active'}

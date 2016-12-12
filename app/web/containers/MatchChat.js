@@ -11,6 +11,7 @@ import {
 	Button, 
 	ButtonToolbar, 
     ListView,
+    ListHeader,
 } from '../elements';
 
 class MatchChat extends Component {
@@ -18,11 +19,14 @@ class MatchChat extends Component {
 	constructor(props) {
 		super(props);
 		
-		
-		
 		this.handleChatInputValueChange = this.handleChatInputValueChange.bind(this);
 		this.handleChatInputKeyDown = this.handleChatInputKeyDown.bind(this);
+		// this.handleChatInputFocus = this.handleChatInputFocus.bind(this);
 	}
+
+	// handleChatInputFocus(event) {
+	// 	this.props.clearMatchChatInputValue();
+	// } 
 
   	handleChatInputKeyDown(event) {
   		if (event.key == 'Enter' && this.props.match.chat.value !== ''){
@@ -79,7 +83,11 @@ class MatchChat extends Component {
 			<div className={containerClasses}>
 				<div className="match-chat-wrapper">
 
-					<div className="match-chat-title">Chat</div>
+					<ListHeader
+						title="Match Chat" 
+						icon="remove"
+						onIconClick={this.props.hideMatchChat}
+						/>
 					
 					<ListView
 		  				className="chat-history"

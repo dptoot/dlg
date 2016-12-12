@@ -36,10 +36,11 @@ class RemoteDataInterface {
 			actor: match.actor,
 			status: match.status,
 			started: moment(match.createdAt).fromNow(),
-			lastPlayed: moment(match.updatedAt).fromNow(),
+			lastPlayed: moment(match.lastPlayed).fromNow(),
 			showSearch: false,
 			chat: {
-				history: RemoteDataInterface.processChat(match.chat, state.user.id),
+				// newMessageCount: RemoteDataInterface.getNewChatMessageCount(match.chat, state.user.id, state.match.chat),
+				history: RemoteDataInterface.processChatHistory(match.chat, state.user.id),
 			},
 			...RemoteDataInterface.sortPlayers([match.player_1, match.player_2], state.user),
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
@@ -53,7 +54,14 @@ class RemoteDataInterface {
 		return matchData;
     }
 
-    static processChat(messages = [], userId) {
+    static getNewChatMessageCount(messages = [], userId, chat) {
+    	return messageCount = messages.filter(chatMessage => {
+    			const isOpponentMessage = userId !== chatMessage.user;
+	    		return isOpponentMessage && moment(chatMessage.timestamp).isAfter(chat.lastActivity);
+    	}).length
+    }
+
+    static processChatHistory(messages = [], userId) {
     	return messages.map(chatMessage => {
     		return {
     			message: chatMessage.message,

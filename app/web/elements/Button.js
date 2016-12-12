@@ -10,7 +10,7 @@ class Button extends Component {
 
     render() {
 
-		const {className, text, type, icon, ...rest} = this.props;
+		const {className, text, type, icon, badge, ...rest} = this.props;
 
 		const classes = classnames({
 			button: true,
@@ -19,6 +19,7 @@ class Button extends Component {
 
         return (
             <div className={classes} {...rest}>
+                {badge && <div className="badge">{badge}</div>}
                 {icon && <Icon name={icon} />}
                 {text}
             </div>
@@ -29,6 +30,7 @@ class Button extends Component {
 
 Button.defaultProps = {
     type: 'primary',
+    badge: false,
 }
 
 export default renderable(Button);
