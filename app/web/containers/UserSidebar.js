@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
 import Icon from 'react-fontawesome';
-import Sidebar from 'react-sidebar';
+import {bubble as Menu} from 'react-burger-menu';
 import theme from '../../engine/theme';
 
 import { 
@@ -13,50 +13,72 @@ import {
     Button,
 } from '../elements';
 
-
-
 class UserSidebar extends Component {
 
-    renderSidebar() {
-        return ( 
-            <div className="sidebar">
-                <div className="header">
-                    Logged in as: {this.props.user.name}
-                </div>
-                <Button 
-                    className="text-gray"
-                    type="link"
-                    onClick={this.props.logoutUser}
-                    text="Logout"
-                    />
-            </div>    
-        );
+    getMenuStyles() {
+        return {
+            bmBurgerButton: {
+                display: 'none'
+              },
+              bmBurgerBars: {
+                display: 'none',
+              },
+              bmCrossButton: {
+                height: '24px',
+                width: '24px',
+                cursor: 'pointer',
+              },
+              bmCross: {
+                background: theme.light,
+              },
+              bmMenuWrap: {
+                zIndex: 1001,
+              },
+              bmMenu: {
+                background: theme.grayDark,
+                padding: theme.paddingLarge,
+                fontSize: '1em'
+              },
+              bmMorphShape: {
+                fill: theme.grayDark,
+              },
+              bmItemList: {
+                color: theme.light,
+                padding: '1em'
+              },
+              bmOverlay: {
+                zIndex: 1000,
+                background: 'rgba(0, 0, 0, 0.7)'
+              }
+        }
     }
+
+ 
 
     render() {
 
+        const menuOptions = {
+            isOpen: this.props.drawer.open,
+            styles: this.getMenuStyles(),
+            right: true,
+            pageWrapId: 'page-wrap',
+            outerContainerId: 'outer-container',
+        }
+
         return (
-          <Sidebar sidebar={this.renderSidebar()}
-                   open={this.props.drawer.open}
-                   onSetOpen={this.props.closeDrawer}
-                   pullRight
-                   styles={{
-                        sidebar: {
-                            zIndex: 102,
-                            width: '20%',
-                            background: theme.light,
-                        },
-                        overlay: {
-                            zIndex: 101,
-                            backgroundColor: 'rgba(0,0,0,.6)',
-                        },
-                        dragHandle: {
-                            zIndex: 101,
-                        }
-                   }}
-                   >
-            {this.props.children}
-          </Sidebar>
+            <Menu {...menuOptions}>
+                <div className="header">
+                    Logged in as: {this.props.user.name}
+                </div>
+                <div>
+                    <Button 
+                        className="text-gray"
+                        type="link"
+                        onClick={this.props.logoutUser}
+                        text="Logout"
+                        />
+                </div>
+            </Menu>
         );
     
     }

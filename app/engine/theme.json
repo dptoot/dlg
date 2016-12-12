@@ -10,5 +10,13 @@
 	"grayLighter": "#998c8f", 
 	"grayLightest": "#a59a9c", 
 	"primary":  "#ef1748",
-	"secondary":  "#0879A2"
+	"secondary":  "#0879A2",
+
+	"paddingSmall": "5px",
+	"paddingMedium": "10px",
+	"paddingLarge": "20px",
+
+	"marginSmall": "5px",
+	"marginMedium": "10px",
+	"marginLarge": "20px"
 }

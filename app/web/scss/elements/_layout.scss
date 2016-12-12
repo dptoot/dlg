@@ -49,6 +49,11 @@ header {
 	}
 }
 
+.app-wrapper {
+	display: flex;
+	margin-top: 100px;
+}
+
 // Scrollbar
 ::-webkit-scrollbar              { /* 1 */ }
 ::-webkit-scrollbar-button       { /* 2 */ }

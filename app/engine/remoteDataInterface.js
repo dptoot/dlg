@@ -39,7 +39,7 @@ class RemoteDataInterface {
 			lastPlayed: moment(match.updatedAt).fromNow(),
 			showSearch: false,
 			chat: {
-				history: match.chat,
+				history: RemoteDataInterface.processChat(match.chat, state.user.id),
 			},
 			...RemoteDataInterface.sortPlayers([match.player_1, match.player_2], state.user),
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
@@ -51,6 +51,16 @@ class RemoteDataInterface {
 
 
 		return matchData;
+    }
+
+    static processChat(messages = [], userId) {
+    	return messages.map(chatMessage => {
+    		return {
+    			message: chatMessage.message,
+    			user: chatMessage.user,
+    			timestamp: moment(chatMessage.timestamp).calendar(),
+    		}
+    	})
     }
 
     static sortPlayers(players, user) {

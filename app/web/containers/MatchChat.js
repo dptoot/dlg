@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
 import socket from '../websocket';
+import classnames from 'classnames';
 import {
 
 } from '../components';
@@ -49,34 +50,53 @@ class MatchChat extends Component {
 		}
   	}
 
-  	renderChatItem(item) {
-  		return (
-  			<div>{item.message}</div>
-  		);
-  	}
+  	renderChatItem(item, index) {
+  		const bubbleClasses = classnames({
+  			'chat-bubble': true,
+  			'user': this.props.user.id === item.user,
+  			'opponent': this.props.user.id !== item.user,
+  		});
 
-  	renderChatHistory() {
   		return (
-  			<ListView
-  				className="chat-history"
-				dataSource={this.props.match.chat.history}
-				renderRow={this.renderChatItem}
-	        />
+  			<div 
+  				key={index} 
+  				className={bubbleClasses}
+  				>
+  				<div>{item.message}</div>
+  				<div className="chat-bubble-timestamp">{item.timestamp}</div>
+  			</div>
   		);
   	}
 
 	render() {
-		return (
-			<div className="match-chat">
-				<div className="title-bar">Chat</div>
-				{this.renderChatHistory()}
-				<input 
-					autoFocus
-					value={this.props.match.chat.value}
-					onChange={this.handleChatInputValueChange}
-					onKeyDown={this.handleChatInputKeyDown}
-					placeholder=""
-					/>
+
+		const containerClasses = classnames({
+			'match-chat': true,
+			'closed': !this.props.match.chat.showMatchChat,
+		})
+
+		return !this.props.match.isInitialState && (
+			<div className={containerClasses}>
+				<div className="match-chat-wrapper">
+
+					<div className="match-chat-title">Chat</div>
+					
+					<ListView
+		  				className="chat-history"
+						dataSource={this.props.match.chat.history}
+						renderRow={this.renderChatItem.bind(this)}
+			        />
+					
+					<div className="match-chat-input-container">
+						<input 
+							autoFocus
+							value={this.props.match.chat.value}
+							onChange={this.handleChatInputValueChange}
+							onKeyDown={this.handleChatInputKeyDown}
+							placeholder="Enter a message"
+							/>
+					</div>
+				</div>
 			</div>
 		)
 	}

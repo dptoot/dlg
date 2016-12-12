@@ -26,10 +26,12 @@ export const match = createReducer(initialState, {
 	}, 
 	
 	[types.UPDATE_MATCH](state, action) {
+		const {chat, ...rest} = action.payload.match;
 		return {
 			...state, 
 			isInitialState: false,
-			...action.payload.match,
+			chat: Object.assign(state.chat, chat),
+			...rest,
 		};
 	},
 

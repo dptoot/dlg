@@ -1,12 +1,106 @@
 .match-chat {
+	position: relative;
+	display: flex;
+	transition: all 0.5s ease-out;
+	width: 20%;
+	max-height: 100vh;
 	background: $grayDark;
-	padding: $paddingMedium;
+	overflow: hidden;
 
-	input {
-		position: fixed;
-		bottom: $marginMedium;
-		left: $marginMedium;
-		right: 0;
-		width: 90%;
+	&.closed {
+		width: 0;
+		padding: 0;
+		margin: 0;
 	}
+	
+
+	.match-chat-wrapper {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		width: 20%;
+		height: calc(100% - 100px);
+		position: fixed;
+		margin-top: 0;
+		margin-left: 0;
+		padding-right: $paddingMedium;
+	}
+
+	
+
+	.match-chat-title {
+		flex: 0;
+		padding: $paddingSmall $paddingMedium;
+		background: $grayDarkest;
+		margin-bottom: $marginMedium;
+	}
+
+
+	.chat-history {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+	}
+
+	.match-chat-input-container {
+		flex: 0;
+		margin-top: $marginSmall;
+		padding: $paddingSmall;
+	}
+
+	.chat-bubble {
+		display: flex;
+		flex-direction: column;
+		width: 75%;
+		position:relative;
+		padding: $paddingSmall $paddingMedium;
+		margin-bottom: $marginMedium;
+		color: #fff;
+		border-radius: $border-radius;
+	}
+
+	.chat-bubble.user {
+		background: $secondary;
+		margin-right: $marginSmall;
+		align-self: flex-end;
+		&:after {
+			border-top: $marginSmall solid transparent;
+			border-bottom: $marginSmall solid transparent;
+			border-left: $marginSmall solid $secondary;
+			right: -$marginSmall;
+			bottom: $marginSmall;
+		}
+	}
+
+	.chat-bubble.opponent {
+
+		background: $grayLighter;
+		margin-left: $marginSmall;
+		&:after {
+			border-top: $marginSmall solid transparent;
+			border-bottom: $marginSmall solid transparent;
+			border-right: $marginSmall solid $grayLighter;
+			left: -$marginSmall;
+			bottom: $marginSmall;
+		}
+	}
+
+	/* For the bubble tail */
+	.chat-bubble:after {
+		content: "";
+		position: absolute;
+		display: block;
+		width: 0;
+		z-index: 1;
+	}
+
+	.chat-bubble-timestamp {
+		font-size: $text-xs;
+		align-self: flex-end;
+	}
+		
+
+		
 }
+
