@@ -13,7 +13,7 @@ class Header extends Component {
 
     renderMatchesSidebarTrigger() {
         return (
-            <Icon name="bars" className="text-xlg text-gray" onClick={this.props.toggleMatchesSidebar} />
+            <Icon name="bars" className="text-xlg text-gray" onClick={this.props.openUserDrawer} />
         );
     }
 
@@ -25,7 +25,7 @@ class Header extends Component {
     	        </div>
         		<Avatar 
                     name={this.props.user.name} 
-                    onClick={this.props.openDrawer}
+                    onClick={this.props.showUserDrawer}
                     />
         		
             </header>

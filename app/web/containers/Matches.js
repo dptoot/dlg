@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
 import socket from '../websocket';
 import { showNotification } from '../notifications';
+import renderable from '../hoc/renderable';
 
 import { 
 	MatchListItem,
@@ -167,4 +168,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Matches);
+export default connect(mapStateToProps, mapDispatchToProps)(renderable(Matches));

@@ -39,14 +39,15 @@ class LastManStanton extends Component {
 				<div id="outer-container" className={containerClasses}>
 				<Header />
 					<UserSidebar />
+					
 						
 					
 					<div id="page-wrap">
 						
 						<div className="app-wrapper">
-							<Matches />	
+							<Matches rendered={this.props.browser.greaterThan.small} />	
 							<Match />
-							<MatchChat />
+							<MatchChat rendered={this.props.browser.greaterThan.small}/>
 						</div>
 					</div>
 				</div>
