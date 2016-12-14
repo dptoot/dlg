@@ -16,7 +16,7 @@ import theme from '../styles/theme';
 class AppWrapper extends Component {
 
     componentDidMount() {
-        socket.on('matchupdate', message => {
+        socket.on('remoteSync', message => {
             if(message.players.includes(this.props.user.id)) {
                 // update matches lists for the user
                 this.props.fetchMatchesList(this.props.user.id);

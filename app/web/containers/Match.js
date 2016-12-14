@@ -24,12 +24,7 @@ class Match extends Component {
 	}
 
 	componentDidMount() {
-		socket.on('matchupdate', message => {
-			// Update match if the message includes the user id and the match is loaded
-			if(message.players.includes(this.props.user.id) && message.id === this.props.match.id) {
-				this.props.fetchMatch(this.props.match.id);
-			}
-		})
+		// this.props.fetchMatch(this.props.match.id);
 	}
 
 	getMatchChatStyles() {

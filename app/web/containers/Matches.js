@@ -24,14 +24,6 @@ class Matches extends Component {
 		this.handleCreateMatchClick = this.handleCreateMatchClick.bind(this);
 	}
 
-	componentDidMount() {
-		socket.on('matchupdate', message => {	
-			if(message.players.includes(this.props.user.id)) {
-				this.props.fetchMatchesList(this.props.user.id);
-			}
-		})
-	}
-
 	componentWillReceiveProps(nextProps) {
 		// Show pending match alert if there is a pending match present
 		if (nextProps.matches.lists.pending.length !== this.props.matches.lists.pending.length) {

@@ -3,6 +3,7 @@ import * as LayoutActions from './layout';
 import * as MatchesActions from './matches';
 import * as MatchActions from './match';
 import * as SearchActions from './search';
+import * as WebsocketActions from './websocket';
 
 export const ActionCreators = Object.assign({}, 
  	UserActions,
@@ -10,4 +11,5 @@ export const ActionCreators = Object.assign({},
 	MatchesActions,
 	MatchActions,
 	SearchActions,
+	WebsocketActions,
 );

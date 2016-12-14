@@ -5,11 +5,16 @@ import RemoteDataInterface from '../remoteDataInterface';
 const matchApi = '/api/match';
 
 export function updateMatch(match) {
-	return {
-		type: types.UPDATE_MATCH,
-		payload: {
-			match
-		},
+	return (dispatch, getState) => {
+		const state = getState();
+		console.log(match)
+		
+		dispatch({
+			type: types.UPDATE_MATCH,
+			payload: {
+				match: RemoteDataInterface.getMatch(match, state),
+			},
+		})
 	}
 }
 
@@ -128,46 +133,26 @@ export function verifyAnswer(answer) {
 	}
 }
 
-export function createMatch() {
+export function createMatch(socket) {
 	return (dispatch, getState) => {
 		const state = getState();
+
+		state.websocket.emit('createMatch', {
+            actorId: state.search.users.selected.id, 
+            opponentId: state.search.users.selected.id,
+            userId: state.user.id, 
+        });
 		
-		Api.authenticatedPost(`${matchApi}`, {
-			opponent_id: state.search.users.selected.id,
-			remote_id: state.search.actors.selected.id,
-			user_id: state.user.id,
-		})
-		.then(response => {
-			if (response.success) {
-				
-			} else {
-				// handle bad login
-			}
-		})
 	}
 }
 
 export function fetchMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
-		
-		Api.authenticatedGet(`${matchApi}/${matchId}`)
-		.then(response => {
-			if (response.success) {
-				return response.match
-			} else {
-				// handle bad login
-			}
-		})
-		.then(match => {
-			console.log('match', match);
-			return RemoteDataInterface.getMatch(match, state);
-		})
-		.then(match => {
-			dispatch(updateMatch(match));
-			dispatch(hideRefreshingMatch());
-		})
 
+		state.websocket.emit('fetchMatch', {
+			matchId: matchId,
+		});
 
 	}
 }

@@ -32,62 +32,42 @@ export function hidePendingMatchAlert() {
 	}
 }
 
-export function toggleMatchesSidebar() {
-	return {
-		type: types.TOGGLE_MATCHES_SIDEBAR, 
-		payload: {},
+export function updateMatches(matches) {
+	return (dispatch, getState) => {
+
+		const state = getState();
+		const normalizedMatches = {};
+
+		// Iterate over each of the match types and normalize the data
+		Object.keys(matches).forEach((matchType, index) => {
+			normalizedMatches[matchType] = matches[matchType].map(match => {
+				return RemoteDataInterface.getMatch(match, state);
+			})
+		})
+
+		// Update Matches
+		dispatch({
+			type: types.UPDATE_MATCHES,
+			payload: {
+				isRefreshing: false,
+				matches: normalizedMatches,
+			}
+		})
 	}
 }
-
-export function updateMatchesList(matches) {
-	return {
-		isRefreshing: false,
-		type: types.UPDATE_MATCHES_LIST,
-		payload: {
-			matches
-		},
-	}
-}
-
-
 
 export function refreshMatches(userId) {
 	return (dispatch, getState) => {
 		dispatch(showRefreshingMatches());
-		dispatch(fetchMatchesList(userId));
+		dispatch(fetchMatches(userId));
 	}
 }
 
-
-
-export function fetchMatchesList(userId) {
+export function fetchMatches() {
 	return (dispatch, getState) => {
 		const state = getState();
-		
-		Api.authenticatedGet(`/api/matches/${userId}/`)
-		.then(response => {
-			if (response.success) {
-				return response.matches
-			} else {
-				// handle bad login
-			}
-		})
-		.then(matches => {
-			
-			const matchLists = {};
-
-			// Iterate over each of the match types and normalize the data
-			Object.keys(matches).forEach((matchType, index) => {
-				matchLists[matchType] = matches[matchType].map(match => {
-					return RemoteDataInterface.getMatch(match, state);
-				})
-			})
-
-			return matchLists;
-		})
-		.then(matchLists => {
-			dispatch(updateMatchesList(matchLists))
-			dispatch(hideRefreshingMatches());
-		})
+		state.websocket.emit('fetchMatches', {
+			userId: state.user.id,
+		});
 	}
 }

@@ -5,7 +5,6 @@ const initialState = {
 	isInitialState: true,
 	isRefreshing: false,
 	showPendingMatchAlert: false,
-	showMatchesSidebar: true,
 	lists: {
 		current: [],
 		inactive: [],
@@ -49,7 +48,7 @@ export const matches = createReducer(initialState, {
 		return initialState;
 	}, 
 	
-	[types.UPDATE_MATCHES_LIST](state, action) {
+	[types.UPDATE_MATCHES](state, action) {
 		return {
 			...state,
 			isInitialState: false, 
@@ -58,12 +57,5 @@ export const matches = createReducer(initialState, {
 			}
 		};
 	},
-
-	[types.TOGGLE_MATCHES_SIDEBAR](state, action) {
-		return {
-			...state,
-			showMatchesSidebar: !state.showMatchesSidebar,
-		};
-	}, 
 
 })

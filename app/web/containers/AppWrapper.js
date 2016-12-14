@@ -3,24 +3,23 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
 import { requestNotificationPermission } from '../notifications';
+import socket from '../websocket';
 
 class AppWrapper extends Component {
 
+	constructor(props) {
+		super();
+	}
+
 	componentDidMount() {
+
 		requestNotificationPermission();
+		
 	}
 
 	componentWillReceiveProps(nextProps) {
 		
-		// User Login
-		if (!this.props.user.isAuthenticated && nextProps.user.isAuthenticated) {
-			browserHistory.push('/lastmanstanton');
-		}
-
-		// User Logout
-		if (this.props.user.isAuthenticated && !nextProps.user.isAuthenticated) {
-			browserHistory.push('/login')
-		}
+		
 	}
 
 
@@ -32,7 +31,8 @@ class AppWrapper extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user,
+		// user: state.user,
+		// websocket: state.websocket,
 	}
 }
 

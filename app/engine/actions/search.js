@@ -143,81 +143,66 @@ export function selectActorSearchResult(result) {
 	}
 }
 
-const debounceRemoteSearch = debounce((dispatch, collection, value) => remoteSearch(dispatch, collection, value), 500);
+const debounceRemoteSearch = debounce((state, searchType, value) => remoteSearch(state, searchType, value), 500);
 
-export function remoteSearch(dispatch, collection, value) {
-		
-	return Api.authenticatedPost(`/api/search/${collection}`, {
-		query: value,
-	})
+export function remoteSearch(state, searchType, value) {
+	state.websocket.emit(searchType, {
+		userId: state.user.id,
+        query: value,
+    });
+	
+}
 
-	.then(response => {
-		if (response.success) {
-			return response;
-		} else {
-			// handle bad login
-		}
-	})
+export function updateSearch({results, searchType}) {
+	return (dispatch, getState) => {
 
-	.then(response => {
-		let results;
-
-		switch(collection) {
+		switch(searchType) {
 			case 'movies': 
-				results = response.results.map(RemoteDataInterface.movie);
-				dispatch(updateMovieSearchResults(results));
+				normalizedResults = results.map(RemoteDataInterface.movie);
+				dispatch(updateMovieSearchResults(normalizedResults));
 				break;
 			case 'users': 
-				results = response.results.map(RemoteDataInterface.user);
-				dispatch(updateUserSearchResults(results));
+				normalizedResults = results.map(RemoteDataInterface.user);
+				dispatch(updateUserSearchResults(normalizedResults));
 				break;
 			case 'actors': 
-				results = response.results.map(RemoteDataInterface.actor);
-				dispatch(updateActorSearchResults(results));
+				normalizedResults = results.map(RemoteDataInterface.actor);
+				dispatch(updateActorSearchResults(normalizedResults));
 				break;
 		}
-
-	})
+	}
 }
 
 export function fetchSearch(collection, value) {
 	return (dispatch, getState) => {
+		const state = getState();
+		let searchType;
 
 		switch(collection) {
-			case 'movies': 
+			case 'movies':
+				searchType = 'searchMovies'; 
 				dispatch(updateMovieSearchValue(value));
 				break;
 			case 'users': 
+				searchType = 'searchUsers'; 
 				dispatch(updateUserSearchValue(value));
 				break;
 			case 'actors': 
+				searchType = 'searchActors'; 
 				dispatch(updateActorSearchValue(value));
 				break;
 		}
 
-		const state = getState();
-
-		debounceRemoteSearch(dispatch, collection, state.search[collection].value)
+		debounceRemoteSearch(state, searchType, value)
 		
 	}
 }
 
 export function fetchRandomActorSearch() {
 	return (dispatch, getState) => {
-
-		return Api.authenticatedGet(`/api/search/actors/random`)
-
-		.then(response => {
-			if (response.success) {
-				return response;
-			} else {
-				// handle bad login
-			}
-		})
-
-		.then(response => {
-			const results = response.results.map(RemoteDataInterface.actor);
-			dispatch(updateActorSearchResults(results));
-		})
+		const state = getState();
+		state.websocket.emit('searchActorsRandom', {
+			userId: state.user.id,
+    	});
 	}
 }

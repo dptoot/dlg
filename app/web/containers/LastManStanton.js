@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
+import socket from '../websocket';
 
 import classnames from 'classnames';
 
@@ -16,29 +17,13 @@ import UserSidebar from '../containers/UserSidebar';
 
 class LastManStanton extends Component {
 
-	componentDidMount() {
-
-		// Get Initial dataset
-		if (this.props.user.isAuthenticated) {
-			this.props.fetchMatchesList(this.props.user.id);
-		}
-
-	}
-
-	componentWillReceiveProps(nextProps) { 
-		if (!this.props.user.isAuthenticated && nextProps.user.isAuthenticated) {
-			this.props.fetchMatchesList(nextProps.user.id);
-		}
-	}
-
 	render() {
 
 		const containerClasses = classnames({
 			'mobile': this.props.browser.lessThan.small,
 		})
 
-
-		return(
+		return this.props.user.id && this.props.websocket && (
 				
 				<div id="outer-container" className={containerClasses}>
 				<Header />
@@ -51,7 +36,7 @@ class LastManStanton extends Component {
 					<div id="page-wrap">
 						
 						<div className="app-wrapper">
-							<MatchesColumn rendered={this.props.browser.greaterThan.extraSmall} />	
+							<MatchesColumn rendered={this.props.browser.greaterThan.extraSmall  } />	
 							<Match />
 							<MatchChatColumn rendered={this.props.browser.greaterThan.extraSmall}/>
 						</div>
@@ -65,9 +50,9 @@ class LastManStanton extends Component {
 
 function mapStateToProps(state) {
 	return {
-		user: state.user,
 		browser: state.browser,
-		matches: state.matches,
+		user: state.user,
+		websocket: state.websocket,
 	}
 }
 

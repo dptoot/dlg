@@ -5,6 +5,7 @@ import * as matchesReducer from './matches';
 import * as matchReducer from './match';
 import * as searchReducer from './search';
 import * as layoutReducer from './layout';
+import * as websocketReducer from './websocket';
 
 export default combineReducers(Object.assign({
 	browser: responsiveStateReducer,
@@ -14,5 +15,6 @@ export default combineReducers(Object.assign({
 	matchReducer,
 	searchReducer,
 	layoutReducer,
+	websocketReducer
 ));
 
