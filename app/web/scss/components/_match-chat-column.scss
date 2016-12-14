@@ -1,0 +1,12 @@
+.match-chat-column {
+	position: relative;
+	transition: all 0.5s ease-out;
+	width: 20%;
+	
+
+	&.closed {
+		width: 0;
+		padding: 0;
+		margin: 0;
+	}
+}

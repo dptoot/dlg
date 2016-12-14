@@ -13,7 +13,7 @@ class Header extends Component {
 
     renderMatchesSidebarTrigger() {
         return (
-            <Icon name="bars" className="text-xlg text-gray" onClick={this.props.openUserDrawer} />
+            <Icon name="bars" className="text-xlg text-gray" onClick={this.props.showMatches} />
         );
     }
 

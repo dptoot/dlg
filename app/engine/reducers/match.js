@@ -102,30 +102,6 @@ export const match = createReducer(initialState, {
 		};
 	},
 
-	[types.SHOW_MATCH_CHAT](state, action) {
-		return {
-			...state, 
-			chat: {
-				...state.chat,
-				showMatchChat: true,
-				lastActivity: Date.now(),
-				newMessageCount: initialState.chat.newMessageCount,
-			},
-		};
-	},
-
-	[types.HIDE_MATCH_CHAT](state, action) {
-		return {
-			...state, 
-			chat: {
-				...state.chat,
-				showMatchChat: false,
-				lastActivity: Date.now(),
-				newMessageCount: initialState.chat.newMessageCount,
-			},
-		};
-	},
-
 	[types.UPDATE_MATCH_CHAT_LAST_ACTIVITY](state, action) {
 		return {
 			...state, 

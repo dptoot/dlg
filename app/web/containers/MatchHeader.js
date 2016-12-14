@@ -108,8 +108,8 @@ class MatchHeader extends Component {
                         <Button 
                             type="secondary"
                             icon="comments"
-                            text={this.props.match.chat.showMatchChat ? 'Close Chat' : 'Open Chat'}
-                            onClick={this.props.match.chat.showMatchChat ? this.props.hideMatchChat : this.props.showMatchChat}
+                            text={this.props.layout.showMatchChat ? 'Close Chat' : 'Open Chat'}
+                            onClick={this.props.layout.showMatchChat ? this.props.hideMatchChat : this.props.showMatchChat}
                             />
                         <Button 
                             rendered={this.props.match.status === 'active'}
@@ -139,6 +139,7 @@ MatchHeader.defaultProps = {
 function mapStateToProps(state) {
     return {
         match: state.match,
+        layout: state.layout,
     }
 }
 

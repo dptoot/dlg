@@ -8,6 +8,7 @@ import MatchHeader from '../containers/MatchHeader';
 import MatchChat from '../containers/MatchChat';
 import {Modal} from 'react-overlays';
 import socket from '../websocket';
+import classnames from 'classnames';
 
 class Match extends Component {
 
@@ -97,6 +98,11 @@ class Match extends Component {
 	} 
 	
 	renderMatch() {
+
+		const containerClasses = classnames({
+			'flex': this.props.browser.greaterThan.extraSmall,
+		})
+
 		return (
 
 			<div className="match-board">
@@ -105,15 +111,13 @@ class Match extends Component {
 					onSearchClick={this.handleToggleSearch} 
 					/>
 
-				<div className="flex">	
+				<div className={containerClasses}>	
 					<LastAnswer 
 						rendered={this.props.match.lastAnswer}
-						className="flex-grow margin-horizontal-lg margin-collapse-left"
 						answer={this.props.match.lastAnswer} 
 						/>
 
 					<MatchStatus 
-						className="flex-grow"
 						match={this.props.match}
 						/>
 				</div>
@@ -150,6 +154,7 @@ function mapStateToProps(state) {
 	return {
 		user: state.user,
 		match: state.match,
+		browser: state.browser,
 	}
 }
 

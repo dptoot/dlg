@@ -5,11 +5,14 @@ import {mapDispatchToProps} from '../../engine';
 
 import classnames from 'classnames';
 
-import Match from './Match';
-import Matches from './Matches';
-import MatchChat from './MatchChat';
-import Header from './Header';
-import UserSidebar from './UserSidebar';
+import Match from '../containers/Match';
+import MatchesColumn from '../containers/MatchesColumn';
+import MatchesDrawer from '../containers/MatchesDrawer';
+
+import MatchChatColumn from '../containers/MatchChatColumn';
+import MatchChatDrawer from '../containers/MatchChatDrawer';
+import Header from '../containers/Header';
+import UserSidebar from '../containers/UserSidebar';
 
 class LastManStanton extends Component {
 
@@ -31,8 +34,9 @@ class LastManStanton extends Component {
 	render() {
 
 		const containerClasses = classnames({
-			'mobile': this.props.browser.lessThan.medium,
+			'mobile': this.props.browser.lessThan.small,
 		})
+
 
 		return(
 				
@@ -40,14 +44,16 @@ class LastManStanton extends Component {
 				<Header />
 					<UserSidebar />
 					
+					<MatchesDrawer rendered={this.props.browser.lessThan.small} />
+					<MatchChatDrawer rendered={this.props.browser.lessThan.small} />
 						
 					
 					<div id="page-wrap">
 						
 						<div className="app-wrapper">
-							<Matches rendered={this.props.browser.greaterThan.small} />	
+							<MatchesColumn rendered={this.props.browser.greaterThan.extraSmall} />	
 							<Match />
-							<MatchChat rendered={this.props.browser.greaterThan.small}/>
+							<MatchChatColumn rendered={this.props.browser.greaterThan.extraSmall}/>
 						</div>
 					</div>
 				</div>

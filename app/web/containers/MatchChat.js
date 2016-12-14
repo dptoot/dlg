@@ -79,13 +79,8 @@ class MatchChat extends Component {
 
 	render() {
 
-		const containerClasses = classnames({
-			'match-chat': true,
-			'closed': !this.props.match.chat.showMatchChat,
-		})
-
 		return !this.props.match.isInitialState && (
-			<div className={containerClasses}>
+			<div className="match-chat">
 				<div className="match-chat-wrapper">
 
 					<ListHeader

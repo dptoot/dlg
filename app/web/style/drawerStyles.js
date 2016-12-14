@@ -1,37 +1,55 @@
+import deepAssign from 'deep-assign';
 import theme from '../../engine/theme';
 
-export const matchesDrawer = {
-	bmBurgerButton: {
+export const standardDrawer = {
+    bmBurgerButton: {
         display: 'none'
-      },
-      bmBurgerBars: {
+    },
+    bmBurgerBars: {
         display: 'none',
-      },
-      bmCrossButton: {
+    },
+    bmCrossButton: {
         height: '24px',
         width: '24px',
         cursor: 'pointer',
-      },
-      bmCross: {
+    },
+    bmCross: {
         background: theme.light,
-      },
-      bmMenuWrap: {
+    },
+    bmMenuWrap: {
         zIndex: 1001,
-      },
-      bmMenu: {
+    },
+    bmMenu: {
+        padding: 0,
         background: theme.grayDark,
-        padding: theme.paddingLarge,
         fontSize: '1em'
-      },
-      bmMorphShape: {
+    },
+    bmMorphShape: {
         fill: theme.grayDark,
-      },
-      bmItemList: {
+    },
+    bmItemList: {
+        padding: 0,
         color: theme.light,
-        padding: '1em'
-      },
-      bmOverlay: {
+    },
+    bmOverlay: {
         zIndex: 1000,
         background: 'rgba(0, 0, 0, 0.7)'
-      }
-}
+    }
+};
+
+export const matchesDrawer = deepAssign(standardDrawer, {
+    bmMenu: {
+        width: '100%',
+    }
+});
+
+export const userDrawer = deepAssign(standardDrawer, {
+    
+});
+
+export const matchChatDrawer = deepAssign(standardDrawer, {
+   bmMenu: {
+        width: '100%',
+    }
+});
+

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "deep-assign": "^2.0.0",
     "lodash.debounce": "^4.0.8",
     "notifyjs": "^2.0.3",
     "react": "^15.3.2",

@@ -89,21 +89,6 @@ export function clearMatchChatInputValue() {
 	}
 }
 
-export function showMatchChat() {
-	return {
-		type: types.SHOW_MATCH_CHAT, 
-		payload: {},
-	}
-}
-
-export function hideMatchChat() {
-	return {
-		type: types.HIDE_MATCH_CHAT, 
-		payload: {},
-	}
-}
-
-
 // thunks
 export function refreshMatch(match) {
 	return (dispatch, getState) => {

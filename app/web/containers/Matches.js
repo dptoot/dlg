@@ -52,6 +52,7 @@ class Matches extends Component {
 	}
 
 	handleMatchClick(matchId) {
+		this.props.onMatchClick();
 		this.props.fetchMatch(matchId)
 	}
 
@@ -161,10 +162,15 @@ class Matches extends Component {
 
 }
 
+Matches.defaultProps = {
+	onMatchClick: () => {},
+}
+
 function mapStateToProps(state) {
 	return {
 		user: state.user,
 		matches: state.matches,
+		browser: state.browser,
 	}
 }
 
