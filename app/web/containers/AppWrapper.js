@@ -3,36 +3,30 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
 import { requestNotificationPermission } from '../notifications';
-import socket from '../websocket';
 
 class AppWrapper extends Component {
 
-	constructor(props) {
-		super();
-	}
-
-	componentDidMount() {
-
-		requestNotificationPermission();
-		
-	}
-
-	componentWillReceiveProps(nextProps) {
-		
+	handleWebsockets() {
 		
 	}
 
 
 	render() {
-		return this.props.children;
+		return this.props.websocket && (
+			<div>
+				{this.props.initializeUserWebsocketListeners()}
+				{this.props.children}
+			</div>
+
+		)
 	}
 	
 }		
 
 function mapStateToProps(state) {
 	return {
-		// user: state.user,
-		// websocket: state.websocket,
+		user: state.user,
+		websocket: state.websocket,
 	}
 }
 

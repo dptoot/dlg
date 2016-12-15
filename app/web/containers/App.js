@@ -29,6 +29,7 @@ class App extends Component {
 		// User Login
 		if (!this.props.user.isAuthenticated && nextProps.user.isAuthenticated) {
 			browserHistory.push('/lastmanstanton');
+			nextProps.fetchMatches();
 		}
 
 		// User Logout
@@ -36,49 +37,11 @@ class App extends Component {
 			browserHistory.push('/login');
 		}
 
+		// Catch all to load user matches
 		if (nextProps.user.id && nextProps.websockets) {
 			nextProps.fetchMatches();
 		}
-		
-
-		// Wait until sockets are available to bind to them.
-		if (!this.props.websocket && nextProps.websocket) {
-
-
-			nextProps.fetchMatches();
 			
-
-			// UPDATE MATCHES
-			nextProps.websocket.on('updateMatches', data => {
-				if(data.userId === this.props.user.id) {
-					nextProps.updateMatches(data.matches);
-				}
-			});
-
-			// UPDATE MATCH
-			nextProps.websocket.on('updateMatch', data => {
-
-				const player1Id = data.match.player_1.user._id;
-				const player2Id = data.match.player_2.user._id;
-
-				if([player1Id, player2Id].includes(this.props.user.id)) {
-					nextProps.updateMatch(data.match);
-				}
-			});
-
-			// UPDATE SEARCH
-			nextProps.websocket.on('updateSearch', data => {
-				if(data.userId === this.props.user.id) {
-					nextProps.updateSearch(data);
-				}
-			});
-
-			// UPDATE SEARCH
-			nextProps.websocket.on('updateUser', data => {
-				this.props.loginUser(data);
-			});
-
-		}
 	}
 
 	
@@ -131,7 +94,7 @@ class App extends Component {
 
 	
 	render() {
-		return(
+		return (
 			<Router history={browserHistory} >
 				<Route path='/' component={AppWrapper} onEnter={this.handleAutoLogin}>
 					

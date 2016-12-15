@@ -23,10 +23,11 @@ class LastManStanton extends Component {
 			'mobile': this.props.browser.lessThan.small,
 		})
 
-		return this.props.user.id && this.props.websocket && (
+		return this.props.user.isAuthenticated && this.props.websocket && (
 				
 				<div id="outer-container" className={containerClasses}>
-				<Header />
+					{this.props.initializeMatchWebsocketListeners()}
+					<Header />
 					<UserSidebar />
 					
 					<MatchesDrawer rendered={this.props.browser.lessThan.small} />

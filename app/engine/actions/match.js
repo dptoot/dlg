@@ -138,7 +138,7 @@ export function createMatch(socket) {
 		const state = getState();
 
 		state.websocket.emit('createMatch', {
-            actorId: state.search.users.selected.id, 
+            actorRemoteId: state.search.actors.selected.id, 
             opponentId: state.search.users.selected.id,
             userId: state.user.id, 
         });
@@ -180,14 +180,10 @@ export function acceptMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedGet(`${matchApi}/${matchId}/accept`)
-		.then(response => {
-			if (response.success) {
-				return response.match
-			} else {
-				// handle bad login
-			}
-		})
+		state.websocket.emit('acceptMatch', {
+			matchId: matchId,
+			userId: state.user.id, 
+		});
 
 	}
 }
@@ -196,14 +192,10 @@ export function deleteMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		Api.authenticatedDelete(`${matchApi}/${matchId}`)
-		.then(response => {
-			if (response.success) {
-				return response.match
-			} else {
-				// handle bad login
-			}
-		})
+		state.websocket.emit('deleteMatch', {
+			matchId: matchId,
+			userId: state.user.id, 
+		});
 
 	}
 }
