@@ -33,7 +33,6 @@ export function initializeMatchWebsocketListeners() {
 		// UPDATE MATCHES
 		state.websocket.on('updateMatches', data => {
 			if(data.userId === state.user.id) {
-				console.log("updating matches", data.matches)
 				dispatch(updateMatches(data.matches));
 			}
 		});

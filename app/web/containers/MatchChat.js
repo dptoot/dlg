@@ -36,14 +36,7 @@ class MatchChat extends Component {
   	handleChatInputKeyDown(event) {
   		if (event.key == 'Enter' && this.props.match.chat.value !== ''){
   			
-  			// Send chat data to server via websockets
-  			socket.emit('chatMessage', {
-  				matchId: this.props.match.id,
-  				user: this.props.user.id,
-  				message: this.props.match.chat.value,
-  				timestamp: Date.now(), 
-  			});
-
+  			this.props.submitChatMessage();
   			this.props.clearMatchChatInputValue();
   		}
   	}
