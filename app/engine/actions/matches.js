@@ -33,6 +33,9 @@ export function hidePendingMatchAlert() {
 }
 
 export function updateMatches(matches) {
+
+	console.log(matches)
+
 	return (dispatch, getState) => {
 
 		const state = getState();

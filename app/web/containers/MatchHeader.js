@@ -71,7 +71,7 @@ class MatchHeader extends Component {
         const buttons = [
             {
                 text: 'Yes', 
-                onClick: this.props.deactivateMatch,
+                onClick: () => this.props.deactivateMatch(this.props.match),
             }, 
             {
                 text: 'No',

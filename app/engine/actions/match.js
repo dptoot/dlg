@@ -60,14 +60,14 @@ export function deleteMatch(matchId) {
 	}
 }
 
-export function deactivateMatch() {
+export function deactivateMatch(match) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
 		state.websocket.emit('deactivateMatch', {
-			matchId: state.match.id,
+			matchId: match.id,
 			userId: state.user.id,
-			opponentId: state.match.opponent.user.id,
+			opponentId: match.opponent.user.id,
 		})
 
 	}
