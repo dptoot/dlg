@@ -1,6 +1,21 @@
 import * as types from './types';
 
 // CHAT
+export function showCreateMatch() {
+	return {
+		type: types.SHOW_CREATE_MATCH,
+		payload: {},
+	}
+}
+
+export function hideCreateMatch() {
+	return {
+		type: types.HIDE_CREATE_MATCH,
+		payload: {},
+	}
+}
+
+// CHAT
 export function showMatchChat() {
 	return {
 		type: types.SHOW_MATCH_CHAT,

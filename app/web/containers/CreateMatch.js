@@ -16,6 +16,7 @@ import {
 	RemoteImage,
 	Avatar,
 	Button,
+	ListHeader, 
 } from '../elements';
 
 class CreateMatch extends Component {
@@ -36,9 +37,9 @@ class CreateMatch extends Component {
 	
 	handleSubmit() {
   		this.props.createMatch();
+  		this.props.hideCreateMatch();
   		this.props.clearUserSearchResult();
   		this.props.clearActorSearchResult();
-  		browserHistory.push('/lastManStanton');
   	}
 
   	handleCloseSearch() {
@@ -84,7 +85,6 @@ class CreateMatch extends Component {
                     width={92}
                     />
 			</CreateSelection>
-  			
 		); 
   	}
 
@@ -138,36 +138,36 @@ class CreateMatch extends Component {
 
   	render() {
 		return (
-			<CenteredWrapper>
-				<Card 
-					containerClassName="width-50"
-					title="Create Match"
-					vertical
-					>
-				{this.props.search.users.selected ? this.renderSelectedUser() : this.renderTextInput({
-					title: 'Select an Opponent',
-					placeholder: 'Enter any user name',
-					onInputClick: this.handleUserSearchInputClick,
-				})}
-
-				{this.props.search.actors.selected ? this.renderSelectedActor() : this.renderTextInput({
-					title: 'Select an Actor',
-					placeholder: 'Enter any Actor\'s or Actress\' name',
-					onInputClick: (this.handleActorSearchInputClick),
-				})}
-				
-				
-				<Button 
-					onClick={this.handleSubmit}
-					text="Request Match"
+			<div>
+				<ListHeader 
+					title="Create a Match"
+					icon="remove"
+					onIconClick={this.props.hideCreateMatch}
 					/>
+				<div className="padding-horizontal-md padding-vertical-md">
+					{this.props.search.users.selected ? this.renderSelectedUser() : this.renderTextInput({
+						title: 'Select an Opponent',
+						placeholder: 'Enter any user name',
+						onInputClick: this.handleUserSearchInputClick,
+					})}
 
-				</Card>
-				
-				{/*	Search Modals */}
-				{this.renderActorSearch()}
-				{this.renderUserSearch()}
-			</CenteredWrapper>
+					{this.props.search.actors.selected ? this.renderSelectedActor() : this.renderTextInput({
+						title: 'Select an Actor',
+						placeholder: 'Enter any Actor\'s or Actress\' name',
+						onInputClick: (this.handleActorSearchInputClick),
+					})}
+					
+					
+					<Button 
+						onClick={this.handleSubmit}
+						text="Request Match"
+						/>
+					
+					{/*	Search Modals */}
+					{this.renderActorSearch()}
+					{this.renderUserSearch()}
+				</div>
+		</div>
 		)
 	}
 }

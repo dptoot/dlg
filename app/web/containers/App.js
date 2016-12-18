@@ -53,7 +53,7 @@ class App extends Component {
 				
 				<Route path='/' component={PublicWrapper} onEnter={this.handleAutoLogin}>
 					<IndexRoute component={Login} />
-					<Route path="register" component={Register} />
+					<Route path="/register" component={Register} />
 				</Route>
 
 				<Route path="lastmanstanton" component={AuthWrapper} onEnter={this.handleAutoLogin}>

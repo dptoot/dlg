@@ -37,6 +37,12 @@ export const standardDrawer = {
     }
 };
 
+export const createMatchDrawer = deepAssign(standardDrawer, {
+    bmMenu: {
+        width: '100%',
+    }
+});
+
 export const matchesDrawer = deepAssign(standardDrawer, {
     bmMenu: {
         width: '100%',

@@ -16,7 +16,9 @@ class Card extends Component {
             containerClassName, 
             shadow = '1x', 
             vertical = false,
-            justify = 'center', 
+            justify = 'center',
+            icon, 
+            onIconClick,
             ...rest
         } = this.props;
 
@@ -33,7 +35,10 @@ class Card extends Component {
 
         return (
             <div className={classes} {...rest}>
-            	<div className="card-title">{title}</div>
+            	<div className="card-title">
+                    <div>{title}</div>
+                    {this.props.icon && <Icon name={this.props.icon} onClick={this.props.onIconClick} />}
+                </div>
             	<div className={contentClasses}>
                 	{children}
                 </div>
@@ -44,7 +49,7 @@ class Card extends Component {
 }
 
 Card.defaultProps = {
-
+    onIconClick: () => {},
 }
 
 export default Card;

@@ -9,6 +9,7 @@ import Match from '../containers/Match';
 import MatchesColumn from '../containers/MatchesColumn';
 import MatchesDrawer from '../containers/MatchesDrawer';
 
+import CreateMatchDrawer from '../containers/CreateMatchDrawer';
 import MatchChatColumn from '../containers/MatchChatColumn';
 import MatchChatDrawer from '../containers/MatchChatDrawer';
 import Header from '../containers/Header';
@@ -17,8 +18,10 @@ import UserSidebar from '../containers/UserSidebar';
 class LastManStanton extends Component {
 
 	componentDidMount() {
-		this.props.fetchMatches();
 		this.props.initializeWebsocketListeners();
+		this.props.fetchMatches();
+		// This seems to break matches normalization
+		// this.props.setLastUserLogin();
 	}
 
 	render() {
@@ -33,6 +36,7 @@ class LastManStanton extends Component {
 					
 					<Header />
 					<UserSidebar />
+					<CreateMatchDrawer />
 					
 					<MatchesDrawer rendered={this.props.browser.lessThan.small} />
 					<MatchChatDrawer rendered={this.props.browser.lessThan.small} />

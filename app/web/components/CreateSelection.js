@@ -14,11 +14,12 @@ class CreateSelection extends Component {
     render() {
         return (
             <Card 
+                title={this.props.title}
                 shadow={false}
                 className="create-selection"
+                icon="remove"
+                onIconClick={this.props.onRemove}
                 >
-
-                <Icon name="remove" onClick={this.props.onRemove}/>
 
                 <div className="create-selection-image">
                     {this.props.children}

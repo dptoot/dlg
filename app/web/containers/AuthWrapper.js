@@ -4,6 +4,7 @@ import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
 import { requestNotificationPermission } from '../notifications';
 import {connectSocket, getSocket} from '../websocket';
+import {CenteredWrapper} from '../elements';
 
 class AuthWrapper extends Component {
 
@@ -17,7 +18,6 @@ class AuthWrapper extends Component {
 		if (!this.props.websocket) {
 			connectSocket()
 			.then(socket => {
-				console.log(socket)
 				this.props.updateWebsocket(socket);  
 			})
 		}
@@ -31,8 +31,16 @@ class AuthWrapper extends Component {
 
 	}
 
+	renderLoading() {
+		return (
+			<CenteredWrapper>
+				<div>Loading...</div>
+			</CenteredWrapper>
+		);
+	}
+
 	render() {
-		return this.props.websocket ? this.props.children : (<h1>LOADING</h1>)
+		return this.props.websocket ? this.props.children : this.renderLoading();
 	}
 	
 }		
