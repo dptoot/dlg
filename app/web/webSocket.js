@@ -20,9 +20,6 @@ export function connectSocket() {
 		socket.on('error', () => console.log('there was an error connecting dlg websocket server'));
 	});
 }
-	
-
-
 
 export function getSocket() {
 	return socket;

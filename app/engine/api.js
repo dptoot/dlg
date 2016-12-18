@@ -8,6 +8,7 @@ class Api {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'dataType': 'json',
+      'credentials': 'include',
     }
   }
 
@@ -27,22 +28,6 @@ class Api {
     return this.xhr(route, params, 'DELETE', false);
   }
 
-  static authenticatedGet(route) {
-    return this.xhr(route, null, 'GET', true);
-  }
-
-  static authenticatedPut(route, params) {
-    return this.xhr(route, params, 'PUT', true);
-  }
-
-  static authenticatedPost(route, params) {
-    return this.xhr(route, params, 'POST', true);
-  }
-
-  static authenticatedDelete(route, params) {
-    return this.xhr(route, params, 'DELETE', true);
-  }
-
   static xhr(route, params, verb, authenticated = false) {
 
   	console.log('CALLING REST API');
@@ -52,15 +37,7 @@ class Api {
     
     // Add headers
     options.headers = Api.headers();
-
-    // Add Authentication if required
-    if (authenticated) {
-        Object.assign(options.headers, {
-            'Authorization': store.getState().user.token,
-            'credentials': 'include',
-        });
-    }
-
+    
     return fetch(url, options)
       .then( resp => {
         
