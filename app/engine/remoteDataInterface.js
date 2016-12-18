@@ -49,12 +49,9 @@ class RemoteDataInterface {
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
 		}
 
-		console.log(matchData);
-
 		if (matchData.players.user.status === 'current') {
 			matchData.showSearch = true;
 		}
-
 
 		return matchData;
     }

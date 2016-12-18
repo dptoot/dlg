@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
 import Icon from 'react-fontawesome';
-import {bubble as Menu} from 'react-burger-menu';
+import {slide as Menu} from 'react-burger-menu';
 import theme from '../../engine/theme';
 import { matchesDrawer } from '../style/drawerStyles';
 import renderable from '../hoc/renderable';

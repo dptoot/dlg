@@ -3,21 +3,24 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
-import Icon from 'react-fontawesome';
 import {slide as Menu} from 'react-burger-menu';
-import theme from '../../engine/theme';
 import { createMatchDrawer } from '../style/drawerStyles';
 import renderable from '../hoc/renderable';
 import CreateMatch from '../containers/CreateMatch';
-import {ListHeader} from '../elements';
 
 class CreateMatchDrawer extends Component {
+
+    getDrawerWidth() {
+        const percentage = this.props.browser.greaterThan.extraSmall ? .3 : 1;
+        return this.props.browser.width * percentage;
+    }
     
     render() {
 
         const menuOptions = {
             customBurgerIcon: false,
             customCrossIcon: false,
+            width: this.getDrawerWidth(),
             isOpen: this.props.layout.showCreateMatch,
             styles: createMatchDrawer,
             pageWrapId: 'page-wrap',
@@ -47,7 +50,6 @@ CreateMatchDrawer.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
         layout: state.layout,
         browser: state.browser,
     }

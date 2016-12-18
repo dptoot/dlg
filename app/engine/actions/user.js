@@ -40,8 +40,6 @@ export function logoutUser() {
 	}
 }
 
-
-
 export function updateUser(user) {
 	return {
 		type: types.UPDATE_USER,

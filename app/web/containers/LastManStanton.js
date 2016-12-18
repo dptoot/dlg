@@ -36,11 +36,11 @@ class LastManStanton extends Component {
 					
 					<Header />
 					<UserSidebar />
-					<CreateMatchDrawer />
+					
 					
 					<MatchesDrawer rendered={this.props.browser.lessThan.small} />
 					<MatchChatDrawer rendered={this.props.browser.lessThan.small} />
-						
+					<CreateMatchDrawer />	
 					
 					<div id="page-wrap">
 						
