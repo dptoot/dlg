@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
-import socket from '../websocket';
 
 import classnames from 'classnames';
 
@@ -17,16 +16,21 @@ import UserSidebar from '../containers/UserSidebar';
 
 class LastManStanton extends Component {
 
+	componentDidMount() {
+		this.props.fetchMatches();
+		this.props.initializeWebsocketListeners();
+	}
+
 	render() {
 
 		const containerClasses = classnames({
 			'mobile': this.props.browser.lessThan.small,
 		})
 
-		return this.props.user.isAuthenticated && this.props.websocket && (
+		return (
 				
 				<div id="outer-container" className={containerClasses}>
-					{this.props.initializeMatchWebsocketListeners()}
+					
 					<Header />
 					<UserSidebar />
 					
@@ -52,8 +56,6 @@ class LastManStanton extends Component {
 function mapStateToProps(state) {
 	return {
 		browser: state.browser,
-		user: state.user,
-		websocket: state.websocket,
 	}
 }
 

@@ -78,9 +78,16 @@ export function authenticateUser() {
 
 		const state = getState();
 		
-		state.websocket.emit('authenticateUser', {
+		Api.post('/accounts/authenticate', {
 			name: state.user.name,
 			password: state.user.password,
+		})
+		.then(response => {
+			if (response.success) {
+				dispatch(loginUser(response))
+			} else {
+				// handle bad login
+			}
 		});
 	}
 }

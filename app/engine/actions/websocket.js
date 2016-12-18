@@ -13,19 +13,7 @@ export function updateWebsocket(websocket) {
 	}
 }
 
-export function initializeUserWebsocketListeners() {
-	return (dispatch, getState) => {
-
-		const state = getState();
-
-		// LOGIN USER
-		state.websocket.on('updateUser', data => {
-			dispatch(loginUser(data));
-		});
-	}
-}
-
-export function initializeMatchWebsocketListeners() {
+export function initializeWebsocketListeners() {
 	return (dispatch, getState) => {
 
 		const state = getState();

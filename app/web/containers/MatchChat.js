@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
-import socket from '../websocket';
 import classnames from 'classnames';
 import Scroll from 'react-scroll';
 var scroll = Scroll.animateScroll;

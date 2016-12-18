@@ -7,7 +7,6 @@ import Search from '../containers/Search';
 import MatchHeader from '../containers/MatchHeader';
 import MatchChat from '../containers/MatchChat';
 import {Modal} from 'react-overlays';
-import socket from '../websocket';
 import classnames from 'classnames';
 
 class Match extends Component {

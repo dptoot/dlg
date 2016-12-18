@@ -82,7 +82,7 @@ class Register extends Component {
 				</Card>
 
 				<Button 
-                    onClick={() => browserHistory.push('/login')}
+                    onClick={() => browserHistory.push('/')}
                     text="Already have an account? Well just log in then!"
                     type="link"
                     />

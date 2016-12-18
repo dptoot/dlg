@@ -3,12 +3,27 @@
 import io from 'socket.io-client/socket.io';
 import config from '../engine/config';
 
-const socket = io(config('WEBSOCKET_HOST'), {
-  transports: ['websocket'] // you need to explicitly tell it to use websockets
-});
+const socket = false;
 
-socket.on('connect', () => console.log('connection established to dlg websocket server'));
-socket.on('disconnect', () => console.log('connection lost to the dlg websocket server'));
-socket.on('error', () => console.log('there was an error connecting dlg websocket server'));
+export function connectSocket() {
+	return new Promise((resolve, reject) => {
+		socket = io(config('WEBSOCKET_HOST'), {
+			transports: ['websocket'] // you need to explicitly tell it to use websockets
+		});
 
-export default socket;
+		socket.on('connect', () => {
+			resolve(socket);
+			console.log('connection established to dlg websocket server');
+		});
+
+		socket.on('disconnect', () => console.log('connection lost to the dlg websocket server'));
+		socket.on('error', () => console.log('there was an error connecting dlg websocket server'));
+	});
+}
+	
+
+
+
+export function getSocket() {
+	return socket;
+}

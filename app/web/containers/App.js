@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {mapDispatchToProps, storage} from '../../engine';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import AppWrapper from './AppWrapper';
+import PublicWrapper from './PublicWrapper';
+import AuthWrapper from './AuthWrapper';
 import Login from './Login';
 import Register from './Register';
 import LastManStanton from './LastManStanton';
 import CreateMatch from './CreateMatch';
 import Search from './Search';
-import socket from '../websocket';
+
 
 
 class App extends Component {
@@ -16,96 +17,49 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.requireAuth = this.requireAuth.bind(this);
-		this.handleAutoLogin = this.handleAutoLogin.bind(this);
-
-		socket.on('connect', () => {
-			props.updateWebsocket(socket);  
-		})
+		this.handleAutoLogin = this.handleAutoLogin.bind(this);	
 	}
-
-	componentWillReceiveProps(nextProps) {
-
-		// User Login
-		if (!this.props.user.isAuthenticated && nextProps.user.isAuthenticated) {
-			browserHistory.push('/lastmanstanton');
-			nextProps.fetchMatches();
-		}
-
-		// User Logout
-		if (this.props.user.isAuthenticated && !nextProps.user.isAuthenticated) {
-			browserHistory.push('/login');
-		}
-
-		// Catch all to load user matches
-		if (nextProps.user.id && nextProps.websockets) {
-			nextProps.fetchMatches();
-		}
-			
-	}
-
 	
 	handleAutoLogin(nextState, replace, callback) {
-		const publicPaths = ['/login', '/register'];
-		// Ignore all this if we are already on a white list page
-		if (publicPaths.includes(nextState.location.pathname)) {
-			callback();
-		} 
-
-		if (!this.props.user.isAuthenticated) {
-			storage.load({
-			    key: 'loginState',
-			    autoSync: false,
-			}).then(user => {
-			    this.props.loginUser(user);
-			    callback();
-			}).catch(err => {
-			    switch (err.name) {
-			        case 'NotFoundError':
-						replace({
-						  pathname: '/login',
-						  state: { nextPathname: nextState.location.pathname }
-						});
-						callback();
-						break;
-			        case 'ExpiredError':
-			            replace({
-						  pathname: '/login',
-						  state: { nextPathname: nextState.location.pathname }
-						})
-						callback();
-			            break;
-			    }
-			})
-		} else {
-			callback();
+		
+		// Ignore if we are logged in
+		if (this.props.user.isAuthenticated) {
+			return callback();
 		}
 
-	}
+		// Try and auto login
+		storage.load({
+		    key: 'loginState',
+		    autoSync: false,
+		})
 
-	requireAuth(nextState, replace) {
-		// if (!this.props.user.isAuthenticated) {
-		// 	replace({
-		// 	  pathname: '/login',
-		// 	  state: { nextPathname: nextState.location.pathname }
-		// 	})
-		// }
-	}
+		// If there is a user then log them in and load page
+		.then(user => {
+		    this.props.loginUser(user);
+		    callback();
+		})
 
+		// if not then just load the page
+		.catch(err => {
+		   callback()
+		})
+		
+
+	}
 	
 	render() {
 		return (
-			<Router history={browserHistory} >
-				<Route path='/' component={AppWrapper} onEnter={this.handleAutoLogin}>
-					
-					<Route path="login" component={Login} />
+			<Router history={browserHistory}>
+				
+				<Route path='/' component={PublicWrapper} onEnter={this.handleAutoLogin}>
+					<IndexRoute component={Login} />
 					<Route path="register" component={Register} />
-
-					<Route path="lastmanstanton" component={LastManStanton} onEnter={this.requireAuth} />
-					
-					<Route path="create-match" component={CreateMatch} onEnter={this.requireAuth}/>
-
 				</Route>
+
+				<Route path="lastmanstanton" component={AuthWrapper} onEnter={this.handleAutoLogin}>
+					<IndexRoute component={LastManStanton} />
+				</Route>
+
 			</Router>
 		);
 	}
@@ -115,7 +69,6 @@ class App extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user,
-		websocket: state.websocket,
 	}
 }
 
