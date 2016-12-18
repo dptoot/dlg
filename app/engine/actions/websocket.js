@@ -2,7 +2,7 @@ import * as types from './types';
 import {updateMatches} from './matches';
 import {updateMatch} from './match';
 import {updateSearch} from './search';
-import {loginUser} from './user';
+import {loginUser, updateUser} from './user';
 
 export function updateWebsocket(websocket) {
 	return {
@@ -39,6 +39,14 @@ export function initializeWebsocketListeners() {
 		state.websocket.on('updateSearch', data => {
 			if(data.userId === state.user.id) {
 				dispatch(updateSearch(data));
+			}
+		});
+
+		// UPDATE SEARCH
+		state.websocket.on('updateUser', data => {
+			console.log('update user', data)
+			if(data.userId === state.user.id) {
+				dispatch(updateUser(data.user));
 			}
 		});
 	}

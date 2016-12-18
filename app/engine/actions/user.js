@@ -112,3 +112,13 @@ export function createUser(user) {
 		})
 	}
 }
+
+export function setLastUserLogin() {
+	return (dispatch, getState) => {
+		const state = getState();
+
+		state.websocket.emit('setLastUserLogin', {
+			userId: state.user.id,
+		})
+	}
+}
