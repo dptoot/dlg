@@ -3,10 +3,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
-import Icon from 'react-fontawesome';
 import {bubble as Menu} from 'react-burger-menu';
-import theme from '../../engine/theme';
 import { userDrawer } from '../style/drawerStyles';
+import enhancedDrawer from '../hoc/enhancedDrawer';
+
 
 import { 
     Alert,
@@ -14,23 +14,23 @@ import {
     Button,
 } from '../elements';
 
-class UserSidebar extends Component {
+class UserDrawer extends Component {
+
+    handleStateChange(state) {
+        if (!state.isOpen) {
+            this.props.hideUserDrawer();
+        }
+    }
     
     render() {
 
-        const menuOptions = {
-            customBurgerIcon: false,
+        const menuOptions = this.getDrawerOptions({
+            width: '30%',
             isOpen: this.props.layout.showUserDrawer,
             styles: userDrawer,
             right: true,
-            pageWrapId: 'page-wrap',
-            outerContainerId: 'outer-container',
-            onStateChange: state => {
-                if (!state.isOpen) {
-                    this.props.hideUserDrawer();
-                }
-            }
-        }
+            onStateChange: this.handleStateChange.bind(this)
+        });
 
         return (
             <Menu {...menuOptions}>
@@ -52,16 +52,13 @@ class UserSidebar extends Component {
 
 }
 
-UserSidebar.defaultProps = {
-
-}
-
 function mapStateToProps(state) {
     return {
         user: state.user,
         layout: state.layout,
+        browser: state.browser,
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserSidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(enhancedDrawer(UserDrawer));
 

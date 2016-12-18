@@ -7,7 +7,7 @@ import Icon from 'react-fontawesome';
 import {push as Menu} from 'react-burger-menu';
 import theme from '../../engine/theme';
 import { matchChatDrawer } from '../style/drawerStyles';
-import renderable from '../hoc/renderable';
+import enhancedDrawer from '../hoc/enhancedDrawer';
 import MatchChat from '../containers/MatchChat';
 import {ListHeader} from '../elements';
 
@@ -15,21 +15,18 @@ class MatchChatDrawer extends Component {
     
     render() {
 
-        const menuOptions = {
-            customBurgerIcon: false,
-            customCrossIcon: false,
-            width: this.props.browser.width,
+        const menuOptions = this.getDrawerOptions({
+            width: '100%',
             isOpen: this.props.layout.showMatchChat,
             styles: matchChatDrawer,
             right: true,
-            pageWrapId: 'page-wrap',
-            outerContainerId: 'outer-container',
+            
             onStateChange: state => {
                 if (!state.isOpen) {
                     this.props.hideMatchChat();
                 }
             }
-        }
+        });
 
         return (
             <Menu {...menuOptions}>
@@ -53,5 +50,5 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(renderable(MatchChatDrawer));
+export default connect(mapStateToProps, mapDispatchToProps)(enhancedDrawer(MatchChatDrawer));
 

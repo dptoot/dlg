@@ -32,11 +32,12 @@
     "redux": "^3.6.0",
     "redux-create-reducer": "^1.1.1",
     "redux-logger": "^2.7.4",
-    "redux-responsive": "^3.2.2",
+    "redux-responsive": "^4.0.2",
     "redux-thunk": "^2.1.0",
     "socket.io-client": "^1.5.1",
     "tcomb-form": "^0.9.10",
-    "tcomb-form-native": "^0.6.1"
+    "tcomb-form-native": "^0.6.1",
+    "whatwg-fetch": "^2.0.0"
   },
   "jest": {
     "preset": "jest-react-native"

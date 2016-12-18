@@ -13,7 +13,7 @@ import CreateMatchDrawer from '../containers/CreateMatchDrawer';
 import MatchChatColumn from '../containers/MatchChatColumn';
 import MatchChatDrawer from '../containers/MatchChatDrawer';
 import Header from '../containers/Header';
-import UserSidebar from '../containers/UserSidebar';
+import UserDrawer from '../containers/UserDrawer';
 
 class LastManStanton extends Component {
 
@@ -25,29 +25,30 @@ class LastManStanton extends Component {
 	}
 
 	render() {
+		const isMobile = this.props.browser.is.extraSmall;
 
 		const containerClasses = classnames({
-			'mobile': this.props.browser.lessThan.small,
+			'mobile': isMobile,
 		})
+
+		
 
 		return (
 				
 				<div id="outer-container" className={containerClasses}>
 					
 					<Header />
-					<UserSidebar />
-					
-					
-					<MatchesDrawer rendered={this.props.browser.lessThan.small} />
-					<MatchChatDrawer rendered={this.props.browser.lessThan.small} />
+					<UserDrawer />
+					<MatchesDrawer rendered={isMobile} />
+					<MatchChatDrawer rendered={isMobile} />
 					<CreateMatchDrawer />	
 					
 					<div id="page-wrap">
 						
 						<div className="app-wrapper">
-							<MatchesColumn rendered={this.props.browser.greaterThan.extraSmall  } />	
+							<MatchesColumn rendered={!isMobile} />	
 							<Match />
-							<MatchChatColumn rendered={this.props.browser.greaterThan.extraSmall}/>
+							<MatchChatColumn rendered={!isMobile}/>
 						</div>
 					</div>
 				</div>

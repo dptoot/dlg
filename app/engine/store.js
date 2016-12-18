@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import reducer from './reducers';
-import {createResponsiveStoreEnhancer} from 'redux-responsive'
+import {responsiveStoreEnhancer} from 'redux-responsive'
 
 const loggerMiddleware = createLogger({ 
     collapsed: true,
@@ -11,7 +11,7 @@ const loggerMiddleware = createLogger({
 });
 
 const enhancer = compose(
-  createResponsiveStoreEnhancer({performanceMode: true}),
+  responsiveStoreEnhancer,
   applyMiddleware(
     thunkMiddleware, 
     loggerMiddleware,
