@@ -143,7 +143,7 @@ class Match extends Component {
 			        			onPress={this.handleAnswersPress.bind(this)}
 								icon="chevron-right"
 								>
-								<Text>Your stats against {this.props.match.opponent.user.name}</Text>
+								<Text>Your stats against {this.props.match.players.opponent.user.name}</Text>
 							</ListItem>
 							<ListItem
 								rendered={this.isMatchActive()} 

@@ -55,31 +55,35 @@ class Matches extends Component {
 	renderPendingMatchAlert() {
 
 		const match = this.props.matches.lists.pending[0];
-		const buttons = [
-			{
-				text: 'Accept', 
-				onClick: () => {
-					this.props.acceptMatch(match.id);
+
+		if (match) {
+			const buttons = [
+				{
+					text: 'Accept', 
+					onClick: () => {
+						this.props.acceptMatch(match.id);
+					}
+				}, 
+				{
+					text: 'Decline',
+					onClick: () => {
+						this.props.deleteMatch(match.id);
+					}
 				}
-			}, 
-			{
-				text: 'Decline',
-				onClick: () => {
-					this.props.deleteMatch(match.id);
-				}
-			}
-		];
-		
-		return (
-			<Alert 
-				show={true}
-				onHide={this.props.hidePendingMatchAlert}
-				title={`${match.opponent.user.name} wants to challenge you`}
-				message={`The actor is ${match.actor.name}.  Do you accept?`}
-				buttons={buttons}
-				/>
-		);
-		
+			];
+			
+			return (
+				<Alert 
+					show={true}
+					onHide={this.props.hidePendingMatchAlert}
+					title={`${match.players.opponent.user.name} wants to challenge you`}
+					message={`The actor is ${match.actor.name}.  Do you accept?`}
+					buttons={buttons}
+					/>
+			);
+		} else {
+			return null;
+		}
 	}
 
 	renderMatches(list) {

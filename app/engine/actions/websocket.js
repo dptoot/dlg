@@ -40,10 +40,9 @@ export function initializeMatchWebsocketListeners() {
 		// UPDATE MATCH
 		state.websocket.on('updateMatch', data => {
 
-			const player1Id = data.match.player_1.user._id;
-			const player2Id = data.match.player_2.user._id;
+			const playerIds = data.match.players.map(player => player.user._id);
 
-			if([player1Id, player2Id].includes(state.user.id)) {
+			if(playerIds.includes(state.user.id)) {
 				dispatch(updateMatch(data.match));
 			}
 		});

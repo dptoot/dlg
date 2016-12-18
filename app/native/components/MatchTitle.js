@@ -17,9 +17,9 @@ class MatchTitle extends Component {
         }
 
         if (this.props.match.status === 'inactive') {
-            matchStatusText = matchStatusCopy[this.props.match.userPlayer.status]; 
+            matchStatusText = matchStatusCopy[this.props.match.players.user.status]; 
         } else {
-            matchStatusText = matchStatusCopy[this.props.match.userPlayer.status]; 
+            matchStatusText = matchStatusCopy[this.props.match.players.user.status]; 
         }
 
         return matchStatusText;

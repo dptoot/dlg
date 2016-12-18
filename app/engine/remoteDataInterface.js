@@ -42,8 +42,8 @@ class RemoteDataInterface {
 				// newMessageCount: RemoteDataInterface.getNewChatMessageCount(match.chat, state.user.id, state.match.chat),
 				history: RemoteDataInterface.processChatHistory(match.chat, state.user.id),
 			},
-			...RemoteDataInterface.sortPlayers({
-				players: [match.player_1, match.player_2],
+			players: RemoteDataInterface.assignPlayers({
+				players: match.players,
 				user: state.user
 			}),
 			...RemoteDataInterface.getAnswerData(match.answers, match.status),
@@ -51,7 +51,7 @@ class RemoteDataInterface {
 
 		console.log(matchData);
 
-		if (matchData.userPlayer.status === 'current') {
+		if (matchData.players.user.status === 'current') {
 			matchData.showSearch = true;
 		}
 
@@ -76,14 +76,14 @@ class RemoteDataInterface {
     	})
     }
 
-    static sortPlayers({players, user}) {
+    static assignPlayers({players, user}) {
 
-    	const sortedPlayers = {};
+    	const assignedPlayers = {};
 
 		players.forEach(player => {
-			const playerType = player.user._id === user.id ? 'userPlayer' : 'opponent';
+			const playerType = player.user._id === user.id ? 'user' : 'opponent';
 
-			sortedPlayers[playerType] = Object.assign({}, player, {
+			assignedPlayers[playerType] = Object.assign({}, player, {
 				user: {
 					name: player.user.name,
 					id: player.user._id,
@@ -92,7 +92,7 @@ class RemoteDataInterface {
 			
 		});
 
-		return sortedPlayers;
+		return assignedPlayers;
 	}
 
 	static getAnswerData(answers = [], matchStatus) {

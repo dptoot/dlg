@@ -24,7 +24,7 @@ class MatchStatus extends Component {
             );
         } else {
             actorMatchHistory = (
-                <div className="text-gray">Bold move!  You and {this.props.match.opponent.user.name} are the first people to play {this.props.match.actor.name}</div>
+                <div className="text-gray">Bold move!  You and {this.props.match.players.opponent.user.name} are the first people to play {this.props.match.actor.name}</div>
             );
         }
 

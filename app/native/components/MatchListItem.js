@@ -29,7 +29,7 @@ class MatchListItem extends Component {
                         />
                     <View style={styles.matchInfo}>
                         <Text style={styles.actorName}>{match.actor.name}</Text>
-                        <Text style={styles.opponent}>Playing against {match.opponent.user.name}</Text>
+                        <Text style={styles.opponent}>Playing against {match.players.opponent.user.name}</Text>
                         <Text style={styles.lastPlayed}>Last Played: {match.lastPlayed}</Text>
                     </View>
                 </View>

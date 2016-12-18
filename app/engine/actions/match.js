@@ -67,7 +67,7 @@ export function deactivateMatch(match) {
 		state.websocket.emit('deactivateMatch', {
 			matchId: match.id,
 			userId: state.user.id,
-			opponentId: match.opponent.user.id,
+			opponentId: match.players.opponent.user.id,
 		})
 
 	}
@@ -144,7 +144,7 @@ export function submitCorrectAnswer(answer) {
 			answerRemoteId: answer.id,
 			title: answer.name,
 			userId: state.user.id,
-			opponentId: state.match.opponent.user.id,
+			opponentId: state.match.players.opponent.user.id,
 		})
 		
 	}
@@ -158,7 +158,7 @@ export function submitChatMessage() {
 		state.websocket.emit('chatMessage', {
 			matchId: state.match.id,
 			userId: state.user.id,
-			opponentId: state.match.opponent.user.id,
+			opponentId: state.match.players.opponent.user.id,
 			message: state.match.chat.value,
 			timestamp: Date.now(), 
 		});
