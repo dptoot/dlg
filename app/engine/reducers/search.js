@@ -3,7 +3,10 @@ import * as types from '../actions/types';
 
 const initialState = {
 	isFetching: false,
-	
+	showSearch: false,
+	collection: null,
+	onSelection: () => {},
+	onHide: () => {},
 	movies: {
 		value: null,
 		results: [],
@@ -29,6 +32,27 @@ export const search = createReducer(initialState, {
 	[types.CLEAR_USER](state, action) {
 		return initialState;
 	}, 
+
+	// SEARCH DRAWER
+	[types.SHOW_SEARCH](state, action) {
+		return {
+			...state, 
+			showSearch: true,
+			collection: action.payload.collection,
+			onSelection: action.payload.onSelection,
+			onHide: action.payload.onHide,
+		};
+	},
+
+	[types.HIDE_SEARCH](state, action) {
+		return {
+			...state, 
+			showSearch: false,
+			collection: initialState.collection,
+			onSelection: initialState.onSelection,
+			onHide: initialState.onHide,
+		};
+	},
 	
 	// MOVIE SEARCH
 	[types.UPDATE_MOVIE_SEARCH_VALUE](state, action) {

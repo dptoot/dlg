@@ -19,20 +19,35 @@ class MatchHeader extends Component {
         super();
 
         this.handleRematch = this.handleRematch.bind(this);
-    }
-
-    renderSearchInput() {
-        return (
-            <input 
-                onClick={this.props.onSearchClick}  
-                placeholder={`Guess a ${this.props.match.actor.name} movie`} 
-                />
-        );
+        this.handleSearchSelection = this.handleSearchSelection.bind(this);
+        this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
     }
 
     handleRematch() {
         this.props.selectUserSearchResult(this.props.match.players.opponent.user);
         this.props.showCreateMatch();
+    }
+
+    handleSearchSelection(answer) {
+        this.props.clearMovieSearchResult();
+        this.props.hideSearch();
+        this.props.verifyAnswer(answer);
+    }
+
+    handleSearchInputClick() {
+        this.props.showSearch({
+            collection: 'movies',
+            onSelection: this.handleSearchSelection.bind(this),
+        });
+    }
+
+    renderSearchInput() {
+        return (
+            <input 
+                onClick={this.handleSearchInputClick}  
+                placeholder={`Guess a ${this.props.match.actor.name} movie`} 
+                />
+        );
     }
 
     renderSearchPlaceholder({message, icon}) {
@@ -104,9 +119,9 @@ class MatchHeader extends Component {
         return (
             <div className="match-header">
                 <RemoteImage 
-                            path={this.props.match.actor.profile_path}
-                            width={154}
-                            />
+                    path={this.props.match.actor.profile_path}
+                    width={154}
+                    />
 
                 <div className="match-header-content">
                     <div className="text-xlg">{this.props.match.actor.name}</div>

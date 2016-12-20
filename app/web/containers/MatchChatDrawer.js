@@ -12,6 +12,15 @@ import MatchChat from '../containers/MatchChat';
 import {ListHeader} from '../elements';
 
 class MatchChatDrawer extends Component {
+
+    handleStateChange(state) {
+        if (!state.isOpen) {
+            this.props.unlockBodyScroll();
+            this.props.hideMatchChat();
+        } else {
+            this.props.lockBodyScroll();
+        }
+    }
     
     render() {
 
@@ -20,12 +29,7 @@ class MatchChatDrawer extends Component {
             isOpen: this.props.layout.showMatchChat,
             styles: matchChatDrawer,
             right: true,
-            
-            onStateChange: state => {
-                if (!state.isOpen) {
-                    this.props.hideMatchChat();
-                }
-            }
+            onStateChange: this.handleStateChange,
         });
 
         return (

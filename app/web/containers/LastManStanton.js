@@ -14,6 +14,7 @@ import MatchChatColumn from '../containers/MatchChatColumn';
 import MatchChatDrawer from '../containers/MatchChatDrawer';
 import Header from '../containers/Header';
 import UserDrawer from '../containers/UserDrawer';
+import SearchDrawer from '../containers/SearchDrawer';
 
 class LastManStanton extends Component {
 
@@ -46,6 +47,7 @@ class LastManStanton extends Component {
 					<MatchesDrawer rendered={isMobile} />
 					<MatchChatDrawer rendered={isMobile} />
 					<CreateMatchDrawer />	
+					<SearchDrawer />	
 					
 					<div id="page-wrap">
 						

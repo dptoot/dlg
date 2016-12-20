@@ -18,7 +18,10 @@ class UserDrawer extends Component {
 
     handleStateChange(state) {
         if (!state.isOpen) {
+            this.props.unlockBodyScroll();
             this.props.hideUserDrawer();
+        } else {
+            this.props.lockBodyScroll();
         }
     }
     

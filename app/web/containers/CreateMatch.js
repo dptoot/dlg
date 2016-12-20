@@ -24,15 +24,11 @@ class CreateMatch extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.state = {
-			showUserSearch: false,
-			showActorSearch: false,
-		}
-
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleCloseSearch = this.handleCloseSearch.bind(this);
-		this.handleUserSearchInputClick = this.handleUserSearchInputClick.bind(this);
-		this.handleActorSearchInputClick = this.handleActorSearchInputClick.bind(this);
+		this.handleUserInputClick = this.handleUserInputClick.bind(this);
+		this.handleActorInputClick = this.handleActorInputClick.bind(this);
+		this.handleUserSelection = this.handleUserSelection.bind(this);
+		this.handleActorSelection = this.handleActorSelection.bind(this);
 	}
 	
 	handleSubmit() {
@@ -42,22 +38,28 @@ class CreateMatch extends Component {
   		this.props.clearActorSearchResult();
   	}
 
-  	handleCloseSearch() {
-  		this.setState({
-  			showUserSearch: false,
-  			showActorSearch: false,
-  		})
+  	handleUserSelection(user) {
+		this.props.selectUserSearchResult(user);
+		this.props.hideSearch();
   	}
 
-  	handleUserSearchInputClick() {
-  		this.setState({
-  			showUserSearch: true,
+  	handleActorSelection(actor) {
+		this.props.selectActorSearchResult(actor);
+		this.props.hideSearch();
+  	}
+  	
+
+  	handleUserInputClick(user) {
+  		this.props.showSearch({
+  			collection: 'users', 
+  			onSelection: this.handleUserSelection.bind(this),
   		});
   	}
 
-  	handleActorSearchInputClick() {
-  		this.setState({
-  			showActorSearch: true,
+  	handleActorInputClick(actor) {
+  		this.props.showSearch({
+  			collection: 'actors',
+  			onSelection: this.handleActorSelection.bind(this),
   		});
   	}
 
@@ -92,50 +94,6 @@ class CreateMatch extends Component {
   		return <CreateMatchInput {...props} />;
   	}
 
-  	renderUserSearch() {
-		return (
-			<SearchModal 
-				show={this.state.showUserSearch}
-				searchCollection="users"
-				onSelection={user => {
-					// Close the modal
-	  				this.handleCloseSearch();
-	  				
-	  				// Store Result
-	  				this.props.selectUserSearchResult(user);
-
-	  				// Clear the search
-	  				this.props.clearUserSearchResults();
-	  				this.props.clearUserSearchValue();
-	  			
-				}}
-				onClose={this.handleCloseSearch}
-				/>
-			);
-	}
-
-  	renderActorSearch() {
-		return (
-			<SearchModal 
-				show={this.state.showActorSearch}
-				searchCollection="actors"
-				onSelection={actor => {
-					// Close the modal
-	  				this.handleCloseSearch();
-	  				
-	  				// Store Result
-	  				this.props.selectActorSearchResult(actor);
-
-	  				// Clear the search
-	  				this.props.clearActorSearchResults();
-	  				this.props.clearActorSearchValue();
-	  			
-				}}
-				onClose={this.handleCloseSearch}
-				/>
-			);
-	} 
-
   	render() {
 		return (
 			<div>
@@ -148,13 +106,13 @@ class CreateMatch extends Component {
 					{this.props.search.users.selected ? this.renderSelectedUser() : this.renderTextInput({
 						title: 'Select an Opponent',
 						placeholder: 'Enter any user name',
-						onInputClick: this.handleUserSearchInputClick,
+						onInputClick: this.handleUserInputClick,
 					})}
 
 					{this.props.search.actors.selected ? this.renderSelectedActor() : this.renderTextInput({
 						title: 'Select an Actor',
 						placeholder: 'Enter any Actor\'s or Actress\' name',
-						onInputClick: (this.handleActorSearchInputClick),
+						onInputClick: (this.handleActorInputClick),
 					})}
 					
 					
@@ -162,10 +120,7 @@ class CreateMatch extends Component {
 						onClick={this.handleSubmit}
 						text="Request Match"
 						/>
-					
-					{/*	Search Modals */}
-					{this.renderActorSearch()}
-					{this.renderUserSearch()}
+				
 				</div>
 		</div>
 		)

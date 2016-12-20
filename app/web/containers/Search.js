@@ -26,15 +26,15 @@ class Search extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (this.props.search[this.props.searchCollection].results !== nextProps.search[nextProps.searchCollection].results) {
+		if (this.props.search[this.props.search.collection].results !== nextProps.search[nextProps.search.collection].results) {
 			this.setState({
-				dataSource: nextProps.search[nextProps.searchCollection].results
+				dataSource: nextProps.search[nextProps.search.collection].results
 			})
 		}
   	}
 
   	getPlaceholder() {
-  		switch(this.props.searchCollection) {
+  		switch(this.props.search.collection) {
   			case 'movies':
   				return 'Enter a movie title'
   				break;
@@ -52,9 +52,9 @@ class Search extends Component {
 		const value = event.target.value;
 
 		if (value) {
-			this.props.fetchSearch(this.props.searchCollection, value);
+			this.props.fetchSearch(this.props.search.collection, value);
 		} else {
-			switch(this.props.searchCollection) {
+			switch(this.props.search.collection) {
 				case 'movies': 
 					this.props.clearMovieSearchValue();
 					break;
@@ -71,7 +71,7 @@ class Search extends Component {
 
   	renderListItem(data) {
 
-  		switch(this.props.searchCollection) {
+  		switch(this.props.search.collection) {
   			case 'movies':
   				return (
 		  			<RemoteSearchItem 
@@ -111,7 +111,7 @@ class Search extends Component {
   	}
 
   	renderRandomSearch() {
-  		return this.props.searchCollection === 'actors' && (
+  		return this.props.search.collection === 'actors' && (
   			<ButtonToolbar className="flex flex-centered margin-vertical-lg margin-collapse-bottom">
 	  			<Button 
 					type="secondary" 
@@ -137,7 +137,7 @@ class Search extends Component {
 				<div className="search-header">
 					<input 
 						autoFocus
-						value={this.props.search[this.props.searchCollection].value} 
+						value={this.props.search[this.props.search.collection].value} 
 						onChange={this.handleSearchChangeText}
 						placeholder={this.getPlaceholder()}
 						/>

@@ -40,6 +40,8 @@ export const SHOW_MATCHES = 'SHOW_MATCHES';
 export const HIDE_MATCHES = 'CLOSE_MATCHES';
 export const SHOW_MATCH_CHAT = 'SHOW_MATCH_CHAT';
 export const HIDE_MATCH_CHAT = 'CLOSE_MATCH_CHAT';
+export const SHOW_SEARCH = 'SHOW_SEARCH';
+export const HIDE_SEARCH = 'CLOSE_SEARCH';
 
 // SEARCH
 export const FETCH_SEARCH = 'FETCH_SEARCH';

@@ -13,7 +13,10 @@ class MatchesDrawer extends Component {
     
     handleStateChange(state) {
         if (!state.isOpen) {
+            this.props.unlockBodyScroll();
             this.props.hideMatches();
+        } else {
+            this.props.lockBodyScroll();
         }
     }
 

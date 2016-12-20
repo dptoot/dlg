@@ -7,11 +7,11 @@ function DrawerEnhancer(WrappedComponent) {
   	constructor() {
   		super();
 
-		const childState = this.state || {};
+  		const childState = this.state || {};
 
-		this.state = Object.assign(childState, {
-			windowWidth: 0,
-		})
+  		this.state = Object.assign(childState, {
+  			windowWidth: 0,
+  		})
 
   	}
 
@@ -32,15 +32,15 @@ function DrawerEnhancer(WrappedComponent) {
   	getDrawerOptions({width, ...rest}) {
   		
   		const options = {
-			customBurgerIcon: false,
-		    customCrossIcon: false,
-		    pageWrapId: 'page-wrap',
-		    outerContainerId: 'outer-container',
-		    width: this.getWidth(width),
-			...rest
-		};
+  			customBurgerIcon: false,
+  		    customCrossIcon: false,
+  		    pageWrapId: 'page-wrap',
+  		    outerContainerId: 'outer-container',
+  		    width: this.getWidth(width),
+  			...rest
+  		};
 
-		return options;
+  		return options;
   	}
 
     render() {

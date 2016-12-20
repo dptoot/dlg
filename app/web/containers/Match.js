@@ -11,21 +11,6 @@ import classnames from 'classnames';
 
 class Match extends Component {
 
-	constructor() {
-		super();
-
-		this.state = {
-			showSearch: false,
-		}
-
-		this.handleToggleSearch = this.handleToggleSearch.bind(this);
-		this.handleSearchSelection = this.handleSearchSelection.bind(this);
-	}
-
-	componentDidMount() {
-		// this.props.fetchMatch(this.props.match.id);
-	}
-
 	getMatchChatStyles() {
 		return {
 			root: {
@@ -47,18 +32,6 @@ class Match extends Component {
 			},
 		}
 	}
-	
-	handleToggleSearch() {
-		this.setState({
-			showSearch: !this.state.showSearch,
-		})
-	}
-
-	handleSearchSelection(answer) {
-		this.handleToggleSearch();
-		this.props.clearMovieSearchValue();
-		this.props.verifyAnswer(answer);
-	}
 
 	renderMatchAlert() {
 		
@@ -71,26 +44,7 @@ class Match extends Component {
 				/>
 		)
 	}
-
-	renderSearch() {
-		return (
-			<Modal
-	          aria-labelledby='modal-label'
-	          className="search-modal"
-	          backdropClassName="search-backdrop"
-	          show={this.state.showSearch}
-	          onHide={this.handleToggleSearch}
-	        >
-	        	<div className="search-dialog">
-					<Search 
-						searchCollection="movies"
-						onSelection={this.handleSearchSelection}
-						/>
-				</div>
-	        </Modal>
-			);
-	} 
-	
+		
 	renderMatch() {
 
 		const containerClasses = classnames({
@@ -135,7 +89,6 @@ class Match extends Component {
 	render() {
 		return (
 			<div className="match-board-container">
-				{this.renderSearch()}
 				{this.renderMatchAlert()}
 				{this.props.match.id ? this.renderMatch() : this.renderPlaceholder()}
 			</div>

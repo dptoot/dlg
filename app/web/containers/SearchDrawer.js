@@ -6,33 +6,45 @@ import {mapDispatchToProps} from '../../engine';
 import {slide as Menu} from 'react-burger-menu';
 import { createMatchDrawer } from '../style/drawerStyles';
 import enhancedDrawer from '../hoc/enhancedDrawer';
-import CreateMatch from '../containers/CreateMatch';
+import Search from '../containers/Search';
+import ListHeader from '../elements/ListHeader';
 
-class CreateMatchDrawer extends Component {
+class SearchDrawer extends Component {
 
     handleStateChange(state) {
         if (!state.isOpen) {
             this.props.unlockBodyScroll();
-            this.props.hideCreateMatch();
-            this.props.clearUserSearchResult();
-            this.props.clearActorSearchResult();
+            this.props.hideSearch();
         } else {
             this.props.lockBodyScroll();
         }
     }
 
+    renderSearch() {
+        return this.props.search.collection && (
+            <Search 
+                searchCollection={this.props.search.collection}
+                onSelection={this.props.search.onSelection}
+                />
+        );
+    }
+
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '30%',
-            isOpen: this.props.layout.showCreateMatch,
+            width: '95%',
+            isOpen: this.props.search.showSearch,
             styles: createMatchDrawer,
             onStateChange: this.handleStateChange.bind(this),
         });
 
         return (
             <Menu {...menuOptions}>
-                <CreateMatch />
+                <ListHeader 
+                    icon="remove"
+                    onIconClick={this.props.hideSearch}
+                    />
+                {this.renderSearch()}
             </Menu>
         );
     
@@ -42,10 +54,10 @@ class CreateMatchDrawer extends Component {
 
 function mapStateToProps(state) {
     return {
-        layout: state.layout,
         browser: state.browser,
+        search: state.search,
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(enhancedDrawer(CreateMatchDrawer));
+export default connect(mapStateToProps, mapDispatchToProps)(enhancedDrawer(SearchDrawer));
 

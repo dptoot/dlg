@@ -3,6 +3,23 @@ import Api from '../api';
 import debounce from 'lodash.debounce';
 import RemoteDataInterface from '../remoteDataInterface';
 
+export function showSearch({collection, onSelection}) {
+	return {
+		type: types.SHOW_SEARCH,
+		payload: {
+			collection: collection, 
+			onSelection: onSelection,
+		},
+	}
+}
+
+export function hideSearch() {
+	return {
+		type: types.HIDE_SEARCH,
+		payload: {},
+	}
+}
+
 // MOVIE
 export function updateMovieSearchValue(value) {
 	return {

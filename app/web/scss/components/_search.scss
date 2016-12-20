@@ -31,9 +31,7 @@
     background-color: $grayDark;
     box-shadow: $shadow-1x;
     padding: 20px;
-    transition: 1s;
-
-    
+    transition: 1s;  
 }
 
 .search-wrapper {
@@ -44,8 +42,11 @@
 	.search-header {
 		display: flex;
 		flex-direction: column;
-		
+		width: 100%;
     	font-size: $text-lg;
+    	background: $grayDarker;
+    	padding: $paddingLarge;
+    	margin-bottom: $marginLarge;
     }
 
 	.search-header input {
@@ -61,6 +62,7 @@
 		flex: 1;
 		justify-content: center;
 		align-items: center; 
+		color: $grayLight;
 	}
 
 	.search-results {
@@ -69,6 +71,6 @@
 		flex: 1;
 		justify-content: space-around;
 		overflow: auto;
-		padding: $paddingLarge 0;
+		padding-bottom: $paddingLarge;
 	}
 }

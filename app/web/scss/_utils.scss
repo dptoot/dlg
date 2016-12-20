@@ -6,6 +6,10 @@
 .shadow-1x {
 	box-shadow: $shadow-1x;
 }
+
+.unscrollable {
+	overflow: hidden;
+}
  
 
 // TEXT SIZE

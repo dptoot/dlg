@@ -1,6 +1,23 @@
 import * as types from './types';
 
 // CHAT
+export function lockBodyScroll() {
+	return (dispatch, getState) => {
+		if (document.body) {
+			document.body.classList.add('unscrollable');
+		}
+	}
+}
+
+export function unlockBodyScroll() {
+	return (dispatch, getState) => {
+		if (document.body) {
+			document.body.classList.remove('unscrollable');
+		}
+	}
+}
+
+// CHAT
 export function showCreateMatch() {
 	return {
 		type: types.SHOW_CREATE_MATCH,
@@ -59,4 +76,3 @@ export function hideUserDrawer() {
 		payload: {},
 	}
 }
-
