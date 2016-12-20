@@ -155,7 +155,7 @@ export function submitChatMessage() {
 		const state = getState();
 		
 		// Send chat data to server via websockets
-		state.websocket.emit('chatMessage', {
+		state.websocket.emit('submitChatMessage', {
 			matchId: state.match.id,
 			userId: state.user.id,
 			opponentId: state.match.players.opponent.user.id,
@@ -231,7 +231,7 @@ export function verifyAnswer(answer) {
 					title: 'You Lost!', 
 					message: `Sorry, ${state.match.actor.name} was not in ${answer.name}.`
 				}));
-			dispatch(deactivateMatch())
+			dispatch(deactivateMatch(state.match))
 		}
 
 	}

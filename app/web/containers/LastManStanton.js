@@ -20,8 +20,14 @@ class LastManStanton extends Component {
 	componentDidMount() {
 		this.props.initializeWebsocketListeners();
 		this.props.fetchMatches();
+		
 		// This seems to break matches normalization
 		// this.props.setLastUserLogin();
+
+		// Show the matches drawer if we are in mobile mode
+		if (this.props.browser.is.extraSmall) {
+			this.props.showMatches();
+		}
 	}
 
 	render() {
@@ -30,8 +36,6 @@ class LastManStanton extends Component {
 		const containerClasses = classnames({
 			'mobile': isMobile,
 		})
-
-		
 
 		return (
 				
