@@ -15,6 +15,12 @@ import {
 
 class MatchHeader extends Component {
 
+    constructor() {
+        super();
+
+        this.handleRematch = this.handleRematch.bind(this);
+    }
+
     renderSearchInput() {
         return (
             <input 
@@ -22,6 +28,11 @@ class MatchHeader extends Component {
                 placeholder={`Guess a ${this.props.match.actor.name} movie`} 
                 />
         );
+    }
+
+    handleRematch() {
+        this.props.selectUserSearchResult(this.props.match.players.opponent.user);
+        this.props.showCreateMatch();
     }
 
     renderSearchPlaceholder({message, icon}) {
@@ -117,6 +128,13 @@ class MatchHeader extends Component {
                             icon="remove"
                             text="Quit Match"
                             onClick={this.props.showQuitMatchAlert}
+                            />
+                        <Button 
+                            rendered={this.props.match.status === 'inactive'}
+                            type="secondary"
+                            icon="plus"
+                            text={`Start match against ${this.props.match.players.opponent.user.name}`}
+                            onClick={this.handleRematch}
                             />
 
                         
