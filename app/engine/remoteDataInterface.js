@@ -31,6 +31,14 @@ class RemoteDataInterface {
     }
 
     static getMatch(match, state) {
+
+    	// Assign the players to either user or opponent
+    	const assignedPlayers = RemoteDataInterface.assignPlayers({
+			players: match.players,
+			user: state.user
+		});
+
+    	// Build a new match data object
     	const matchData = {
 			id: match._id,
 			actor: match.actor,
@@ -42,11 +50,8 @@ class RemoteDataInterface {
 				// newMessageCount: RemoteDataInterface.getNewChatMessageCount(match.chat, state.user.id, state.match.chat),
 				history: RemoteDataInterface.processChatHistory(match.chat, state.user.id),
 			},
-			players: RemoteDataInterface.assignPlayers({
-				players: match.players,
-				user: state.user
-			}),
-			...RemoteDataInterface.getAnswerData(match.answers, match.status),
+			players: assignedPlayers,
+			...RemoteDataInterface.getAnswerData(match),
 		}
 
 		if (matchData.players.user.status === 'current') {
@@ -61,6 +66,10 @@ class RemoteDataInterface {
     			const isOpponentMessage = userId !== chatMessage.user;
 	    		return isOpponentMessage && moment(chatMessage.timestamp).isAfter(chat.lastActivity);
     	}).length
+    }
+
+    static getPlayer(playerId, players) {
+    	return players.filter(player => player.user._id === playerId)[0].user;
     }
 
     static processChatHistory(messages = [], userId) {
@@ -86,18 +95,22 @@ class RemoteDataInterface {
 					id: player.user._id,
 				}
 			});
-			
 		});
 
 		return assignedPlayers;
 	}
 
-	static getAnswerData(answers = [], matchStatus) {
+	static getAnswerData(match) {
+
+			if (!match.answers) {
+				return;
+			}
+
 			const formattedAnswers = [];
 			let lastAnswer = false;
 			let selectedAnswerCount = 0;
 
-			answers.forEach(answer => {
+			match.answers.forEach(answer => {
 				const formattedAnswer = {
 					id: answer._id,
 					remoteId: answer.remote_id,
@@ -109,7 +122,7 @@ class RemoteDataInterface {
 						selected: answer.selected,
 						title: answer.title,
 						imagePath: answer.poster_path,
-						selectedBy: null,
+						selectedBy: RemoteDataInterface.getPlayer(answer.selectedBy, match.players),
 						selectionIndex: answer.selectionIndex,
 						overview: answer.overview,
 					})
@@ -119,13 +132,11 @@ class RemoteDataInterface {
 					}
 
 					selectedAnswerCount++;
-				} else if (matchStatus === 'inactive') {
+				} else if (match.status === 'inactive') {
 					Object.assign(formattedAnswer, {
 						imagePath: answer.poster_path,
 					})
 				}
-
-
 
 				formattedAnswers.push(formattedAnswer);
 			})
@@ -133,9 +144,9 @@ class RemoteDataInterface {
 			return {
 				answers: formattedAnswers,
 				lastAnswer: lastAnswer,
-				totalAnswerCount: answers.length,
+				totalAnswerCount: match.answers.length,
 				selectedAnswerCount: selectedAnswerCount,
-				answerCompletionPercentage: Math.floor((selectedAnswerCount/answers.length)*100)
+				answerCompletionPercentage: Math.floor((selectedAnswerCount/match.answers.length)*100)
 			}
 		}
 
