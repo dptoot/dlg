@@ -1,5 +1,6 @@
 export { default as Answer } from './Answer';
 export { default as AnswerBack } from './AnswerBack';
+export { default as AnswerFront } from './AnswerFront';
 export { default as CreateSelection } from './CreateSelection';
 export { default as CreateMatchInput } from './CreateMatchInput';
 export { default as LastAnswer } from './LastAnswer';

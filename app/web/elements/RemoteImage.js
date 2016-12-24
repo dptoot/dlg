@@ -2,46 +2,41 @@
 
 import React, { Component } from 'react'
 import classnames from 'classnames';
+import { PlaceholderImage } from '../elements';
+import {
+    getRemoteImageStyle,
+} from '../style/imageStyles';
 
 class RemoteImage extends Component {
 
     render() {
 
-        const {className, path, height, width, style, originalWidth, maintainAspectRatio, circular, shadow, ...rest} = this.props;
-
+        const {className, path, height, width, style, originalWidth, ...rest} = this.props;
 
         const classes = classnames({
             'remote-image': true,
-        }, className)
-        
+        }, className);
 
-        const uri = `https://image.tmdb.org/t/p/w${width}${path}`
-
-        const remoteImageWidth = originalWidth || width;
-
-        const imageStyle = {
-            width: width, 
-            height: height || width * 1.5,
-        }; 
+        const imageWidth = originalWidth || width;
+        const imageUri = `https://image.tmdb.org/t/p/w${imageWidth}${path}`
 
         const renderImage = () => {
             return (
                 <img
                     className={classes}
-                    style={imageStyle}
-                    src={`https://image.tmdb.org/t/p/w${remoteImageWidth}${path}`}
+                    style={getRemoteImageStyle(width)}
+                    src={imageUri}
                 />
             );
         }
 
         const renderPlaceholder = () => {
             return (
-                <div 
-                    className="remote-image placeholder"
-                    style={imageStyle}
-                    >
-                    <span>?</span>
-                </div>
+                <PlaceholderImage
+                    className={classes} 
+                    width={imageWidth}
+                    icon="question"
+                    />
             );
         }
 
@@ -54,9 +49,7 @@ class RemoteImage extends Component {
 }
 
 RemoteImage.defaultProps = {
-    maintainAspectRatio: false,
-    circular: false,
-    shadow: true,
+
 }
 
 export default RemoteImage;

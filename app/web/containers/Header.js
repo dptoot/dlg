@@ -23,8 +23,9 @@ class Header extends Component {
                 <div>
                     {this.props.browser.lessThan.medium && this.renderMatchesSidebarTrigger()}
     	        </div>
-        		<Avatar 
-                    name={this.props.user.name} 
+        		<Icon 
+                    name="user"
+                    className="text-xlg text-gray"
                     onClick={this.props.showUserDrawer}
                     />
         		

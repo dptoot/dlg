@@ -1,0 +1,15 @@
+.answer-front {
+	display: relative;
+
+	.selected-by {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background: $grayBase;
+		opacity: .95;
+		padding: $paddingSmall $paddingMedium;
+		text-align: right;
+	}
+}

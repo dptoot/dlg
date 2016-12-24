@@ -12,6 +12,7 @@ import {
     Alert,
     RemoteImage,
     Button,
+    ListHeader,
 } from '../elements';
 
 class UserDrawer extends Component {
@@ -37,9 +38,7 @@ class UserDrawer extends Component {
 
         return (
             <Menu {...menuOptions}>
-                <div className="header">
-                    Logged in as: {this.props.user.name}
-                </div>
+                <ListHeader title={`Logged in as: ${this.props.user.name}`} />
                 <div>
                     <Button 
                         className="text-gray"

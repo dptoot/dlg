@@ -32,7 +32,7 @@ class SearchDrawer extends Component {
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '95%',
+            width: '100%',
             isOpen: this.props.search.showSearch,
             styles: createMatchDrawer,
             onStateChange: this.handleStateChange.bind(this),

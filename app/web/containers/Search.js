@@ -112,7 +112,7 @@ class Search extends Component {
 
   	renderRandomSearch() {
   		return this.props.search.collection === 'actors' && (
-  			<ButtonToolbar className="flex flex-centered margin-vertical-lg margin-collapse-bottom">
+  			<ButtonToolbar className="flex flex-centered margin-vertical-lg margin-collapse-top">
 	  			<Button 
 					type="secondary" 
 					text="Find Random Actors" 

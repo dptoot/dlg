@@ -8,3 +8,4 @@ export { default as Flipper } from './Flipper';
 export { default as ListHeader } from './ListHeader';
 export { default as ListView } from './ListView';
 export { default as RemoteImage } from './RemoteImage';
+export { default as PlaceholderImage } from './PlaceholderImage';

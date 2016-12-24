@@ -1,51 +1,48 @@
 'use strict';
 
 import React, { Component } from 'react'
+
 import { 
-    RemoteImage,
     Flipper,
+    PlaceholderImage, 
 } from '../elements';
 
 import { 
-    AnswerBack
+    AnswerBack,
+    AnswerFront,
 } from '../components';
+
+import {
+    getRemoteImageStyle,
+} from '../style/imageStyles';
+
+const imageWidth = 185;
 
 class Answer extends Component {
 
-    render() {
-
-        const {answer, ...rest} = this.props;
-        const imageWidth = 185;
-        const placeholderStyle = {
-            width: imageWidth,
-            height: imageWidth*1.5,
-        }
-
-        let item = (
-            <div 
-                key={answer.id} 
-                style={placeholderStyle}
-                className="answer"
-                >
-                <span>{answer.year}</span>
-            </div>
+    renderAnswer() {
+        return (
+            <Flipper
+                {...getRemoteImageStyle(imageWidth)}
+                containerClassName="margin-vertical-sm"
+                front={<AnswerFront answer={this.props.answer} imageWidth={imageWidth}/>}
+                back={<AnswerBack answer={this.props.answer} />}
+                />
         );
+    }
 
-        if (answer.imagePath) {
-            item = (
-                
-                <Flipper
-                    containerClassName="margin-vertical-sm"
-                    key={answer.id} 
-                    front={<RemoteImage path={answer.imagePath} width={imageWidth} />}
-                    back={<AnswerBack answer={answer} />}
-                    {...placeholderStyle}
-                    />
-                
-            )
-        }
+    renderPlaceholder() {
+        return (
+            <PlaceholderImage 
+                width={imageWidth}
+                className="answer"
+                text={this.props.answer.year}
+                />
+        );
+    }
 
-        return item;
+    render() {
+        return this.props.answer.selected ? this.renderAnswer() : this.renderPlaceholder();
     }
 
 }
