@@ -41,6 +41,30 @@ class MatchHeader extends Component {
         });
     }
 
+    getButtonText(button) {
+        let text = '';
+
+        if (!this.props.browser.is.extraSmall) {
+            switch(button) {
+                case 'chat':
+                    text = this.props.layout.showMatchChat ? 'Close Chat' : 'Open Chat' 
+                    break;
+
+                case 'quit': 
+                    text = "Quit Match";
+                    break;
+                    
+                case 'rematch': 
+                    text = `Start match against ${this.props.match.players.opponent.user.name}`
+                    break;
+
+                default:
+            }
+        }
+
+        return text;
+    }
+
     renderSearchInput() {
         return (
             <input 
@@ -134,21 +158,21 @@ class MatchHeader extends Component {
                         <Button 
                             type="secondary"
                             icon="comments"
-                            text={this.props.layout.showMatchChat ? 'Close Chat' : 'Open Chat'}
+                            text={this.getButtonText('chat')}
                             onClick={this.props.layout.showMatchChat ? this.props.hideMatchChat : this.props.showMatchChat}
                             />
                         <Button 
                             rendered={this.props.match.status === 'active'}
                             type="secondary"
                             icon="remove"
-                            text="Quit Match"
+                            text={this.getButtonText('quit')}
                             onClick={this.props.showQuitMatchAlert}
                             />
                         <Button 
                             rendered={this.props.match.status === 'inactive'}
                             type="secondary"
                             icon="plus"
-                            text={`Start match against ${this.props.match.players.opponent.user.name}`}
+                            text={this.getButtonText('rematch')}
                             onClick={this.handleRematch}
                             />
 
@@ -173,6 +197,7 @@ function mapStateToProps(state) {
     return {
         match: state.match,
         layout: state.layout,
+        browser: state.browser,
     }
 }
 

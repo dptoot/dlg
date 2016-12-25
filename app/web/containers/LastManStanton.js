@@ -41,15 +41,16 @@ class LastManStanton extends Component {
 		return (
 				
 				<div id="outer-container" className={containerClasses}>
-					
-					<Header />
 					<UserDrawer />
 					<MatchesDrawer rendered={isMobile} />
 					<MatchChatDrawer rendered={isMobile} />
 					<CreateMatchDrawer />	
-					<SearchDrawer />	
+					<SearchDrawer />
+						
 					
 					<div id="page-wrap">
+						<Header />
+						
 						
 						<div className="app-wrapper">
 							<MatchesColumn rendered={!isMobile} />	

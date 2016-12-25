@@ -69,7 +69,10 @@ class RemoteDataInterface {
     }
 
     static getPlayer(playerId, players) {
-    	return players.filter(player => player.user._id === playerId)[0].user;
+    	return players.filter(player => {
+    		console.log(player.user._id, playerId);
+    		return player.user._id === playerId;
+    	})[0].user;
     }
 
     static processChatHistory(messages = [], userId) {
@@ -122,7 +125,7 @@ class RemoteDataInterface {
 						selected: answer.selected,
 						title: answer.title,
 						imagePath: answer.poster_path,
-						selectedBy: RemoteDataInterface.getPlayer(answer.selectedBy, match.players),
+						selectedBy: answer.selectedBy && RemoteDataInterface.getPlayer(answer.selectedBy, match.players),
 						selectionIndex: answer.selectionIndex,
 						overview: answer.overview,
 					})
