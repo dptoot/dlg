@@ -75,7 +75,7 @@ class Matches extends Component {
 				<Alert 
 					show={true}
 					onHide={this.props.hidePendingMatchAlert}
-					title={`${match.players.opponent.user.name} wants to challenge you`}
+					title={`${match.players.opponent.name} wants to challenge you`}
 					message={`The actor is ${match.actor.name}.  Do you accept?`}
 					buttons={buttons}
 					/>

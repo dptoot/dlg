@@ -40,7 +40,7 @@ class AppWrapper extends Component {
 
     renderPendingMatchAlert(match) {
         return Alert.alert(
-            `${match.players.opponent.user.name} wants to challenge you`,
+            `${match.players.opponent.name} wants to challenge you`,
             `The actor is ${match.actor.name}.  Do you accept?`,
             [
                 {

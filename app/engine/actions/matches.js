@@ -1,7 +1,4 @@
 import * as types from './types';
-import Api from '../api';
-import RemoteDataInterface from '../remoteDataInterface';
-
 
 export function showRefreshingMatches() {
 	return {
@@ -41,7 +38,7 @@ export function updateMatches(matches) {
 		// Iterate over each of the match types and normalize the data
 		Object.keys(matches).forEach((matchType, index) => {
 			normalizedMatches[matchType] = matches[matchType].map(match => {
-				return RemoteDataInterface.getMatch(match, state);
+				return match;
 			})
 		})
 

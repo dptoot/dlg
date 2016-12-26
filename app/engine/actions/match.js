@@ -1,6 +1,5 @@
 import * as types from './types';
 import Api from '../api';
-import RemoteDataInterface from '../remoteDataInterface';
 
 const matchApi = '/api/match';
 
@@ -67,7 +66,7 @@ export function deactivateMatch(match) {
 		state.websocket.emit('deactivateMatch', {
 			matchId: match.id,
 			userId: state.user.id,
-			opponentId: match.players.opponent.user.id,
+			opponentId: match.players.opponent.id,
 		})
 
 	}
@@ -79,6 +78,7 @@ export function fetchMatch(matchId) {
 
 		state.websocket.emit('fetchMatch', {
 			matchId: matchId,
+			userId: state.user.id,
 		});
 
 	}
@@ -144,7 +144,7 @@ export function submitCorrectAnswer(answer) {
 			answerRemoteId: answer.id,
 			title: answer.name,
 			userId: state.user.id,
-			opponentId: state.match.players.opponent.user.id,
+			opponentId: state.match.players.opponent.id,
 		})
 		
 	}
@@ -158,7 +158,7 @@ export function submitChatMessage() {
 		state.websocket.emit('submitChatMessage', {
 			matchId: state.match.id,
 			userId: state.user.id,
-			opponentId: state.match.players.opponent.user.id,
+			opponentId: state.match.players.opponent.id,
 			message: state.match.chat.value,
 			timestamp: Date.now(), 
 		});
@@ -166,15 +166,18 @@ export function submitChatMessage() {
 	}
 }
 
-export function updateMatch(match) {
+export function updateMatch(matchData) {
 	return (dispatch, getState) => {
 		const state = getState();
-		console.log(match)
+
+		const match = Object.assign({}, matchData, {
+			showSearch: matchData.players.user.status === 'current',
+		})
 		
 		dispatch({
 			type: types.UPDATE_MATCH,
 			payload: {
-				match: RemoteDataInterface.getMatch(match, state),
+				match: match,
 			},
 		})
 	}

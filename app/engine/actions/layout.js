@@ -3,16 +3,33 @@ import * as types from './types';
 // CHAT
 export function lockBodyScroll() {
 	return (dispatch, getState) => {
+		// Ensure we don't break React Native
 		if (document.body) {
+
+			// Disable scrolling web
 			document.body.classList.add('unscrollable');
+
+			// Disable scrolling IOS.
+			document.ontouchmove = function (event) {
+			  event.preventDefault();
+			}
+
 		}
 	}
 }
 
 export function unlockBodyScroll() {
 	return (dispatch, getState) => {
+		// Ensure we don't break React Native
 		if (document.body) {
+
+			// Disable scrolling web
 			document.body.classList.remove('unscrollable');
+
+			// Enable scrolling IOS.
+			document.ontouchmove = function (e) {
+			  return true;
+			}
 		}
 	}
 }

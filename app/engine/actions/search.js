@@ -1,7 +1,6 @@
 import * as types from './types';
 import Api from '../api';
 import debounce from 'lodash.debounce';
-import RemoteDataInterface from '../remoteDataInterface';
 
 export function showSearch({collection, onSelection}) {
 	return {
@@ -173,18 +172,17 @@ export function remoteSearch(state, searchType, value) {
 export function updateSearch({results, searchType}) {
 	return (dispatch, getState) => {
 
+		console.log(results)
+
 		switch(searchType) {
 			case 'movies': 
-				normalizedResults = results.map(RemoteDataInterface.movie);
-				dispatch(updateMovieSearchResults(normalizedResults));
+				dispatch(updateMovieSearchResults(results));
 				break;
 			case 'users': 
-				normalizedResults = results.map(RemoteDataInterface.user);
-				dispatch(updateUserSearchResults(normalizedResults));
+				dispatch(updateUserSearchResults(results));
 				break;
 			case 'actors': 
-				normalizedResults = results.map(RemoteDataInterface.actor);
-				dispatch(updateActorSearchResults(normalizedResults));
+				dispatch(updateActorSearchResults(results));
 				break;
 		}
 	}

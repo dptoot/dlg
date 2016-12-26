@@ -22,7 +22,7 @@ export const standardDrawer = {
     bmMenu: {
         padding: 0,
         background: theme.grayDark,
-        fontSize: '1em'
+        fontSize: '1em',
     },
     bmMorphShape: {
         fill: theme.grayDark,

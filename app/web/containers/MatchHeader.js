@@ -24,7 +24,7 @@ class MatchHeader extends Component {
     }
 
     handleRematch() {
-        this.props.selectUserSearchResult(this.props.match.players.opponent.user);
+        this.props.selectUserSearchResult(this.props.match.players.opponent);
         this.props.showCreateMatch();
     }
 
@@ -55,7 +55,7 @@ class MatchHeader extends Component {
                     break;
                     
                 case 'rematch': 
-                    text = `Start match against ${this.props.match.players.opponent.user.name}`
+                    text = `Start match against ${this.props.match.players.opponent.name}`
                     break;
 
                 default:
@@ -95,19 +95,19 @@ class MatchHeader extends Component {
 
             case 'waiting': 
                 action = this.renderSearchPlaceholder({
-                    message: `Just waiting on ${this.props.match.players.opponent.user.name} to come up with that next answer.`,
+                    message: `Just waiting on ${this.props.match.players.opponent.name} to come up with that next answer.`,
                     icon: 'clock-o',
                 });
                 break;
             case 'loser': 
                 action = this.renderSearchPlaceholder({
-                    message: `You lost to ${this.props.match.players.opponent.user.name}!  Better luck next time.`,
+                    message: `You lost to ${this.props.match.players.opponent.name}!  Better luck next time.`,
                     icon: 'frown-o',
                 });
                 break;
             case 'winner': 
                 action = this.renderSearchPlaceholder({
-                    message: `You beat ${this.props.match.players.opponent.user.name}!  No one knows more ${this.props.match.actor.name} movies than you do.`,
+                    message: `You beat ${this.props.match.players.opponent.name}!  No one knows more ${this.props.match.actor.name} movies than you do.`,
                     icon: 'trophy',
                 });
                 break;
