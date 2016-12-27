@@ -25,7 +25,6 @@ class MatchChatDrawer extends Component {
 
         const menuOptions = this.getDrawerOptions({
             isOpen: this.props.layout.showMatchChat,
-            styles: matchChatDrawer,
             right: true,
             onStateChange: this.handleStateChange,
         });

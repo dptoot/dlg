@@ -1,0 +1,13 @@
+.input-wrapper {
+	position: relative;
+	transform-style: preserve-3d;
+
+	.fa {
+		display: block;
+		position: absolute;
+		right: $marginMedium;
+		top: 25%;
+  		transform: translateY(-25%);
+	}
+}
+

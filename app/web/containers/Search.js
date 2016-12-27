@@ -10,6 +10,7 @@ import {
 	Button, 
 	ButtonToolbar, 
     ListView,
+    Input,
 } from '../elements';
 
 class Search extends Component {
@@ -135,7 +136,7 @@ class Search extends Component {
 		return (
 			<div className="search-wrapper">
 				<div className="search-header">
-					<input 
+					<Input 
 						autoFocus
 						value={this.props.search[this.props.search.collection].value} 
 						onChange={this.handleSearchChangeText}

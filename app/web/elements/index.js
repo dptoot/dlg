@@ -5,6 +5,7 @@ export { default as ButtonToolbar } from './ButtonToolbar';
 export { default as Card } from './Card';
 export { default as CenteredWrapper } from './CenteredWrapper';
 export { default as Flipper } from './Flipper';
+export { default as Input } from './Input';
 export { default as ListHeader } from './ListHeader';
 export { default as ListView } from './ListView';
 export { default as RemoteImage } from './RemoteImage';
