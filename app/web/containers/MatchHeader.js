@@ -46,12 +46,16 @@ class MatchHeader extends Component {
 
         if (!this.props.browser.is.extraSmall) {
             switch(button) {
+                case 'refresh': 
+                    text = 'Refresh'
+                    break;
+
                 case 'chat':
                     text = this.props.layout.showMatchChat ? 'Close Chat' : 'Open Chat' 
                     break;
 
                 case 'quit': 
-                    text = "Quit Match";
+                    text = 'Resign';
                     break;
                     
                 case 'rematch': 
@@ -155,6 +159,7 @@ class MatchHeader extends Component {
                     </div>
 
                     <ButtonToolbar align="right">
+
                         <Button 
                             type="secondary"
                             icon="comments"
@@ -167,6 +172,13 @@ class MatchHeader extends Component {
                             icon="remove"
                             text={this.getButtonText('quit')}
                             onClick={this.props.showQuitMatchAlert}
+                            />
+                        <Button 
+                            rendered={this.props.match.status === 'active'}
+                            type="secondary"
+                            icon="refresh"
+                            text={this.getButtonText('refresh')}
+                            onClick={() => this.props.refreshMatch(this.props.match.id)}
                             />
                         <Button 
                             rendered={this.props.match.status === 'inactive'}

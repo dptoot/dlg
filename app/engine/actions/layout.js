@@ -10,9 +10,9 @@ export function lockBodyScroll() {
 			document.body.classList.add('unscrollable');
 
 			// Disable scrolling IOS.
-			document.ontouchmove = function (event) {
-			  event.preventDefault();
-			}
+			// document.ontouchmove = function (event) {
+			//   event.preventDefault();
+			// }
 
 		}
 	}
@@ -27,9 +27,9 @@ export function unlockBodyScroll() {
 			document.body.classList.remove('unscrollable');
 
 			// Enable scrolling IOS.
-			document.ontouchmove = function (e) {
-			  return true;
-			}
+			// document.ontouchmove = function (e) {
+			//   return true;
+			// }
 		}
 	}
 }

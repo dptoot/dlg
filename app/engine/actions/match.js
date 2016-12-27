@@ -105,10 +105,10 @@ export function hideQuitMatchAlert() {
 	}
 }	
 
-export function refreshMatch(match) {
+export function refreshMatch(matchId) {
 	return (dispatch, getState) => {
 		dispatch(showRefreshingMatch());
-		dispatch(fetchMatch(match));
+		dispatch(fetchMatch(matchId));
 	}
 }
 

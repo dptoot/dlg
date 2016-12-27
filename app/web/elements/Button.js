@@ -21,7 +21,7 @@ class Button extends Component {
             <div className={classes} {...rest}>
                 {badge && <div className="badge">{badge}</div>}
                 {icon && <Icon name={icon} />}
-                {text}
+                {text && <div className="button-text">{text}</div>}
             </div>
         );
     }

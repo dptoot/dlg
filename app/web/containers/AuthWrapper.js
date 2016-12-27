@@ -5,6 +5,7 @@ import {mapDispatchToProps} from '../../engine';
 import { requestNotificationPermission } from '../notifications';
 import {connectSocket, getSocket} from '../websocket';
 import {CenteredWrapper} from '../elements';
+import Icon from 'react-fontawesome';
 
 class AuthWrapper extends Component {
 
@@ -34,7 +35,8 @@ class AuthWrapper extends Component {
 	renderLoading() {
 		return (
 			<CenteredWrapper>
-				<div>Loading...</div>
+				<div>Connecting</div>
+				<Icon name="spinner" className="fa-spin margin-vertical-sm" />
 			</CenteredWrapper>
 		);
 	}

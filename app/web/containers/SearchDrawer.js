@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
 import {slide as Menu} from 'react-burger-menu';
-import { createMatchDrawer } from '../style/drawerStyles';
 import enhancedDrawer from '../hoc/enhancedDrawer';
 import Search from '../containers/Search';
 import ListHeader from '../elements/ListHeader';
@@ -32,9 +31,7 @@ class SearchDrawer extends Component {
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '100%',
             isOpen: this.props.search.showSearch,
-            styles: createMatchDrawer,
             onStateChange: this.handleStateChange.bind(this),
         });
 

@@ -6,7 +6,6 @@ import {mapDispatchToProps} from '../../engine';
 import Icon from 'react-fontawesome';
 import {push as Menu} from 'react-burger-menu';
 import theme from '../../engine/theme';
-import { matchChatDrawer } from '../style/drawerStyles';
 import enhancedDrawer from '../hoc/enhancedDrawer';
 import MatchChat from '../containers/MatchChat';
 import {ListHeader} from '../elements';
@@ -25,7 +24,6 @@ class MatchChatDrawer extends Component {
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '100%',
             isOpen: this.props.layout.showMatchChat,
             styles: matchChatDrawer,
             right: true,

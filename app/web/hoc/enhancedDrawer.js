@@ -23,20 +23,19 @@ function DrawerEnhancer(WrappedComponent) {
   		}
   	}
 
-  	getWidth(width) {
-
-  		const calculatedWidth = this.state.windowWidth * (parseInt(width)/100);
-  		return this.props.browser.is.extraSmall ? this.state.windowWidth : calculatedWidth;
+  	getWidth(isFullScreen) {
+  		const calculatedWidth = this.state.windowWidth * .30;
+  		return this.props.browser.is.extraSmall || isFullScreen ? this.state.windowWidth : calculatedWidth;
   	}
 
-  	getDrawerOptions({width, ...rest}) {
+  	getDrawerOptions({width, fullScreen = true, ...rest}) {
   		
   		const options = {
-  			customBurgerIcon: false,
+  			  customBurgerIcon: false,
   		    customCrossIcon: false,
   		    pageWrapId: 'page-wrap',
   		    outerContainerId: 'outer-container',
-  		    width: this.getWidth(width),
+  		    width: this.getWidth(fullScreen),
   			...rest
   		};
 

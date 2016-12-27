@@ -5,9 +5,10 @@
 	background: $primary;
 	justify-content: center;
 	align-items: center;
+	border-radius: $border-radius;
 
-	.fa {
-		margin-right: $marginSmall;
+	.fa + .button-text {
+		margin-left: $marginSmall;
 	}
 
 	&:hover {

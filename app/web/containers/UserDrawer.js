@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
 import {bubble as Menu} from 'react-burger-menu';
-import { userDrawer } from '../style/drawerStyles';
 import enhancedDrawer from '../hoc/enhancedDrawer';
 
 
@@ -29,9 +28,8 @@ class UserDrawer extends Component {
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '30%',
+            fullScreen: false,
             isOpen: this.props.layout.showUserDrawer,
-            styles: userDrawer,
             right: true,
             onStateChange: this.handleStateChange.bind(this)
         });

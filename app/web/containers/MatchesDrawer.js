@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {mapDispatchToProps} from '../../engine';
 import {slide as Menu} from 'react-burger-menu';
-import { matchesDrawer } from '../style/drawerStyles';
 import enhancedDrawer from '../hoc/enhancedDrawer';
 import Matches from '../containers/Matches';
 import {ListHeader} from '../elements';
@@ -23,9 +22,7 @@ class MatchesDrawer extends Component {
     render() {
 
         const menuOptions = this.getDrawerOptions({
-            width: '100%',
             isOpen: this.props.layout.showMatches,
-            styles: matchesDrawer,
             onStateChange: this.handleStateChange.bind(this),
         });
 
