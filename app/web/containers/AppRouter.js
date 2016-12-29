@@ -65,7 +65,7 @@ class App extends Component {
 	}
 
 	requireAuth() {
-		const {getState, dispatch} = this.props.store;
+		const {getState} = this.props.store;
 		const state = getState();
 
 		if (!state.user.isAuthenticated) {
@@ -86,7 +86,6 @@ class App extends Component {
 
 		// If there is a user then log them in and load page
 		.then(user => {
-			console.log('user: ', user)
 		    dispatch(ActionCreators.loginUser(user));
 		    callback();
 		})
