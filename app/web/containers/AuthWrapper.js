@@ -9,12 +9,6 @@ import Icon from 'react-fontawesome';
 
 class AuthWrapper extends Component {
 
-	componentWillMount() {
-		if (!this.props.user.isAuthenticated) {
-			browserHistory.push('/');
-		}
-	}
-
 	componentDidMount() {
 		if (!this.props.websocket) {
 			connectSocket()
@@ -26,6 +20,7 @@ class AuthWrapper extends Component {
 
 	componentWillReceiveProps(nextProps) {
 
+		// Allow users to logout
 		if (!nextProps.user.isAuthenticated) {
 			browserHistory.push('/');
 		}
