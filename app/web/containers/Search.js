@@ -52,48 +52,40 @@ class Search extends Component {
 	handleSearchChangeText(event) {
 		const value = event.target.value;
 
-		if (value) {
+		if (value !== '') {
 			this.props.fetchSearch(this.props.search.collection, value);
 		} else {
-			switch(this.props.search.collection) {
-				case 'movies': 
-					this.props.clearMovieSearchValue();
-					break;
-				case 'users': 
-					this.props.clearUserSearchValue();
-					break;
-				case 'actors': 
-					this.props.clearActorSearchValue();
-					break;
-			}
-			
+			this.props.clearSearchInputValue(this.props.search.collection);
 		}
   	}
 
-  	renderListItem(data) {
+  	renderListItem(item) {
 
   		switch(this.props.search.collection) {
   			case 'movies':
   				return (
-		  			<RemoteSearchItem 
-		  				item={data} 
-		  				onClick={this.props.onSelection.bind(null, data)}
+		  			<RemoteSearchItem
+		  				key={item.id} 
+		  				item={item} 
+		  				onClick={this.props.onSelection.bind(null, item)}
 		  				/>
 		  		)
   				break;
   			case 'users':
   				return (
-		  			<UserSearchItem 
-		  				item={data} 
-		  				onClick={this.props.onSelection.bind(null, data)}
+		  			<UserSearchItem
+		  				key={item.id} 
+		  				item={item} 
+		  				onClick={this.props.onSelection.bind(null, item)}
 		  				/>
 		  		)
   				break;
   			case 'actors':
   				return (
-		  			<RemoteSearchItem 
-		  				item={data} 
-		  				onClick={this.props.onSelection.bind(null, data)}
+		  			<RemoteSearchItem
+		  				key={item.id} 
+		  				item={item} 
+		  				onClick={this.props.onSelection.bind(null, item)}
 		  				/>
 		  		)
   				break;

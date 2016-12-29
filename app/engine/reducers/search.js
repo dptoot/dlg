@@ -8,19 +8,19 @@ const initialState = {
 	onSelection: () => {},
 	onHide: () => {},
 	movies: {
-		value: null,
+		value: '',
 		results: [],
 		selected: null,
 	},
 
 	users: {
-		value: null,
+		value: '',
 		results: [],
 		selected: null,
 	},
 
 	actors: {
-		value: null,
+		value: '',
 		results: [],
 		selected: null,
 	},
@@ -33,7 +33,7 @@ export const search = createReducer(initialState, {
 		return initialState;
 	}, 
 
-	// SEARCH DRAWER
+	// SHOW SEARCH 
 	[types.SHOW_SEARCH](state, action) {
 		return {
 			...state, 
@@ -44,6 +44,7 @@ export const search = createReducer(initialState, {
 		};
 	},
 
+	// HIDE SEARCH
 	[types.HIDE_SEARCH](state, action) {
 		return {
 			...state, 
@@ -53,182 +54,67 @@ export const search = createReducer(initialState, {
 			onHide: initialState.onHide,
 		};
 	},
-	
-	// MOVIE SEARCH
-	[types.UPDATE_MOVIE_SEARCH_VALUE](state, action) {
+
+	[types.CLEAR_SEARCH_INPUT_VALUE](state, action) {
+		const collection = action.payload.collection;
 		return {
 			...state,
-			movies: {
-				...state.movies,
-				value: action.payload.value,
-			}, 
-			isFetching: false,
+			[collection]: {
+				...state[collection],
+				value: initialState[collection].value,
+			}	
 		};
 	},
-	[types.CLEAR_MOVIE_SEARCH_VALUE](state, action) {
-		return {
-			...state, 
-			movies: {
-				...state.movies,
-				value: null,
-			},
-			isFetching: false,
-		};
-	}, 
-	[types.CLEAR_MOVIE_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			movies: initialState.movies,
-			isFetching: false,
-		};
-	},
-	[types.UPDATE_MOVIE_SEARCH_RESULTS](state, action) {
-		return {
-			...state, 
-			movies: {
-				...state.movies,
-				results: action.payload.results,
-			},
-			isFetching: false,
-		};
-	},
-	[types.CLEAR_MOVIE_SEARCH_RESULTS](state, action) {
-		return {
-			...state, 
-			movies: {
-				...state.movies,
-				results: [],
-			},
-			isFetching: false,
-		};
-	}, 
-	[types.SELECT_MOVIE_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			movies: {
-				...state.movies,
-				selected: action.payload.selected,
-			},
-			isFetching: false,
-		};
-	}, 
 
-	// USER SEARCH
-	[types.UPDATE_USER_SEARCH_VALUE](state, action) {
+	[types.CLEAR_SEARCH_RESULTS](state, action) {
+		const collection = action.payload.collection;
 		return {
 			...state,
-			users: {
-				...state.users,
-				value: action.payload.value,
-			}, 
-			isFetching: false,
+			[collection]: {
+				...state[collection],
+				results: initialState[collection].results,
+			}	
 		};
 	},
-	[types.CLEAR_USER_SEARCH_VALUE](state, action) {
-		return {
-			...state, 
-			users: {
-				...state.users,
-				value: null,
-			},
-			isFetching: false,
-		};
-	},
-	[types.CLEAR_USER_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			users: initialState.users,
-			isFetching: false,
-		};
-	}, 
-	[types.UPDATE_USER_SEARCH_RESULTS](state, action) {
-		return {
-			...state, 
-			users: {
-				...state.users,
-				results: action.payload.results,
-			},
-			isFetching: false,
-		};
-	},
-	[types.CLEAR_USER_SEARCH_RESULTS](state, action) {
-		return {
-			...state, 
-			users: {
-				...state.users,
-				results: [],
-			},
-			isFetching: false,
-		};
-	}, 
-	[types.SELECT_USER_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			users: {
-				...state.users,
-				selected: action.payload.selected,
-			},
-			isFetching: false,
-		};
-	}, 
 
-
-	// ACTOR SEARCH
-	[types.UPDATE_ACTOR_SEARCH_VALUE](state, action) {
+	[types.CLEAR_SEARCH_SELECTED_RESULT](state, action) {
+		const collection = action.payload.collection;
 		return {
 			...state,
-			actors: {
-				...state.actors,
+			[collection]: initialState[collection],	
+		};
+	},
+
+	[types.UPDATE_SEARCH_INPUT_VALUE](state, action) {
+		const collection = action.payload.collection;
+		return {
+			...state,
+			[collection]: {
+				...state[collection],
 				value: action.payload.value,
-			}, 
-			isFetching: false,
+			}	
 		};
 	},
-	[types.CLEAR_ACTOR_SEARCH_VALUE](state, action) {
+
+	[types.UPDATE_SEARCH_RESULTS](state, action) {
+		const collection = action.payload.collection;
 		return {
-			...state, 
-			actors: {
-				...state.actors,
-				value: null,
-			},
-			isFetching: false,
-		};
-	}, 
-	[types.CLEAR_ACTOR_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			actors: initialState.actors,
-			isFetching: false,
-		};
-	}, 
-	[types.UPDATE_ACTOR_SEARCH_RESULTS](state, action) {
-		return {
-			...state, 
-			actors: {
-				...state.actors,
+			...state,
+			[collection]: {
+				...state[collection],
 				results: action.payload.results,
-			},
-			isFetching: false,
+			}	
 		};
 	},
-	[types.CLEAR_ACTOR_SEARCH_RESULTS](state, action) {
+
+	[types.UPDATE_SEARCH_SELECTED_RESULT](state, action) {
+		const collection = action.payload.collection;
 		return {
-			...state, 
-			actors: {
-				...state.actors,
-				results: [],
-			},
-			isFetching: false,
-		};
-	}, 
-	[types.SELECT_ACTOR_SEARCH_RESULT](state, action) {
-		return {
-			...state, 
-			actors: {
-				...state.actors,
+			...state,
+			[collection]: {
+				...state[collection],
 				selected: action.payload.selected,
-			},
-			isFetching: false,
+			}	
 		};
-	}, 
+	},
 })

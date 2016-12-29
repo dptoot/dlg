@@ -34,17 +34,17 @@ class CreateMatch extends Component {
 	handleSubmit() {
   		this.props.createMatch();
   		this.props.hideCreateMatch();
-  		this.props.clearUserSearchResult();
-  		this.props.clearActorSearchResult();
+  		this.props.clearSearchSelectedResult('users');
+  		this.props.clearSearchSelectedResult('actors');
   	}
 
   	handleUserSelection(user) {
-		this.props.selectUserSearchResult(user);
+		this.props.updateSearchSelectedResult('users', user);
 		this.props.hideSearch();
   	}
 
   	handleActorSelection(actor) {
-		this.props.selectActorSearchResult(actor);
+		this.props.updateSearchSelectedResult('actors', actor);
 		this.props.hideSearch();
   	}
   	
@@ -68,7 +68,7 @@ class CreateMatch extends Component {
   			<CreateSelection 
   				title="Selected User"
   				name={this.props.search.users.selected.name}
-  				onRemove={this.props.clearUserSearchResult}
+  				onRemove={this.props.clearSearchSelectedResult.bind(null, 'users')}
   				>
   				<Avatar name={this.props.search.users.selected.name} />
 			</CreateSelection>
@@ -80,7 +80,7 @@ class CreateMatch extends Component {
 			<CreateSelection 
   				title="Selected Actor"
   				name={this.props.search.actors.selected.name}
-  				onRemove={this.props.clearActorSearchResult}
+  				onRemove={this.props.clearSearchSelectedResult.bind(null, 'actors')}
   				>
   				<RemoteImage 
                     path={this.props.search.actors.selected.imagePath} 

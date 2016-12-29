@@ -13,8 +13,8 @@ class CreateMatchDrawer extends Component {
         if (!state.isOpen) {
             this.props.unlockBodyScroll();
             this.props.hideCreateMatch();
-            this.props.clearUserSearchResult();
-            this.props.clearActorSearchResult();
+            this.props.clearSearchSelectedResult('actors');
+            this.props.clearSearchSelectedResult('users');
         } else {
             this.props.lockBodyScroll();
         }

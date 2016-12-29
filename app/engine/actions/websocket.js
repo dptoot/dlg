@@ -34,7 +34,9 @@ export function initializeWebsocketListeners() {
 
 		// UPDATE SEARCH
 		state.websocket.on('updateSearch', data => {
-			if(data.userId === state.user.id) {
+			console.log('update search', data)
+
+			if (data.userId === state.user.id) {
 				dispatch(updateSearch(data));
 			}
 		});

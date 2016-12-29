@@ -19,172 +19,90 @@ export function hideSearch() {
 	}
 }
 
-// MOVIE
-export function updateMovieSearchValue(value) {
+export function clearSearchInputValue(collection) {
 	return {
-		type: types.UPDATE_MOVIE_SEARCH_VALUE,
+		type: types.CLEAR_SEARCH_INPUT_VALUE,
 		payload: {
-			value: value
+			collection: collection,
 		},
 	}
 }
 
-export function clearMovieSearchValue() {
+export function clearSearchResults(collection) {
 	return {
-		type: types.CLEAR_MOVIE_SEARCH_VALUE,
-	}
-}
-
-export function clearMovieSearchResult() {
-	return {
-		type: types.CLEAR_MOVIE_SEARCH_RESULT,
-	}
-}
-
-export function updateMovieSearchResults(results) {
-	return {
-		type: types.UPDATE_MOVIE_SEARCH_RESULTS,
+		type: types.CLEAR_SEARCH_RESULTS,
 		payload: {
+			collection: collection,
+		},
+	}
+}
+
+export function clearSearchSelectedResult(collection) {
+	return {
+		type: types.CLEAR_SEARCH_SELECTED_RESULT,
+		payload: {
+			collection: collection,
+		},
+	}
+}
+
+export function updateSearchInputValue(collection, value) {
+	return {
+		type: types.UPDATE_SEARCH_INPUT_VALUE,
+		payload: {
+			collection: collection,
+			value: value,
+		},
+	}
+}
+
+export function updateSearchResults(collection, results) {
+	return {
+		type: types.UPDATE_SEARCH_RESULTS,
+		payload: {
+			collection: collection,
 			results: results
 		},
 	}
 }
 
-export function clearMovieSearchResults() {
+export function updateSearchSelectedResult(collection, result) {
 	return {
-		type: types.CLEAR_MOVIE_SEARCH_RESULTS,
-	}
-}
-
-export function selectMovieSearchResult(result) {
-	return {
-		type: types.SELECT_MOVIE_SEARCH_RESULT,
+		type: types.UPDATE_SEARCH_SELECTED_RESULT,
 		payload: {
+			collection: collection,
 			selected: result
 		},
 	}
 }
 
 
-// USER
-export function updateUserSearchValue(value) {
-	return {
-		type: types.UPDATE_USER_SEARCH_VALUE,
-		payload: {
-			value: value
-		},
+// Debouced call to Remote Server
+const debouncedSearch = debounce((state, collection, value) => {
+	let message;
+
+	switch(collection) {
+		case 'movies':
+			message = 'searchMovies'; 
+			break;
+		case 'users': 
+			message = 'searchUsers'; 
+			break;
+		case 'actors': 
+			message = 'searchActors'; 
+			break;
 	}
-}
 
-export function clearUserSearchValue() {
-	return {
-		type: types.CLEAR_USER_SEARCH_VALUE,
-	}
-}
-
-export function clearUserSearchResult() {
-	return {
-		type: types.CLEAR_USER_SEARCH_RESULT,
-	}
-}
-
-export function updateUserSearchResults(results) {
-	return {
-		type: types.UPDATE_USER_SEARCH_RESULTS,
-		payload: {
-			results: results
-		},
-	}
-}
-
-export function clearUserSearchResults() {
-	return {
-		type: types.CLEAR_USER_SEARCH_RESULTS,
-	}
-}
-
-export function selectUserSearchResult(result) {
-	return {
-		type: types.SELECT_USER_SEARCH_RESULT,
-		payload: {
-			selected: result
-		},
-	}
-}
-
-
-// ACTOR
-export function updateActorSearchValue(value) {
-	return {
-		type: types.UPDATE_ACTOR_SEARCH_VALUE,
-		payload: {
-			value: value
-		},
-	}
-}
-
-export function clearActorSearchValue() {
-	return {
-		type: types.CLEAR_ACTOR_SEARCH_VALUE,
-	}
-}
-
-export function clearActorSearchResult() {
-	return {
-		type: types.CLEAR_ACTOR_SEARCH_RESULT,
-	}
-}
-
-export function updateActorSearchResults(results) {
-	return {
-		type: types.UPDATE_ACTOR_SEARCH_RESULTS,
-		payload: {
-			results: results
-		},
-	}
-}
-
-export function clearActorSearchResults() {
-	return {
-		type: types.CLEAR_ACTOR_SEARCH_RESULTS,
-	}
-}
-
-export function selectActorSearchResult(result) {
-	return {
-		type: types.SELECT_ACTOR_SEARCH_RESULT,
-		payload: {
-			selected: result
-		},
-	}
-}
-
-const debounceRemoteSearch = debounce((state, searchType, value) => remoteSearch(state, searchType, value), 500);
-
-export function remoteSearch(state, searchType, value) {
-	state.websocket.emit(searchType, {
+	state.websocket.emit(message, {
 		userId: state.user.id,
         query: value,
     });
-	
-}
 
-export function updateSearch({results, searchType}) {
+}, 500);
+
+export function updateSearch({collection, results}) {
 	return (dispatch, getState) => {
-
-		console.log(results)
-
-		switch(searchType) {
-			case 'movies': 
-				dispatch(updateMovieSearchResults(results));
-				break;
-			case 'users': 
-				dispatch(updateUserSearchResults(results));
-				break;
-			case 'actors': 
-				dispatch(updateActorSearchResults(results));
-				break;
-		}
+		dispatch(updateSearchResults(collection, results));
 	}
 }
 
@@ -193,22 +111,9 @@ export function fetchSearch(collection, value) {
 		const state = getState();
 		let searchType;
 
-		switch(collection) {
-			case 'movies':
-				searchType = 'searchMovies'; 
-				dispatch(updateMovieSearchValue(value));
-				break;
-			case 'users': 
-				searchType = 'searchUsers'; 
-				dispatch(updateUserSearchValue(value));
-				break;
-			case 'actors': 
-				searchType = 'searchActors'; 
-				dispatch(updateActorSearchValue(value));
-				break;
-		}
+		dispatch(updateSearchInputValue(collection, value));
 
-		debounceRemoteSearch(state, searchType, value)
+		debouncedSearch(state, collection, value)
 		
 	}
 }

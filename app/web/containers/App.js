@@ -51,12 +51,20 @@ class App extends Component {
 		return (
 			<Router history={browserHistory}>
 				
-				<Route path='/' component={PublicWrapper} onEnter={this.handleAutoLogin}>
+				<Route 
+					path='/' 
+					component={PublicWrapper} 
+					onEnter={this.handleAutoLogin}
+					>
 					<IndexRoute component={Login} />
 					<Route path="/register" component={Register} />
 				</Route>
 
-				<Route path="lastmanstanton" component={AuthWrapper} onEnter={this.handleAutoLogin}>
+				<Route 
+					path="lastmanstanton" 
+					component={AuthWrapper} 
+					onEnter={this.handleAutoLogin}
+					>
 					<IndexRoute component={LastManStanton} />
 				</Route>
 

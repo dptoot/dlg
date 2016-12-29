@@ -29,8 +29,7 @@ class Input extends Component {
 }
 
 Input.defaultProps = {
-    type: 'primary',
-    badge: false,
+    
 }
 
 export default renderable(Input);
