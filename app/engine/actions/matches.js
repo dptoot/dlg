@@ -8,20 +8,6 @@ export function showRefreshingMatches() {
 	}
 }
 
-export function showPendingMatchAlert() {
-	return {
-		type: types.SHOW_PENDING_MATCH_ALERT, 
-		payload: {},
-	}
-}
-
-export function hidePendingMatchAlert() {
-	return {
-		type: types.HIDE_PENDING_MATCH_ALERT, 
-		payload: {},
-	}
-}
-
 export function updateMatches(matches) {
 	return (dispatch, getState) => {
 		// console.log(matches)

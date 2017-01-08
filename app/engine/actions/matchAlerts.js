@@ -24,3 +24,10 @@ export function showQuitMatchAlert() {
 	}
 }
 
+export function showPendingMatchAlert() {
+	return {
+		type: types.SHOW_PENDING_MATCH_ALERT, 
+		payload: {},
+	}
+}
+

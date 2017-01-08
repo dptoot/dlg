@@ -7,11 +7,15 @@ import Api from '../api';
 export function acceptMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
-		
-		state.websocket.emit('acceptMatch', {
-			matchId: matchId,
-			userId: state.user.id, 
-		});
+
+		Api.authenticatedGet({
+			url: `/api/match/${matchId}/accept`,
+			token: state.user.token,
+		})
+
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
+		})
 
 	}
 }
@@ -20,24 +24,39 @@ export function archiveMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		state.websocket.emit('archiveMatch', {
-			userId: state.user.id,
-			matchId: matchId,
+		Api.authenticatedPost({
+			url: `/api/match/${matchId}/archive`,
+			token: state.user.token,
+			params: {
+				userId: state.user.id,
+			} 
+		})
+
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
 		})
 
 	}
 }
 
-export function createMatch(socket) {
+export function createMatch() {
 	return (dispatch, getState) => {
 		const state = getState();
 
-		state.websocket.emit('createMatch', {
-            actorRemoteId: state.search.actors.selected.id, 
-            opponentId: state.search.users.selected.id,
-            userId: state.user.id, 
-        });
-		
+		Api.authenticatedPost({
+			url: `/api/match`,
+			token: state.user.token,
+			params: {
+	            actorRemoteId: state.search.actors.selected.id, 
+	            opponentId: state.search.users.selected.id,
+	            userId: state.user.id, 
+	        }
+		})
+
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
+		})
+
 	}
 }
 
@@ -53,13 +72,21 @@ export function deleteMatch(matchId) {
 	}
 }
 
-export function deactivateMatch(matchId) {
+export function deactivateMatch({matchId, winnerId, loserId}) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		state.websocket.emit('deactivateMatch', {
-			matchId: match.id,
-			userId: state.user.id,
+		Api.authenticatedPost({
+			url: `/api/match/${matchId}/deactivate`,
+			token: state.user.token,
+			params: {
+				winnerId: winnerId,
+				loserId: loserId,
+			} 
+		})
+
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
 		})
 
 	}
@@ -83,8 +110,8 @@ export function submitCorrectAnswer(answer) {
 			url: `/api/match/${state.match.id}/answer`,
 			token: state.user.token,
 			params: {
-				answer_remote_id: answer.id,
-				user_id: state.user.id,
+				answerRemoteId: answer.id,
+				userId: state.user.id,
 			} 
 		})
 
@@ -102,25 +129,42 @@ export function verifyAnswer(answer) {
 		const verifiedAnswer = match.answers.filter(matchAnswer => matchAnswer.remoteId === answer.id)[0];
 
 		if (!!verifiedAnswer) {
+
 			if (verifiedAnswer.selected) {
+				
+				// Show Match Alert for previously selected answer
 				dispatch(matchAlertsActions.showMatchAlert({
 					title: 'Try Again!', 
 					message: `Looks like someone has already chosen ${verifiedAnswer.title}.`
 				}));
+
 			} else {
-			
+				
+				// Show Success Match Alert
 				dispatch(matchAlertsActions.showMatchAlert({
 					title: 'Well Done!', 
 					message: `${match.actor.name} was in ${answer.name}.`
 				}));
+
+				// Submit Correct answer to DB
 				dispatch(submitCorrectAnswer(answer))
 			}
+
 		} else {
+			
+			// Show Losing Match Alert
 			dispatch(matchAlertsActions.showMatchAlert({
-					title: 'You Lost!', 
-					message: `Sorry, ${match.actor.name} was not in ${answer.name}.`
-				}));
-			dispatch(deactivateMatch(state.match.id))
+				title: 'You Lost!', 
+				message: `Sorry, ${match.actor.name} was not in ${answer.name}.`
+			}));
+
+			// Deactivate Match 
+			dispatch(deactivateMatch({
+				matchId: state.match.id,
+				winnerId: match.players.opponent.id,
+				loserId: match.players.user.id,
+			}))
+
 		}
 
 	}

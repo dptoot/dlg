@@ -122,10 +122,17 @@ class MatchHeader extends Component {
     }
 
     renderQuitMatchAlert() {
+
+        console.log(this.props.match)
+
         const buttons = [
             {
                 text: 'Yes', 
-                onClick: () => this.props.deactivateMatch(this.props.match.id),
+                onClick: () => this.props.deactivateMatch({
+                    matchId: this.props.match.id,
+                    winnerId: this.props.match.players.opponent.id,
+                    loserId: this.props.match.players.user.id,
+                }),
             }, 
             {
                 text: 'No',

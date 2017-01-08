@@ -4,7 +4,6 @@ import * as types from '../actions/types';
 const initialState = {
 	isInitialState: true,
 	isRefreshing: false,
-	showPendingMatchAlert: false,
 	types: {
 		current: [],
 		inactive: [],
@@ -20,21 +19,6 @@ export const matches = createReducer(initialState, {
 		return initialState;
 	}, 
 
-	[types.SHOW_PENDING_MATCH_ALERT](state, action) {
-		
-		return {
-			...state, 
-			showPendingMatchAlert: true,
-		};
-	},
-
-	[types.HIDE_PENDING_MATCH_ALERT](state, action) {
-		return {
-			...state, 
-			showPendingMatchAlert: false,
-		};
-	},
-
 	[types.SHOW_REFRESHING_MATCHES](state, action) {
 		return {
 			...state, 
@@ -48,8 +32,6 @@ export const matches = createReducer(initialState, {
 			isRefreshing: false,
 		};
 	},
-
-	
 	
 	[types.UPDATE_MATCHES](state, action) {
 		return {

@@ -24,10 +24,11 @@ class Matches extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// Show pending match alert if there is a pending match present
-		if (nextProps.matches.types.pending.length !== this.props.matches.types.pending.length) {
-			this.props.showPendingMatchAlert()
-		}
+		// console.log(nextProps.matches.types.pending)
+		// // Show pending match alert if there is a pending match present
+		// if (nextProps.matches.types.pending.length > 0) {
+		// 	this.props.showPendingMatchAlert()
+		// }
 
 		// Show a window notification if there has been a change in current matches
 		// and it is not the initial data load
@@ -49,41 +50,6 @@ class Matches extends Component {
 
 	handleCreateMatchClick() {
 		this.props.showCreateMatch();
-	}
-	
-	renderPendingMatchAlert() {
-
-		const pendingMatchId = this.props.matches.types.pending[0];
-		const match = this.props.matches.instances[pendingMatchId];
-
-		if (match) {
-			const buttons = [
-				{
-					text: 'Accept', 
-					onClick: () => {
-						this.props.acceptMatch(match.id);
-					}
-				}, 
-				{
-					text: 'Decline',
-					onClick: () => {
-						this.props.deleteMatch(match.id);
-					}
-				}
-			];
-			
-			return (
-				<Alert 
-					show={true}
-					onHide={this.props.hidePendingMatchAlert}
-					title={`${match.players.opponent.name} wants to challenge you`}
-					message={`The actor is ${match.actor.name}.  Do you accept?`}
-					buttons={buttons}
-					/>
-			);
-		} else {
-			return null;
-		}
 	}
 
 	renderMatches(list) {
@@ -151,8 +117,6 @@ class Matches extends Component {
 						/>
 					{this.renderMatches('inactive')}	
 				</div>
-
-				{this.props.matches.showPendingMatchAlert && this.renderPendingMatchAlert()}
 			</div>
 		);
 	}

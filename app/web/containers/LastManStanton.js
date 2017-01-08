@@ -16,6 +16,7 @@ import MatchChatDrawer from '../containers/MatchChatDrawer';
 import Header from '../containers/Header';
 import UserDrawer from '../containers/UserDrawer';
 import SearchDrawer from '../containers/SearchDrawer';
+import PendingMatchContainer from '../containers/PendingMatchContainer';
 
 class LastManStanton extends Component {
 
@@ -59,10 +60,10 @@ class LastManStanton extends Component {
 				<div id="outer-container" className={containerClasses}>
 					<UserDrawer />
 					<MatchesDrawer rendered={isMobile} />
-					<MatchChatDrawer rendered={isMobile} />
+					{/*<MatchChatDrawer rendered={isMobile} />*/}
 					<CreateMatchDrawer />	
 					<SearchDrawer />
-						
+					<PendingMatchContainer />	
 					
 					<div id="page-wrap">
 						<Header />
