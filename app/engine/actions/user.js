@@ -35,7 +35,7 @@ export function logoutUser() {
 		})
 
 		.then(() => {
-			dispatch(clearUser())
+			dispatch(appReset())
 		})
 	}
 }
@@ -47,9 +47,9 @@ export function updateUser(user) {
 	}
 }
 
-export function clearUser() {
+export function appReset() {
 	return {
-		type: types.CLEAR_USER,
+		type: types.APP_RESET,
 		payload: {},
 	}
 }

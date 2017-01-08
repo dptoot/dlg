@@ -13,7 +13,7 @@ class DrawerContainer extends Component {
             <Drawer
                 ref="navigation"
                 open={this.props.open}
-                onClose={this.props.closeDrawer}
+                onClose={this.props.hideUserDrawer}
                 type="static"
                 content={<SideMenu />}
                 openDrawerOffset={100}
@@ -42,7 +42,7 @@ const drawerStyles = {
 
 function mapStateToProps(state) {
     return {
-        open: state.drawer.open
+        open: state.layout.showUserDrawer
     }
 }
 

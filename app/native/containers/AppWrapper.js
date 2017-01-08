@@ -9,24 +9,13 @@ import {
 
 import { connect } from 'react-redux';
 import { mapDispatchToProps } from '../../engine';
-import socket from '../websocket';
 
 import theme from '../styles/theme';
 
 class AppWrapper extends Component {
 
     componentDidMount() {
-        socket.on('remoteSync', message => {
-            if(message.players.includes(this.props.user.id)) {
-                // update matches lists for the user
-                this.props.fetchMatchesList(this.props.user.id);
 
-                // update current match if it is affected
-                if (message.id === this.props.match.id) {
-                    this.props.fetchMatch(this.props.match.id);
-                }
-            }
-        });
     }
 
     componentWillReceiveProps(nextProps) {

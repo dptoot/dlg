@@ -134,8 +134,8 @@ class MatchHeader extends Component {
         
         return (
             <Alert 
-                show={this.props.match.showQuitMatchAlert}
-                onHide={this.props.hideQuitMatchAlert}
+                show={this.props.renderQuitMatchAlert}
+                onHide={this.props.hideMatchAlert}
                 title={`Quit Match`}
                 message={`Are you sure you want to quit?`}
                 buttons={buttons}
@@ -178,7 +178,7 @@ class MatchHeader extends Component {
                             type="secondary"
                             icon="refresh"
                             text={this.getButtonText('refresh')}
-                            onClick={() => this.props.refreshMatch(this.props.match.id)}
+                            onClick={() => this.props.refreshMatches()}
                             />
                         <Button 
                             rendered={this.props.match.status === 'inactive'}
@@ -207,7 +207,8 @@ MatchHeader.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        match: state.match,
+        match: state.matches.instances[state.match.selectedMatchId],
+        renderQuitMatchAlert: state.matchAlerts.renderQuitMatchAlert,
         layout: state.layout,
         browser: state.browser,
     }

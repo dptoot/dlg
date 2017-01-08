@@ -3,19 +3,13 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import {mapDispatchToProps} from '../../engine';
 import { requestNotificationPermission } from '../notifications';
-import {connectSocket, getSocket} from '../websocket';
 import {CenteredWrapper} from '../elements';
 import Icon from 'react-fontawesome';
 
 class AuthWrapper extends Component {
 
 	componentDidMount() {
-		if (!this.props.websocket) {
-			connectSocket()
-			.then(socket => {
-				this.props.updateWebsocket(socket);  
-			})
-		}
+		
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -37,7 +31,8 @@ class AuthWrapper extends Component {
 	}
 
 	render() {
-		return this.props.websocket ? this.props.children : this.renderLoading();
+		// return this.props.websocket ? this.props.children : this.renderLoading();
+		return this.props.children;
 	}
 	
 }		
@@ -45,7 +40,6 @@ class AuthWrapper extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user,
-		websocket: state.websocket,
 	}
 }
 

@@ -72,66 +72,12 @@ export function deactivateMatch(match) {
 	}
 }
 
-export function fetchMatch(matchId) {
-	return (dispatch, getState) => {
-		const state = getState();
-
-		state.websocket.emit('fetchMatch', {
-			matchId: matchId,
-			userId: state.user.id,
-		});
-
-	}
-}
-
-export function hideMatchAlert() {
+export function selectMatch(matchId) {
 	return {
-		type: types.HIDE_MATCH_ALERT, 
-		payload: {},
-	}
-}
-
-export function hideRefreshingMatch() {
-	return {
-		type: types.HIDE_REFRESHING_MATCH, 
-		payload: {},
-	}
-}
-
-export function hideQuitMatchAlert() {
-	return {
-		type: types.HIDE_QUIT_MATCH_ALERT, 
-		payload: {},
-	}
-}	
-
-export function refreshMatch(matchId) {
-	return (dispatch, getState) => {
-		dispatch(showRefreshingMatch());
-		dispatch(fetchMatch(matchId));
-	}
-}
-
-export function showRefreshingMatch() {
-	return {
-		type: types.SHOW_REFRESHING_MATCH, 
-		payload: {},
-	}
-}
-
-export function showMatchAlert(matchAlert) {
-	return {
-		type: types.SHOW_MATCH_ALERT, 
+		type: types.SELECT_MATCH, 
 		payload: {
-			matchAlert: matchAlert,
+			matchId: matchId,
 		},
-	}
-}
-
-export function showQuitMatchAlert() {
-	return {
-		type: types.SHOW_QUIT_MATCH_ALERT, 
-		payload: {},
 	}
 }
 
@@ -163,23 +109,6 @@ export function submitChatMessage() {
 			timestamp: Date.now(), 
 		});
 		
-	}
-}
-
-export function updateMatch(matchData) {
-	return (dispatch, getState) => {
-		const state = getState();
-
-		const match = Object.assign({}, matchData, {
-			showSearch: matchData.players.user.status === 'current',
-		})
-		
-		dispatch({
-			type: types.UPDATE_MATCH,
-			payload: {
-				match: match,
-			},
-		})
 	}
 }
 

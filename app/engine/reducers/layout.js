@@ -10,7 +10,7 @@ const initialState = {
 
 export const layout = createReducer(initialState, {
 
-	[types.CLEAR_USER](state, action) {
+	[types.APP_RESET](state, action) {
 		return initialState;
 	}, 
 

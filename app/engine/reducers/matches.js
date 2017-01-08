@@ -5,15 +5,20 @@ const initialState = {
 	isInitialState: true,
 	isRefreshing: false,
 	showPendingMatchAlert: false,
-	lists: {
+	types: {
 		current: [],
 		inactive: [],
 		waiting: [],
 		pending: [],
 	},
+	instances: [],
+
 };
 
 export const matches = createReducer(initialState, {
+	[types.APP_RESET](state, action) {
+		return initialState;
+	}, 
 
 	[types.SHOW_PENDING_MATCH_ALERT](state, action) {
 		
@@ -44,17 +49,17 @@ export const matches = createReducer(initialState, {
 		};
 	},
 
-	[types.CLEAR_USER](state, action) {
-		return initialState;
-	}, 
+	
 	
 	[types.UPDATE_MATCHES](state, action) {
 		return {
 			...state,
 			isInitialState: false, 
-			lists: {
-				...action.payload.matches
-			}
+			isRefreshing: false,
+			types: {
+				...action.payload.types
+			}, 
+			instances: action.payload.instances
 		};
 	},
 

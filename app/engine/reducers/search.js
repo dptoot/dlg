@@ -29,7 +29,7 @@ const initialState = {
 
 export const search = createReducer(initialState, {
 
-	[types.CLEAR_USER](state, action) {
+	[types.APP_RESET](state, action) {
 		return initialState;
 	}, 
 

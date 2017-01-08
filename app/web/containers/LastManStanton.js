@@ -19,7 +19,6 @@ import SearchDrawer from '../containers/SearchDrawer';
 class LastManStanton extends Component {
 
 	componentDidMount() {
-		this.props.initializeWebsocketListeners();
 		this.props.fetchMatches();
 		
 		// This seems to break matches normalization
@@ -55,7 +54,7 @@ class LastManStanton extends Component {
 						<div className="app-wrapper">
 							<MatchesColumn rendered={!isMobile} />	
 							<Match />
-							<MatchChatColumn rendered={!isMobile}/>
+							{/*<MatchChatColumn rendered={!isMobile}/>*/}
 						</div>
 					</div>
 				</div>

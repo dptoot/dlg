@@ -32,18 +32,6 @@ class Match extends Component {
 			},
 		}
 	}
-
-	renderMatchAlert() {
-		
-		return (
-			<Alert
-				show={this.props.match.showMatchAlert}
-				onHide={this.props.hideMatchAlert}
-				title={this.props.match.matchAlert.title}
-				message={this.props.match.matchAlert.message}
-				/>
-		)
-	}
 		
 	renderMatch() {
 
@@ -54,6 +42,13 @@ class Match extends Component {
 		return (
 
 			<div className="match-board">
+				<Alert
+					show={this.props.matchAlerts.renderMatchAlert}
+					onHide={this.props.hideMatchAlert}
+					title={this.props.matchAlerts.title}
+					message={this.props.matchAlerts.message}
+					/>
+
 				<MatchHeader 
 					match={this.props.match} 
 					onSearchClick={this.handleToggleSearch} 
@@ -89,8 +84,7 @@ class Match extends Component {
 	render() {
 		return (
 			<div className="match-board-container">
-				{this.renderMatchAlert()}
-				{this.props.match.id ? this.renderMatch() : this.renderPlaceholder()}
+				{this.props.match ? this.renderMatch() : this.renderPlaceholder()}
 			</div>
 		);
 	}
@@ -98,9 +92,11 @@ class Match extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log('match: ', state.matches.instances[state.match.selectedMatchId])
 	return {
 		user: state.user,
-		match: state.match,
+		match: state.matches.instances[state.match.selectedMatchId],
+		matchAlerts: state.matchAlerts,
 		browser: state.browser,
 	}
 }

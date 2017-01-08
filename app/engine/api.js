@@ -8,7 +8,6 @@ class Api {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'dataType': 'json',
-      'credentials': 'include',
     }
   }
 
@@ -28,21 +27,43 @@ class Api {
     return this.xhr(route, params, 'DELETE', false);
   }
 
-  static xhr(route, params, verb, authenticated = false) {
+  static authenticatedGet({url, token}) {
+    return this.xhr(url, null, 'GET', token);
+  }
 
-  	console.log('CALLING REST API');
+  static authenticatedPut({url, params, token}) {
+    return this.xhr(url, params, 'PUT', token);
+  }
+
+  static authenticatedPost({url, params, token}) {
+    return this.xhr(url, params, 'POST', token);
+  }
+
+  static authenticatedDelete({url, params, token}) {
+    return this.xhr(url, params, 'DELETE', token);
+  }
+
+  static xhr(route, params, verb, token = false) {
 
     const url = `${config('API_HOST')}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     
     // Add headers
     options.headers = Api.headers();
-    
+
+    // Add Authentication if required
+    if (token) {
+        Object.assign(options.headers, {
+            'Authorization': token,
+            'credentials': 'include',
+        });
+    }
+
     return fetch(url, options)
-      .then( resp => {
-        
-        let json = resp.json();
-        if (resp.ok) {
+      .then( response => {
+        console.log(response)
+        let json = response.json();
+        if (response.ok) {
           return json
         }
         return json.then(err => {throw err});
@@ -51,4 +72,4 @@ class Api {
   }
 }
 
-export default Api
+export default Api;

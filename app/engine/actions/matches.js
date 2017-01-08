@@ -1,4 +1,5 @@
 import * as types from './types';
+import Api from '../api';
 
 export function showRefreshingMatches() {
 	return {
@@ -6,14 +7,6 @@ export function showRefreshingMatches() {
 		payload: {},
 	}
 }
-
-export function hideRefreshingMatches() {
-	return {
-		type: types.HIDE_REFRESHING_MATCHES, 
-		payload: {},
-	}
-}
-
 
 export function showPendingMatchAlert() {
 	return {
@@ -31,40 +24,38 @@ export function hidePendingMatchAlert() {
 
 export function updateMatches(matches) {
 	return (dispatch, getState) => {
-
-		const state = getState();
-		const normalizedMatches = {};
-
-		// Iterate over each of the match types and normalize the data
-		Object.keys(matches).forEach((matchType, index) => {
-			normalizedMatches[matchType] = matches[matchType].map(match => {
-				return match;
-			})
-		})
+		// console.log(matches)
 
 		// Update Matches
 		dispatch({
 			type: types.UPDATE_MATCHES,
 			payload: {
-				isRefreshing: false,
-				matches: normalizedMatches,
+				types: matches.types,
+				instances: matches.instances,
 			}
 		})
 	}
 }
 
-export function refreshMatches(userId) {
+export function refreshMatches() {
 	return (dispatch, getState) => {
 		dispatch(showRefreshingMatches());
-		dispatch(fetchMatches(userId));
+		dispatch(fetchMatches());
 	}
 }
 
 export function fetchMatches() {
 	return (dispatch, getState) => {
 		const state = getState();
-		state.websocket.emit('fetchMatches', {
-			userId: state.user.id,
-		});
+
+		Api.authenticatedGet({
+			url: `/api/matches/${state.user.id}`, 
+			token: state.user.token,
+		})
+		
+		.then(response => {
+			dispatch(updateMatches(response.matches))
+		}) 
+		
 	}
 }

@@ -25,7 +25,7 @@ class Matches extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		// Show pending match alert if there is a pending match present
-		if (nextProps.matches.lists.pending.length !== this.props.matches.lists.pending.length) {
+		if (nextProps.matches.types.pending.length !== this.props.matches.types.pending.length) {
 			this.props.showPendingMatchAlert()
 		}
 
@@ -33,7 +33,7 @@ class Matches extends Component {
 		// and it is not the initial data load
 		const isInitialDataLoad = this.props.matches.isInitialState && !nextProps.matches.isInitialState;
 		
-		if ( !isInitialDataLoad && (nextProps.matches.lists.current.length > this.props.matches.lists.current.length)) {
+		if ( !isInitialDataLoad && (nextProps.matches.types.current.length > this.props.matches.types.current.length)) {
 			this.showMatchUpdateNotification()
 		}
 	}
@@ -44,7 +44,7 @@ class Matches extends Component {
 
 	handleMatchClick(matchId) {
 		this.props.onMatchClick();
-		this.props.fetchMatch(matchId)
+		this.props.selectMatch(matchId);
 	}
 
 	handleCreateMatchClick() {
@@ -53,7 +53,8 @@ class Matches extends Component {
 	
 	renderPendingMatchAlert() {
 
-		const match = this.props.matches.lists.pending[0];
+		const pendingMatchId = this.props.matches.types.pending[0];
+		const match = this.props.matches.instances[pendingMatchId];
 
 		if (match) {
 			const buttons = [
@@ -86,11 +87,12 @@ class Matches extends Component {
 	}
 
 	renderMatches(list) {
-		const matches = this.props.matches.lists[list];
+		const matches = this.props.matches.types[list];
 		let element;
 
 		if (matches.length > 0) {
-			element = this.props.matches.lists[list].map(match => {
+			element = this.props.matches.types[list].map(matchId => {
+				const match = this.props.matches.instances[matchId];
 				const dynamicProps = {}
 				if (list === 'inactive') {
 					Object.assign(dynamicProps, {

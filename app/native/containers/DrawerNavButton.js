@@ -7,7 +7,7 @@ class DrawerNavButton extends React.Component {
 
 	render() {
 		return(
-			<IconButton icon="bars" onPress={this.props.openDrawer} {...this.props} />
+			<IconButton icon="bars" onPress={this.props.showUserDrawer} {...this.props} />
 		);
 	}
 

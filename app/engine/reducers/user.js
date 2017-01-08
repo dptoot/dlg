@@ -11,7 +11,7 @@ const initialState = {
 
 export const user = createReducer(initialState, {
 
-	[types.CLEAR_USER](state, action) {
+	[types.APP_RESET](state, action) {
 		return initialState;
 	}, 
 

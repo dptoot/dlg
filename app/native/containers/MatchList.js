@@ -40,7 +40,7 @@ class MatchesList extends Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchMatchesList(this.props.user.id);
+		this.props.fetchMatches(this.props.user.id);
 	}
 
 	componentWillReceiveProps(nextProps) {
