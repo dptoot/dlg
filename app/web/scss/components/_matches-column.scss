@@ -1,10 +1,6 @@
 .matches-column {
 	width: 20%;
-	-webkit-overflow-scrolling: touch;
-
-	&.closed {
-		width: 0;
-		padding: 0;
-		margin: 0;
-	}
+	display: flex;
+	flex-direction: column;
+	box-shadow: $shadow-1x;
 }

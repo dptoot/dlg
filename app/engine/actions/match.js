@@ -1,7 +1,6 @@
 import * as types from './types';
 import * as matchesActions from './matches';
 import * as matchAlertsActions from './matchAlerts';
-
 import Api from '../api';
 
 
@@ -39,6 +38,32 @@ export function archiveMatch(matchId) {
 
 	}
 }
+
+export function archiveInactiveMatches() {
+	return (dispatch, getState) => {
+		const state = getState();
+
+		const archiveMatchPromise = (matchId) => {
+			return Api.authenticatedPost({
+				url: `/api/match/${matchId}/archive`,
+				token: state.user.token,
+				params: {
+					userId: state.user.id,
+				} 
+			})
+		}
+		
+		const archivePromises = state.matches.types.inactive.map(archiveMatchPromise);
+
+		Promise.all(archivePromises)
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
+		})
+
+	}
+}
+
+
 
 export function createMatch() {
 	return (dispatch, getState) => {

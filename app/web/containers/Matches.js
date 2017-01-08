@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import {mapDispatchToProps} from '../../engine';
 import { showNotification } from '../notifications';
 import renderable from '../hoc/renderable';
+import Icon from 'react-fontawesome';
 
 import { 
 	MatchListItem,
@@ -21,14 +22,10 @@ class Matches extends Component {
 
 		this.handleMatchClick = this.handleMatchClick.bind(this);
 		this.handleCreateMatchClick = this.handleCreateMatchClick.bind(this);
+		this.handleArchiveMatchesClick = this.handleArchiveMatchesClick.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log(nextProps.matches.types.pending)
-		// // Show pending match alert if there is a pending match present
-		// if (nextProps.matches.types.pending.length > 0) {
-		// 	this.props.showPendingMatchAlert()
-		// }
 
 		// Show a window notification if there has been a change in current matches
 		// and it is not the initial data load
@@ -52,48 +49,49 @@ class Matches extends Component {
 		this.props.showCreateMatch();
 	}
 
-	renderMatches(list) {
-		const matches = this.props.matches.types[list];
+	handleArchiveMatchesClick() {
+		this.props.archiveInactiveMatches();
+	}
+
+	renderMatches(type) {
+		const matches = this.props.matches.types[type];
+		
 		let element;
 
 		if (matches.length > 0) {
-			element = this.props.matches.types[list].map(matchId => {
+			return this.props.matches.types[type].map(matchId => {
+				
 				const match = this.props.matches.instances[matchId];
-				const dynamicProps = {}
-				if (list === 'inactive') {
-					Object.assign(dynamicProps, {
-						onDelete: this.props.archiveMatch.bind(null, match.id)
-					})
+				
+				const matchItemProps = {
+					key: match.id,
+					match: match,
+					onClick: this.handleMatchClick,
 				}
 
-				return (
-					<MatchListItem 
-						key={match.id} 
-						match={match} 
-						onClick={this.handleMatchClick}
-						{...dynamicProps}
-						/>
-				);
+				return <MatchListItem {...matchItemProps} />;
+
 			});
 		} else {
-
-			const messages = {
-				inactive: 'You have no recently completed matches',
-				waiting: 'You are not waiting on anyone to play',
-				current: 'It is not your turn in any matches',
-			}
-
-			element = (
+			return (
 				<div className="match-list-item-placeholder">
-					<div>{messages[list]}</div>
+					<div
+						className="linkable" 
+						onClick={this.handleCreateMatchClick}
+						>
+						Start a New Match
+					</div>
 				</div>
 			)
 		}
 
-		return element;
+		
 	}
 
 	render() {
+
+		const showWaitingMatches = this.props.matches.types.waiting.length > 0;
+		const showInactiveMatches = this.props.matches.types.inactive.length > 0;
 		
 		return(
 			<div className="matches">
@@ -107,15 +105,19 @@ class Matches extends Component {
 				</div>
 				<div>
 					<ListHeader
+						rendered={showWaitingMatches}
 						title="Waiting on Opponent" 
 						/>
-					{this.renderMatches('waiting')}	
+					{showWaitingMatches && this.renderMatches('waiting')}	
 				</div>
 				<div>
 					<ListHeader
-						title="Completed Matches" 
+						rendered={showInactiveMatches}
+						title="Completed Matches"
+						icon="trash"
+						onIconClick={this.handleArchiveMatchesClick} 
 						/>
-					{this.renderMatches('inactive')}	
+					{showInactiveMatches && this.renderMatches('inactive')}	
 				</div>
 			</div>
 		);

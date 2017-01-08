@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { RemoteImage } from '../components';
 import Icon from 'react-fontawesome';
 import classnames from 'classnames';
+import renderable from '../hoc/renderable';
 
 
 class ListHeader extends Component {
@@ -26,10 +26,4 @@ class ListHeader extends Component {
 
 }
 
-ListHeader.defaultProps = {
-
-}
-
-export default ListHeader;
-
-
+export default renderable(ListHeader);

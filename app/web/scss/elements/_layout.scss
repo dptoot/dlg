@@ -1,7 +1,9 @@
 html,
 body, 
 #root,
-#root > div {
+#outer-container,
+#page-wrap,
+.app-wrapper {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -51,7 +53,7 @@ header {
 
 .app-wrapper {
 	display: flex;
-	// margin-top: 100px;
+	flex-direction: row;
 }
 
 // Scrollbar
