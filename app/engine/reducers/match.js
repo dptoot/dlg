@@ -2,7 +2,7 @@ import { createReducer } from 'redux-create-reducer';
 import * as types from '../actions/types';
 
 const initialState = {
-	selectedMatchId: null,
+	id: null,
 };
 
 export const match = createReducer(initialState, {
@@ -14,7 +14,7 @@ export const match = createReducer(initialState, {
 	[types.SELECT_MATCH](state, action) {
 		return {
 			...state, 
-			selectedMatchId: action.payload.matchId,
+			id: action.payload.matchId,
 		};
 	},
 

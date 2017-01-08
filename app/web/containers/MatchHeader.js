@@ -24,12 +24,12 @@ class MatchHeader extends Component {
     }
 
     handleRematch() {
-        this.props.selectUserSearchResult(this.props.match.players.opponent);
+        this.props.updateSearchSelectedResult('users', this.props.match.players.opponent);
         this.props.showCreateMatch();
     }
 
     handleSearchSelection(answer) {
-        this.props.clearMovieSearchResult();
+        this.props.clearSearchSelectedResult('movies');
         this.props.hideSearch();
         this.props.verifyAnswer(answer);
     }
@@ -125,7 +125,7 @@ class MatchHeader extends Component {
         const buttons = [
             {
                 text: 'Yes', 
-                onClick: () => this.props.deactivateMatch(this.props.match),
+                onClick: () => this.props.deactivateMatch(this.props.match.id),
             }, 
             {
                 text: 'No',
@@ -207,7 +207,7 @@ MatchHeader.defaultProps = {
 
 function mapStateToProps(state) {
     return {
-        match: state.matches.instances[state.match.selectedMatchId],
+        match: state.matches.instances[state.match.id],
         renderQuitMatchAlert: state.matchAlerts.renderQuitMatchAlert,
         layout: state.layout,
         browser: state.browser,

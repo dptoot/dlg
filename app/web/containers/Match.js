@@ -94,7 +94,7 @@ class Match extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user,
-		match: state.matches.instances[state.match.selectedMatchId],
+		match: state.matches.instances[state.match.id],
 		matchAlerts: state.matchAlerts,
 		browser: state.browser,
 	}

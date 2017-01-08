@@ -166,7 +166,7 @@ class Match extends Component {
 	  				title="Quit Match"
 	  				message="Are you sure you want to give up?"
 	  				>
-  					<AlertButton text="Yes" onPress={() => this.props.deactivateMatch('resign')} />
+  					<AlertButton text="Yes" onPress={() => this.props.deactivateMatch(this.props.match.id)} />
   					<AlertButton text="No" />
 	  			</AlertBox>
 				
