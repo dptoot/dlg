@@ -64,10 +64,14 @@ export function deleteMatch(matchId) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		state.websocket.emit('deleteMatch', {
-			matchId: matchId,
-			userId: state.user.id, 
-		});
+		Api.authenticatedDelete({
+			url: `/api/match/${matchId}`,
+			token: state.user.token,
+		})
+
+		.then(response => {
+			dispatch(matchesActions.fetchMatches());
+		})
 
 	}
 }
