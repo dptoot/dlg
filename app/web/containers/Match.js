@@ -92,7 +92,6 @@ class Match extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('match: ', state.matches.instances[state.match.selectedMatchId])
 	return {
 		user: state.user,
 		match: state.matches.instances[state.match.selectedMatchId],

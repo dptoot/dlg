@@ -78,51 +78,42 @@ export function updateSearchSelectedResult(collection, result) {
 
 
 // Debouced call to Remote Server
-const debouncedSearch = debounce((state, collection, value) => {
-	let message;
+const debouncedSearch = debounce((getState, dispatch, collection, value) => {
 
-	switch(collection) {
-		case 'movies':
-			message = 'searchMovies'; 
-			break;
-		case 'users': 
-			message = 'searchUsers'; 
-			break;
-		case 'actors': 
-			message = 'searchActors'; 
-			break;
-	}
+	const state = getState();
 
-	state.websocket.emit(message, {
-		userId: state.user.id,
-        query: value,
-    });
+	Api.authenticatedPost({
+		url: `/api/search/${collection}`,
+		token: state.user.token,
+		params: {
+			query: value,
+		} 
+	})
+
+	.then(response => {
+		dispatch(updateSearchResults(collection, response.results));
+	})
 
 }, 500);
 
-export function updateSearch({collection, results}) {
-	return (dispatch, getState) => {
-		dispatch(updateSearchResults(collection, results));
-	}
-}
-
 export function fetchSearch(collection, value) {
 	return (dispatch, getState) => {
-		const state = getState();
-		let searchType;
-
 		dispatch(updateSearchInputValue(collection, value));
-
-		debouncedSearch(state, collection, value)
-		
+		debouncedSearch(getState, dispatch, collection, value)
 	}
 }
 
 export function fetchRandomActorSearch() {
 	return (dispatch, getState) => {
 		const state = getState();
-		state.websocket.emit('searchActorsRandom', {
-			userId: state.user.id,
-    	});
+	
+		Api.authenticatedGet({
+			url: `/api/search/actors/random`,
+			token: state.user.token,
+		})
+
+		.then(response => {
+			dispatch(updateSearchResults('actors', response.results));
+		})
 	}
 }

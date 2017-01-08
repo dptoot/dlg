@@ -61,7 +61,6 @@ class Api {
 
     return fetch(url, options)
       .then( response => {
-        console.log(response)
         let json = response.json();
         if (response.ok) {
           return json
