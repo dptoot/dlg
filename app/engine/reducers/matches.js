@@ -15,6 +15,7 @@ const initialState = {
 };
 
 export const matches = createReducer(initialState, {
+
 	[types.APP_RESET](state, action) {
 		return initialState;
 	}, 
@@ -23,13 +24,6 @@ export const matches = createReducer(initialState, {
 		return {
 			...state, 
 			isRefreshing: true,
-		};
-	},
-
-	[types.HIDE_REFRESHING_MATCHES](state, action) {
-		return {
-			...state, 
-			isRefreshing: false,
 		};
 	},
 	
